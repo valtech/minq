@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{27AC3952-1D8A-420D-AE23-CC49A39B83F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Minq</RootNamespace>
+    <AssemblyName>Minq</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ISitecoreContainer.cs" />
+    <Compile Include="ISitecoreContext.cs" />
+    <Compile Include="ISitecoreField.cs" />
+    <Compile Include="ISitecoreItem.cs" />
+    <Compile Include="ISitecoreItemGateway.cs" />
+    <Compile Include="ISitecoreTemplate.cs" />
+    <Compile Include="ISitecoreTemplateGateway.cs" />
+    <Compile Include="Linq\SContext.cs" />
+    <Compile Include="Linq\SConvert.cs" />
+    <Compile Include="Linq\SDb.cs" />
+    <Compile Include="Linq\SField.cs" />
+    <Compile Include="Linq\SItem.cs" />
+    <Compile Include="Linq\STemplate.cs" />
+    <Compile Include="Mvc\ISitecoreFieldMarkup.cs" />
+    <Compile Include="Mvc\ISitecoreFieldMarkupStrategy.cs" />
+    <Compile Include="Mvc\SitecoreFieldAttributeDictionary.cs" />
+    <Compile Include="Mvc\SitecoreFieldAttributeParser.cs" />
+    <Compile Include="Mvc\SitecoreFieldLink.cs" />
+    <Compile Include="Mvc\SitecoreFieldMarkupParser.cs" />
+    <Compile Include="Mvc\SitecoreFieldMetadata.cs" />
+    <Compile Include="Mvc\SitecoreHelper.cs" />
+    <Compile Include="Mvc\SitecorePage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SitecoreChildrenAttribute.cs" />
+    <Compile Include="SitecoreChildTypeAttribute.cs" />
+    <Compile Include="SitecoreFieldAttribute.cs" />
+    <Compile Include="SitecoreFieldExtensions.cs" />
+    <Compile Include="SitecoreItemGatewayExtensions.cs" />
+    <Compile Include="SitecoreItemKey.cs" />
+    <Compile Include="SitecoreItemKeyAttribute.cs" />
+    <Compile Include="SitecoreItemKeyComparer.cs" />
+    <Compile Include="SitecoreTemplateAttribute.cs" />
+    <Compile Include="SitecoreTemplateKey.cs" />
+    <Compile Include="SitecoreTemplateKeyComparer.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

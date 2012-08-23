@@ -1,0 +1,5 @@
+You must add the following libraries to this folder for the project in order to build the solution:
+
+Moq.dll
+Sitecore.Kernal
+Sitecore.Mvc
