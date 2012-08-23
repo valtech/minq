@@ -57,12 +57,12 @@ namespace Minq.Mvc
 		/// <param name="expression">An expression that identifies the object that contains the properties to render.</param>
 		/// <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
 		/// <returns>>Markup for the Sitecore hyperlink.</returns>
-		public SitecoreFieldLink<TModel> LinkFor<TProperty>(Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null)
+		public SitecoreFieldString<TModel> LinkFor<TProperty>(Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null)
 		{
 			return LinkFor<TProperty>(expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
 		}
 
-		private SitecoreFieldLink<TModel> LinkFor<TProperty>(Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
+		private SitecoreFieldString<TModel> LinkFor<TProperty>(Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
 		{
 			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _htmlHelper.ViewData);
 
@@ -70,7 +70,7 @@ namespace Minq.Mvc
 
 			ISitecoreFieldMarkup markup = _markupStrategy.GetFieldMarkup(fieldMetadata, fieldAttributes);
 
-			return new SitecoreFieldLink<TModel>(this, markup);
+			return new SitecoreFieldString<TModel>(markup);
 		}
 
 		public IHtmlString ImageFor<TProperty>(Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null)

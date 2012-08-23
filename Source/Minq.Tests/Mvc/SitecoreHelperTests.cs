@@ -145,12 +145,12 @@ namespace Minq.Tests.Mvc
 			markupStrategy.Setup(ms => ms.GetFieldMarkup(It.Is<SitecoreFieldMetadata>(md => md.FieldName == "Other"), It.IsAny<SitecoreFieldAttributeDictionary>())).Returns(contentMarkup.Object);
 
 			// Act
-			SitecoreFieldLink<TestModel> link = sitecoreHelper.LinkFor(m => m.Logo);
+			SitecoreFieldString<TestModel> link = sitecoreHelper.LinkFor(m => m.Logo);
 
-			link = link.FieldForIfEmpty(m => m.Other);
+			IHtmlString output = link.IfEmpty(() => sitecoreHelper.FieldFor(m => m.Other));
 
 			// Assert
-			Assert.AreEqual(html, link.ToHtmlString());
+			Assert.AreEqual(html, output.ToHtmlString());
 		}
 	}
 }

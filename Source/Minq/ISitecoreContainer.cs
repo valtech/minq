@@ -10,7 +10,7 @@ namespace Minq
 	/// </summary>
 	/// <remarks>
 	/// This class can be backed by any ID/IoC container.
-	/// Their are default implementations that support mocking and the standard Sitecore CMS implementation.
+	/// There are default implementations that support mocking and the standard Sitecore CMS implementation.
 	/// </remarks>
 	public interface ISitecoreContainer
 	{

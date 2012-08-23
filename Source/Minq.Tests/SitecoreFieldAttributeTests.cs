@@ -16,12 +16,12 @@ namespace Minq.Tests
 			TestClass test = new TestClass();
 
 			// Act
-			SitecoreFieldAttribute attribute = SitecoreFieldAttribute.GetItemFieldAttribute(test, "Title");
+			SitecoreFieldAttribute attribute = SitecoreFieldAttribute.GetItemFieldAttribute(typeof(TestClass), "Title");
 
 			// Assert
 			Assert.AreEqual("The Title", attribute.Name);
 
-			Assert.IsNull(SitecoreFieldAttribute.GetItemFieldAttribute(test, "Text"));
+			Assert.IsNull(SitecoreFieldAttribute.GetItemFieldAttribute(typeof(TestClass), "Text"));
 		}
 
 		[SitecoreFieldAttribute("The Title")]

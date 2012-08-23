@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using System.Linq.Expressions;
+using System.Web.UI;
 
 namespace Minq.Mvc
 {
@@ -47,10 +48,19 @@ namespace Minq.Mvc
 			SitecoreFieldMetadata sitecoreMetadata = new SitecoreFieldMetadata();
 
 			ModelMetadata modelMetadata = ModelMetadata.FromLambdaExpression<TModel, TProperty>(expression, viewData);
-			
-			if (viewData.Model != null)
+
+			TModel model = viewData.Model;
+
+			if (model != null)
 			{
-				SitecoreItemKey key = SitecoreItemKeyAttribute.FindKey<TModel>(viewData.Model);
+				object container = ContainerFromExpression(expression, model);
+
+				if (container == null)
+				{
+					throw new Exception(String.Format("Container {0} on model {1} is null for expression path {2}.", modelMetadata.ContainerType, typeof(TModel), ExpressionHelper.GetExpressionText(expression)));
+				}
+
+				SitecoreItemKey key = SitecoreItemKeyAttribute.FindKey(container);
 
 				if (key != null)
 				{
@@ -68,7 +78,7 @@ namespace Minq.Mvc
 
 			string fieldName = modelMetadata.PropertyName;
 
-			SitecoreFieldAttribute itemFieldAttribute = SitecoreFieldAttribute.GetItemFieldAttribute(viewData.Model, modelMetadata.PropertyName);
+			SitecoreFieldAttribute itemFieldAttribute = SitecoreFieldAttribute.GetItemFieldAttribute(modelMetadata.ContainerType, modelMetadata.PropertyName);
 
 			if (itemFieldAttribute != null)
 			{
@@ -78,6 +88,20 @@ namespace Minq.Mvc
 			sitecoreMetadata.FieldName = fieldName;
 
 			return sitecoreMetadata;
+		}
+
+		public static object ContainerFromExpression<TModel, TProperty>(Expression<Func<TModel, TProperty>> expression, TModel model)
+		{
+			string path = ExpressionHelper.GetExpressionText(expression);
+
+			string[] parts = path.Split('.');
+
+			if (parts.Length > 1)
+			{
+				return DataBinder.Eval(model, String.Concat(parts.Take(parts.Length - 1)));
+			}
+
+			return model;
 		}
 	}
 }

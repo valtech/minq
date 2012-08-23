@@ -42,20 +42,5 @@ namespace Minq
 
 			throw new Exception(String.Format("Item of type {0} has no property with a SitecoreItemKeyAttribute.", type));
 		}
-
-		/// <summary>
-		/// Gets a <see cref="SitecoreItemKey"/> for a given strongly typed instance of an object by searching the members for a
-		/// <see cref="SitecoreItemKeyAttribute"/>.
-		/// </summary>
-		/// <remarks>
-		/// This method throws an exception if it cannot find a <see cref="SitecoreItemKey"/> on the given instance.
-		/// </remarks>
-		/// <typeparam name="TType">Type type of the object.</typeparam>
-		/// <param name="instance">The object to search the members of.</param>
-		/// <returns>A <see cref="SitecoreItemKey"/> if found, otherwise an exception is thrown.</returns>
-		public static SitecoreItemKey FindKey<TType>(TType instance)
-		{
-			return FindKey((object)instance);
-		}
 	}
 }

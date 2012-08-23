@@ -60,7 +60,7 @@
     <Compile Include="Mvc\ISitecoreFieldMarkupStrategy.cs" />
     <Compile Include="Mvc\SitecoreFieldAttributeDictionary.cs" />
     <Compile Include="Mvc\SitecoreFieldAttributeParser.cs" />
-    <Compile Include="Mvc\SitecoreFieldLink.cs" />
+    <Compile Include="Mvc\SitecoreFieldString.cs" />
     <Compile Include="Mvc\SitecoreFieldMarkupParser.cs" />
     <Compile Include="Mvc\SitecoreFieldMetadata.cs" />
     <Compile Include="Mvc\SitecoreHelper.cs" />
