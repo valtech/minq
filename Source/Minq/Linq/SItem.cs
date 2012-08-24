@@ -54,6 +54,22 @@ namespace Minq.Linq
 			}
 		}
 
+		public string LanguageName
+		{
+			get
+			{
+				return _item.Key.LanguageName;
+			}
+		}
+
+		public SDb Db
+		{
+			get
+			{
+				return new SDb(_item.Key.DatabaseName, _container);
+			}
+		}
+
 		/// <summary>
 		/// Returns a collection of the child items of this item or document, in order.
 		/// </summary>

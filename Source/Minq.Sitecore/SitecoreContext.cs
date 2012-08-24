@@ -21,10 +21,6 @@ namespace Minq.Sitecore
 			{
 				return ScapiContext.Language.Name;
 			}
-			set
-			{
-				throw new NotImplementedException();
-			}
 		}
 
 		/// <summary>
@@ -35,10 +31,6 @@ namespace Minq.Sitecore
 			get
 			{
 				return ScapiContext.Database.Name;
-			}
-			set
-			{
-				throw new NotImplementedException();
 			}
 		}
 
@@ -52,6 +44,10 @@ namespace Minq.Sitecore
 				ScapiItem item = ScapiContext.Item;
 
 				return new SitecoreItemKey(item.ID.Guid, item.Language.Name, item.Database.Name);
+			}
+			set
+			{
+				ScapiContext.Item = SitecoreItemGateway.GetScapiItem(value, true);
 			}
 		}
 	}

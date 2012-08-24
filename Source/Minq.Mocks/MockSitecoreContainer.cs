@@ -64,6 +64,10 @@ namespace Minq.Mocks
 
 				return _templateGateway;
 			}
+			set
+			{
+				_templateGateway = value;
+			}
 		}
 
 		public TType Resolve<TType>()

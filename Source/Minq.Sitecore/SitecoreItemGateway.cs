@@ -18,16 +18,16 @@ namespace Minq.Sitecore
 	/// </summary>
 	public class SitecoreItemGateway : ISitecoreItemGateway
 	{
-		public ISitecoreItem GetItem(SitecoreItemKey key)
+		public ISitecoreItem GetItem(string keyOrPath, string languageName, string databaseName)
 		{
-			ScapiItem scapiItem = GetScapiItem(key, true);
+			ScapiItem scapiItem = GetScapiItem(keyOrPath, languageName, databaseName, true);
 
 			if (scapiItem != null && scapiItem.Version.Number > 0 && scapiItem.Versions.Count > 0)
 			{
 				return new SitecoreItem(scapiItem);
 			}
 
-			throw new SitecoreItemGatewayException(String.Format("No version of the Sitecore item {0} exists", key));
+			throw new SitecoreItemGatewayException(String.Format("No version of the Sitecore item {0}/{1}/{2} exists", keyOrPath, languageName, databaseName));
 		}
 
 		/// <summary>
@@ -36,15 +36,26 @@ namespace Minq.Sitecore
 		/// <param name="key">The <see cref="SitecoreItemKey" /> unqiuely identifying the item to return.</param>
 		/// <param name="throwErrorIfNotFound">true to throw an exception of the item is not found; false otherwise</param>
 		/// <returns>A <see cref="ISitecoreItem" />.</returns>
-		public static ScapiItem GetScapiItem(SitecoreItemKey key, bool throwErrorIfNotFound)
+		public static ScapiItem GetScapiItem(string keyOrPath, string languageName, string databaseName, bool throwErrorIfNotFound)
 		{
-			ScapiDatabase scapiDatabase = ScapiFactory.GetDatabase(key.DatabaseName);
+			ScapiDatabase scapiDatabase = ScapiFactory.GetDatabase(databaseName);
 
 			ScapiLanguage scapiLanguage;
 
-			if (ScapiLanguage.TryParse(key.LanguageName, out scapiLanguage))
+			if (ScapiLanguage.TryParse(languageName, out scapiLanguage))
 			{
-				ScapiItem scapiItem = ScapiItemManager.Provider.GetItem(new ScapiId(key.Guid), scapiLanguage, ScapiVersion.Latest, scapiDatabase, ScapiSecurityCheck.Enable);
+				ScapiItem scapiItem = null;
+
+				Guid guid;
+
+				if (Guid.TryParse(keyOrPath, out guid))
+				{
+					scapiItem = ScapiItemManager.Provider.GetItem(new ScapiId(guid), scapiLanguage, ScapiVersion.Latest, scapiDatabase, ScapiSecurityCheck.Enable);
+				}
+				else
+				{
+					scapiItem = ScapiItemManager.Provider.GetItem(keyOrPath, scapiLanguage, ScapiVersion.Latest, scapiDatabase, ScapiSecurityCheck.Enable);
+				}
 
 				if (scapiItem != null && scapiItem.Version.Number > 0 && scapiItem.Versions.Count > 0)
 				{
@@ -54,10 +65,15 @@ namespace Minq.Sitecore
 
 			if (throwErrorIfNotFound)
 			{
-				throw new SitecoreItemGatewayException(String.Format("Sitecore item {0} was not found", key));
+				throw new SitecoreItemGatewayException(String.Format("Sitecore item {0}/{1}/{2} was not found", keyOrPath, languageName, databaseName));
 			}
 
 			return null;
+		}
+
+		public static ScapiItem GetScapiItem(SitecoreItemKey key, bool throwErrorIfNotFound)
+		{
+			return GetScapiItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName, throwErrorIfNotFound);
 		}
 	}
 }

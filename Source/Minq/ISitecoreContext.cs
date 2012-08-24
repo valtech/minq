@@ -16,7 +16,7 @@ namespace Minq
 		string LanguageName
 		{
 			get;
-			set;
+			//set;
 		}
 
 		/// <summary>
@@ -25,15 +25,16 @@ namespace Minq
 		string DatabaseName
 		{
 			get;
-			set;
+			//set;
 		}
 
 		/// <summary>
-		/// When overridden in a derived class, gets the Sitecore item key associated with the current HTTP request.
+		/// When overridden in a derived class, gets or sets the Sitecore item key associated with the current HTTP request.
 		/// </summary>
 		SitecoreItemKey ItemKey
 		{
 			get;
+			set;
 		}
 	}
 }

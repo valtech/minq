@@ -33,9 +33,21 @@ namespace Minq.Linq
 			return new SItem(itemGateway.GetItem(new SitecoreItemKey(guid, context.LanguageName, _name)), _container);
 		}
 
-		public SItem Item(string guid)
+		public SItem Item(string keyOrPath)
 		{
-			return Item(new Guid(guid));
+			ISitecoreContext context = _container.Resolve<ISitecoreContext>();
+
+			ISitecoreItemGateway itemGateway = _container.Resolve<ISitecoreItemGateway>();
+
+			return new SItem(itemGateway.GetItem(keyOrPath, context.LanguageName, _name), _container);
+		}
+
+		public string Name
+		{
+			get
+			{
+				return _name;
+			}
 		}
 	}
 }

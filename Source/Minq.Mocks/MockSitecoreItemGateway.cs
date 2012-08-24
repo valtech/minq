@@ -26,17 +26,26 @@ namespace Minq.Mocks
 		/// </summary>
 		/// <param name="key">The <see cref="SitecoreItemKey" /> unqiuely identifying the item to return.</param>
 		/// <returns>A <see cref="ISitecoreItem" />.</returns>
-		public ISitecoreItem GetItem(SitecoreItemKey key)
+		public ISitecoreItem GetItem(string keyOrPath, string languageName, string databaseName)
 		{
 			ISitecoreItem item;
 
-			if (_items.TryGetValue(key, out item))
+			Guid guid;
+
+			if (Guid.TryParse(keyOrPath, out guid))
 			{
-				return item;
+				if (_items.TryGetValue(new SitecoreItemKey(guid, languageName, databaseName), out item))
+				{
+					return item;
+				}
+				else
+				{
+					throw new MockSitecoreItemGatewayException(String.Format("Sitecore item {0} does not exist", keyOrPath));
+				}
 			}
 			else
 			{
-				throw new MockSitecoreItemGatewayException(String.Format("Sitecore item {0} does not exist", key));
+				throw new MockSitecoreItemGatewayException(String.Format("Path lookup not supported in mocking yet {0}", keyOrPath));
 			}
 		}
 	}

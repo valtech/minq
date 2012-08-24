@@ -58,13 +58,5 @@ namespace Minq.Mocks
 			get;
 			set;
 		}
-
-		SitecoreItemKey ISitecoreContext.ItemKey 
-		{
-			get
-			{
-				return ItemKey;
-			}
-		}
 	}
 }

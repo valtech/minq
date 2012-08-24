@@ -15,6 +15,6 @@ namespace Minq
 		/// </summary>
 		/// <param name="key">The <see cref="SitecoreItemKey" /> unqiuely identifying the item to return.</param>
 		/// <returns>A <see cref="ISitecoreItem" />.</returns>
-		ISitecoreItem GetItem(SitecoreItemKey key);
+		ISitecoreItem GetItem(string keyOrPath, string languageName, string databaseName);
 	}
 }
