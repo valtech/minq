@@ -11,7 +11,6 @@ namespace Minq.Mocks
 	public class MockSitecoreItem : ISitecoreItem
 	{
 		private SitecoreItemKey _key;
-		private SitecoreTemplateKey _templateKey;
 		private IDictionary<string, ISitecoreField> _fields = new Dictionary<string, ISitecoreField>(StringComparer.OrdinalIgnoreCase);
 		private IList<ISitecoreItem> _children = new List<ISitecoreItem>();
 		private ISitecoreItem _parent;
@@ -97,14 +96,8 @@ namespace Minq.Mocks
 
 		public SitecoreTemplateKey TemplateKey
 		{
-			get
-			{
-				return _templateKey;
-			}
-			set
-			{
-				_templateKey = value;
-			}
+			get;
+			set;
 		}
 	}
 }

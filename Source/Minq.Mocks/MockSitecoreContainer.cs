@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Minq.Mocks.Mvc;
+using Minq.Mvc;
 
 namespace Minq.Mocks
 {
@@ -10,6 +12,7 @@ namespace Minq.Mocks
 		private MockSitecoreContext _context;
 		private MockSitecoreItemGateway _itemGateway;
 		private MockSitecoreTemplateGateway _templateGateway;
+		private MockSitecoreRendering _rendering;
 
 		public MockSitecoreContext Context
 		{
@@ -21,6 +24,19 @@ namespace Minq.Mocks
 				}
 
 				return _context;
+			}
+		}
+
+		public MockSitecoreRendering Rendering
+		{
+			get
+			{
+				if (_rendering == null)
+				{
+					_rendering = new MockSitecoreRendering();
+				}
+
+				return _rendering;
 			}
 		}
 
@@ -65,6 +81,10 @@ namespace Minq.Mocks
 			else if (type == typeof(ISitecoreTemplateGateway))
 			{
 				return (TType)(object)TemplateGateway;
+			}
+			else if (type == typeof(ISitecoreRendering))
+			{
+				return (TType)(object)Rendering;
 			}
 
 			throw new NotImplementedException();

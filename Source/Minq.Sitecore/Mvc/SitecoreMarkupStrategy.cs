@@ -9,7 +9,7 @@ using ScapiRenderFieldArgs = global::Sitecore.Pipelines.RenderField.RenderFieldA
 
 namespace Minq.Sitecore.Mvc
 {
-	public class SitecoreFieldMarkupStrategy : ISitecoreFieldMarkupStrategy
+	public class SitecoreMarkupStrategy : ISitecoreMarkupStrategy
 	{
 		public ISitecoreFieldMarkup GetFieldMarkup(SitecoreFieldMetadata fieldMetadata, SitecoreFieldAttributeDictionary fieldAttributes)
 		{
@@ -23,6 +23,11 @@ namespace Minq.Sitecore.Mvc
 			ScapiCorePipeline.Run("renderField", args);
 
 			return new SitecoreFieldMarkup(args.Result);
+		}
+
+		public ISitecoreEditorMarkup GetEditorMarkup(SitecoreFieldAttributeDictionary editorAttributes)
+		{
+			return new SitecoreEditorMarkup(editorAttributes);
 		}
 	}
 }

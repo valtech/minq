@@ -19,12 +19,13 @@ namespace Minq.Tests.Mvc
 
 			DeepModel deepModel = new DeepModel
 			{
-				Deep = new TestModel { Key = key,  Foo = "Foo" }
+				Deep = new TestModel { Key = key,  Foo = "Foo!" }
 			};
 
 			SitecoreFieldMetadata metadata = SitecoreFieldMetadata.FromLambdaExpression<DeepModel, string>(m => m.Deep.Foo, new ViewDataDictionary<DeepModel>(deepModel));
 
 			Assert.AreEqual(key, metadata.Key);
+			Assert.AreEqual("Foo", metadata.FieldName);
 		}
 
 		[Test]

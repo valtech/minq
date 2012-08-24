@@ -13,7 +13,7 @@ namespace Minq.Mvc
 	/// This interface abstracts away the Sitecore rendering pipeline in order to test the HTML generation
 	/// in the MVC library's Sitecore helper.
 	/// </remarks>
-	public interface ISitecoreFieldMarkupStrategy
+	public interface ISitecoreMarkupStrategy
 	{
 		/// <summary>
 		/// Get the field markup for a given field.
@@ -22,5 +22,7 @@ namespace Minq.Mvc
 		/// <param name="fieldAttributes">Additional HTML/Sitecore attributes.</param>
 		/// <returns>A <see cref="ISitecoreFieldMarkup"/> representing the markup generator for the field.</returns>
 		ISitecoreFieldMarkup GetFieldMarkup(SitecoreFieldMetadata fieldMetadata, SitecoreFieldAttributeDictionary fieldAttributes);
+
+		ISitecoreEditorMarkup GetEditorMarkup(SitecoreFieldAttributeDictionary editorAttributes);
 	}
 }

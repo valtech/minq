@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Minq.Mvc;
+using Minq.Sitecore.Mvc;
 
 namespace Minq.Sitecore
 {
@@ -10,6 +12,7 @@ namespace Minq.Sitecore
         private SitecoreContext _context;
         private SitecoreItemGateway _itemGateway;
 		private SitecoreTemplateGateway _templateGateway;
+		private SitecoreRendering _rendering;
 
         private SitecoreContext Context
         {
@@ -23,6 +26,19 @@ namespace Minq.Sitecore
                 return _context;
             }
         }
+
+		private SitecoreRendering Rendering
+		{
+			get
+			{
+				if (_rendering == null)
+				{
+					_rendering = new SitecoreRendering();
+				}
+
+				return _rendering;
+			}
+		}
 
         private SitecoreItemGateway ItemGateway
         {
@@ -66,6 +82,10 @@ namespace Minq.Sitecore
 			else if (type == typeof(ISitecoreTemplateGateway))
 			{
 				return (TType)(object)TemplateGateway;
+			}
+			else if (type == typeof(ISitecoreRendering))
+			{
+				return (TType)(object)Rendering;
 			}
 
             throw new NotImplementedException();

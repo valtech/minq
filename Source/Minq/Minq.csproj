@@ -48,6 +48,9 @@
     <Compile Include="ISitecoreField.cs" />
     <Compile Include="ISitecoreItem.cs" />
     <Compile Include="ISitecoreItemGateway.cs" />
+    <Compile Include="Mvc\ISitecoreEditorMarkup.cs" />
+    <Compile Include="Mvc\Linq\SRendering.cs" />
+    <Compile Include="Mvc\ISitecoreRendering.cs" />
     <Compile Include="ISitecoreTemplate.cs" />
     <Compile Include="ISitecoreTemplateGateway.cs" />
     <Compile Include="Linq\SContext.cs" />
@@ -57,14 +60,13 @@
     <Compile Include="Linq\SItem.cs" />
     <Compile Include="Linq\STemplate.cs" />
     <Compile Include="Mvc\ISitecoreFieldMarkup.cs" />
-    <Compile Include="Mvc\ISitecoreFieldMarkupStrategy.cs" />
+    <Compile Include="Mvc\ISitecoreMarkupStrategy.cs" />
     <Compile Include="Mvc\SitecoreFieldAttributeDictionary.cs" />
     <Compile Include="Mvc\SitecoreFieldAttributeParser.cs" />
     <Compile Include="Mvc\SitecoreFieldString.cs" />
     <Compile Include="Mvc\SitecoreFieldMarkupParser.cs" />
     <Compile Include="Mvc\SitecoreFieldMetadata.cs" />
     <Compile Include="Mvc\SitecoreHelper.cs" />
-    <Compile Include="Mvc\SitecorePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SitecoreChildrenAttribute.cs" />
     <Compile Include="SitecoreChildTypeAttribute.cs" />

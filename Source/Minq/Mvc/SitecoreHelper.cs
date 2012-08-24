@@ -9,6 +9,7 @@ using System.Collections.Concurrent;
 using System.Web;
 using System.Globalization;
 using System.Web.Routing;
+using System.Web.WebPages;
 
 namespace Minq.Mvc
 {
@@ -17,12 +18,12 @@ namespace Minq.Mvc
 	/// </summary>
 	public class SitecoreHelper<TModel>
 	{
-		private HtmlHelper<TModel> _htmlHelper;
-		private ISitecoreFieldMarkupStrategy _markupStrategy;
+		private ViewDataDictionary<TModel> _viewData;
+		private ISitecoreMarkupStrategy _markupStrategy;
 
-		public SitecoreHelper(HtmlHelper<TModel> htmlHelper, ISitecoreFieldMarkupStrategy markupStrategy)
+		public SitecoreHelper(ViewDataDictionary<TModel> viewData, ISitecoreMarkupStrategy markupStrategy)
 		{
-			_htmlHelper = htmlHelper;
+			_viewData = viewData;
 			_markupStrategy = markupStrategy;
 		}
 
@@ -41,7 +42,7 @@ namespace Minq.Mvc
 
 		private IHtmlString FieldFor<TProperty>(Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
 		{
-			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _htmlHelper.ViewData);
+			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _viewData);
 
 			SitecoreFieldAttributeDictionary fieldAttributes = SitecoreFieldAttributeDictionary.FromAttributes(htmlAttributes);
 
@@ -64,7 +65,7 @@ namespace Minq.Mvc
 
 		private SitecoreFieldString<TModel> LinkFor<TProperty>(Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
 		{
-			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _htmlHelper.ViewData);
+			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _viewData);
 
 			SitecoreFieldAttributeDictionary fieldAttributes = SitecoreFieldAttributeDictionary.FromAttributes(htmlAttributes);
 
@@ -75,16 +76,37 @@ namespace Minq.Mvc
 
 		public IHtmlString ImageFor<TProperty>(Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null)
 		{
-			return FieldFor(expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+			return ImageFor(expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
 		}
 
 		private IHtmlString ImageFor<TProperty>(Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
 		{
-			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _htmlHelper.ViewData);
+			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _viewData);
 
 			SitecoreFieldAttributeDictionary fieldAttributes = SitecoreFieldAttributeDictionary.FromImageAttributes(htmlAttributes);
 
 			ISitecoreFieldMarkup markup = _markupStrategy.GetFieldMarkup(fieldMetadata, fieldAttributes);
+
+			return new HtmlString(markup.GetHtml(null));
+		}
+
+		public IHtmlString Editor(Func<object, object> htmlPredicate, object htmlAttributes = null)
+		{
+			return Editor(htmlPredicate, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+		}
+
+		private IHtmlString Editor(Func<object, object> htmlPredicate, IDictionary<string, object> htmlAttributes)
+		{
+			SitecoreFieldAttributeDictionary editorAttributes = SitecoreFieldAttributeDictionary.FromAttributes(htmlAttributes);
+
+			ISitecoreEditorMarkup markup = _markupStrategy.GetEditorMarkup(editorAttributes);
+
+			HelperResult helperResult = htmlPredicate(_viewData.Model) as HelperResult;
+
+			if (helperResult != null)
+			{
+				return new HtmlString(markup.GetHtml(helperResult.ToString()));
+			}
 
 			return new HtmlString(markup.GetHtml(null));
 		}

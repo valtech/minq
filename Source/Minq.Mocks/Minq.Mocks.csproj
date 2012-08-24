@@ -48,6 +48,7 @@
     <Compile Include="MockSitecoreItemGatewayException.cs" />
     <Compile Include="MockSitecoreTemplate.cs" />
     <Compile Include="MockSitecoreTemplateGateway.cs" />
+    <Compile Include="Mvc\MockSitecoreRendering.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
