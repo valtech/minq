@@ -10,12 +10,12 @@ namespace Minq.Tests
 	[TestFixture]
 	public class SitecoreItemKeyTests
 	{
-		private MockSitecoreContainer _container;
+		//private MockSitecoreContainer _container;
 
 		[SetUp]
 		public void SetUp()
 		{
-			_container = new MockSitecoreContainer();
+			//_container = new MockSitecoreContainer();
 		}
 
 		[Test]
@@ -66,7 +66,7 @@ namespace Minq.Tests
 		}
 
 		[Test]
-		public void TestConstructionViaContext()
+		public void TestConstruction()
 		{
 			// Arrange
 			Guid guid = Guid.NewGuid();
@@ -75,22 +75,8 @@ namespace Minq.Tests
 
 			// Act/Assert
 			Assert.AreEqual(guid, key.Guid);
-			Assert.AreEqual(key.LanguageName, _container.Context.LanguageName);
-			Assert.AreEqual(key.DatabaseName, _container.Context.DatabaseName);
-		}
-
-		[Test]
-		public void TestConstructionViaStrings()
-		{
-			// Arrange
-			Guid guid = Guid.NewGuid();
-
-			SitecoreItemKey key = new SitecoreItemKey(guid, "en-GB", "web");
-
-			// Act/Assert
-			Assert.AreEqual(guid, key.Guid);
-			Assert.AreEqual("en-GB", _container.Context.LanguageName);
-			Assert.AreEqual("web", _container.Context.DatabaseName);
+			Assert.AreEqual("en-GB", key.LanguageName);
+			Assert.AreEqual("web", key.DatabaseName);
 		}
 	}
 }

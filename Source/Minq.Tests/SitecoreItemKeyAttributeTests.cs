@@ -10,14 +10,6 @@ namespace Minq.Tests
 	[TestFixture]
 	public class SitecoreItemKeyAttributeTests
 	{
-		private MockSitecoreContainer _container;
-
-		[SetUp]
-		public void SetUp()
-		{
-			_container = new MockSitecoreContainer();
-		}
-
 		[Test]
 		public void TestFindKey()
 		{

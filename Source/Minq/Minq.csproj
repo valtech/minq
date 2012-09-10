@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISitecoreContainer.cs" />
     <Compile Include="ISitecoreContext.cs" />
     <Compile Include="ISitecoreField.cs" />
     <Compile Include="ISitecoreItem.cs" />

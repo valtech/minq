@@ -10,14 +10,6 @@ namespace Minq.Tests
 	[TestFixture]
 	public class SitecoreItemGatewayTests
 	{
-		private MockSitecoreContainer _container;
-
-		[SetUp]
-		public void SetUp()
-		{
-			_container = new MockSitecoreContainer();
-		}
-
 		[Test]
 		public void GetItemTest()
 		{
@@ -25,9 +17,11 @@ namespace Minq.Tests
 
 			MockSitecoreItem mockItem = new MockSitecoreItem(key);
 
-			_container.ItemGateway.AddItem(mockItem);
+			MockSitecoreItemGateway itemGateway = new MockSitecoreItemGateway();
 
-			ISitecoreItem item = _container.ItemGateway.GetItem(key);
+			itemGateway.AddItem(mockItem);
+
+			ISitecoreItem item = itemGateway.GetItem(key);
 
 			Assert.AreEqual(item.Key, key);
 		}

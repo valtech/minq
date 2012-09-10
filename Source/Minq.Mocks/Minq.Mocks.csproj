@@ -42,9 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MockSitecoreContainer.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="MockSitecoreContext.cs" />
     <Compile Include="MockSitecoreField.cs" />
     <Compile Include="MockSitecoreItem.cs" />

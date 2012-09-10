@@ -10,14 +10,6 @@ namespace Minq.Tests
 	[TestFixture]
 	public class SitecoreTemplateGatewayTests
 	{
-		private MockSitecoreContainer _container;
-
-		[SetUp]
-		public void SetUp()
-		{
-			_container = new MockSitecoreContainer();
-		}
-
 		[Test]
 		public void TestGetTemplate()
 		{
@@ -26,10 +18,12 @@ namespace Minq.Tests
 
 			MockSitecoreTemplate mockItem = new MockSitecoreTemplate(key);
 
-			_container.TemplateGateway.AddTemplate(mockItem);
+			MockSitecoreTemplateGateway templateGateway = new MockSitecoreTemplateGateway();
+
+			templateGateway.AddTemplate(mockItem);
 
 			// Act
-			ISitecoreTemplate template = _container.TemplateGateway.GetTemplate(key);
+			ISitecoreTemplate template = templateGateway.GetTemplate(key);
 
 			// Assert
 			Assert.AreEqual(key, template.Key);
