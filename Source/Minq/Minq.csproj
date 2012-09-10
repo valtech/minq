@@ -50,6 +50,9 @@
     <Compile Include="ISitecoreField.cs" />
     <Compile Include="ISitecoreItem.cs" />
     <Compile Include="ISitecoreItemGateway.cs" />
+    <Compile Include="ISitecoreRequest.cs" />
+    <Compile Include="Linq\SItemComposer.cs" />
+    <Compile Include="Linq\SRequest.cs" />
     <Compile Include="Mvc\ISitecoreEditorMarkup.cs" />
     <Compile Include="Mvc\Linq\SRendering.cs" />
     <Compile Include="Mvc\ISitecoreRendering.cs" />

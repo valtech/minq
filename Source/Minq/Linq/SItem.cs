@@ -12,18 +12,20 @@ namespace Minq.Linq
 	/// </summary>
 	public class SItem
 	{
-		private ISitecoreItem _item;
-		private ISitecoreContainer _container;
+		private ISitecoreItem _sitecoreItem;
+		private SItemComposer _itemComposer;
+		private SDb _db;
+		private STemplate _template;
 
 		/// <summary>
 		///  Initializes the class for use based on a <see cref="ISitecoreItem"/> and <see cref="ISitecoreContainer"/>.
 		/// </summary>
-		/// <param name="item">The low level Sitecore item that represents this LINQ item.</param>
+		/// <param name="sitecoreItem">The low level Sitecore item that represents this LINQ item.</param>
 		/// <param name="container">The Sitecore container.</param>
-		public SItem(ISitecoreItem item, ISitecoreContainer container)
+		public SItem(ISitecoreItem sitecoreItem, SItemComposer itemComposer)
 		{
-			_item = item;
-			_container = container;
+			_sitecoreItem = sitecoreItem;
+			_itemComposer = itemComposer;
 		}
 
 		/// <summary>
@@ -35,7 +37,7 @@ namespace Minq.Linq
 		{
 			ISitecoreField field;
 
-			if (_item.FieldDictionary.TryGetValue(name, out field))
+			if (_sitecoreItem.FieldDictionary.TryGetValue(name, out field))
 			{
 				return new SField(field);
 			}
@@ -50,7 +52,7 @@ namespace Minq.Linq
 		{
 			get
 			{
-				return _item.Key.Guid;
+				return _sitecoreItem.Key.Guid;
 			}
 		}
 
@@ -58,7 +60,7 @@ namespace Minq.Linq
 		{
 			get
 			{
-				return _item.Key.LanguageName;
+				return _sitecoreItem.Key.LanguageName;
 			}
 		}
 
@@ -66,7 +68,12 @@ namespace Minq.Linq
 		{
 			get
 			{
-				return new SDb(_item.Key.DatabaseName, _container);
+				if (_db == null)
+				{
+					_db = new SDb(_sitecoreItem.Key.DatabaseName, _itemComposer);
+				}
+
+				return _db;
 			}
 		}
 
@@ -76,9 +83,9 @@ namespace Minq.Linq
 		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="SItem"/> containing the child items of this item, in order.</returns>
 		public IEnumerable<SItem> Items()
 		{
-			foreach (ISitecoreItem child in _item.Children)
+			foreach (ISitecoreItem child in _sitecoreItem.Children)
 			{
-				yield return new SItem(child, _container);
+				yield return new SItem(child, _itemComposer);
 			}
 		}
 
@@ -150,11 +157,11 @@ namespace Minq.Linq
 		{
 			get
 			{
-				ISitecoreItem parent = _item.Parent;
+				ISitecoreItem parent = _sitecoreItem.Parent;
 
 				if (parent != null)
 				{
-					return new SItem(parent, _container);
+					return new SItem(parent, _itemComposer);
 				}
 
 				return null;
@@ -168,19 +175,24 @@ namespace Minq.Linq
 		{
 			get
 			{
-				return new STemplate(_container.Resolve<ISitecoreTemplateGateway>().GetTemplate(_item.TemplateKey));
+				if (_template == null)
+				{
+					_template = _itemComposer.CreateTemplate(_sitecoreItem.TemplateKey);
+				}
+
+				return _template;
 			}
 		}
 
 		/// <summary>
 		/// Converts this LINQ item into a plain old CLR object.
 		/// </summary>
-		/// <typeparam name="TType">The object type to convert to.</typeparam>
+		/// <typeparam name="T">The object type to convert to.</typeparam>
 		/// <returns>The converted object.</returns>
-		public TType Poco<TType>()
-			where TType : class, new()
+		public T ToType<T>()
+			where T : class, new()
 		{
-			TType instance = new TType();
+			T instance = new T();
 
 			Type type = instance.GetType();
 
@@ -208,7 +220,7 @@ namespace Minq.Linq
 
 					if (itemKeyAttribute != null)
 					{
-						property.SetValue(instance, new SitecoreItemKey(Guid, _container.Resolve<ISitecoreContext>()), null);
+						property.SetValue(instance, new SitecoreItemKey(Guid, _sitecoreItem.Key.LanguageName, _sitecoreItem.Key.DatabaseName), null);
 					}
 
 					SitecoreChildrenAttribute childrenAttribute = (SitecoreChildrenAttribute)Attribute.GetCustomAttribute(property, typeof(SitecoreChildrenAttribute));
@@ -221,9 +233,9 @@ namespace Minq.Linq
 						{
 							Type genericParameter = proprtyType.GetGenericArguments()[0];
 
-							Type genericCollectionType = typeof(PocoCollection<>);
+							Type genericCollectionType = typeof(TypeCollection<>);
 
-							Type collectionType = genericCollectionType.MakeGenericType(new Type[] { genericParameter });
+							Type collectionType = typeof(TypeCollection<>).MakeGenericType(new Type[] { genericParameter });
 
 							object collection = Activator.CreateInstance(collectionType, new object[] { this });
 
@@ -236,32 +248,32 @@ namespace Minq.Linq
 			return instance;
 		}
 
-		#region PocoCollection
-		sealed class PocoCollection<TChild> : ICollection<TChild>
-			where TChild : class, new()
+		#region TypeCollection
+		sealed class TypeCollection<T> : ICollection<T>
+			where T : class, new()
 		{
 			private SItem _item;
-			private IList<TChild> _children;
+			private IList<T> _children;
 
-			public PocoCollection(SItem item)
+			public TypeCollection(SItem item)
 			{
 				_item = item;
 			}
 
-			private IList<TChild> Children
+			private IList<T> Children
 			{
 				get
 				{
 					if (_children == null)
 					{
-						_children = new List<TChild>(_item.Items().Select(item => item.Poco<TChild>()));
+						_children = new List<T>(_item.Items().Select(item => item.ToType<T>()));
 					}
 
 					return _children;
 				}
 			}
 
-			public void Add(TChild item)
+			public void Add(T item)
 			{
 				throw new NotImplementedException();
 			}
@@ -271,12 +283,12 @@ namespace Minq.Linq
 				throw new NotImplementedException();
 			}
 
-			public bool Contains(TChild item)
+			public bool Contains(T item)
 			{
 				throw new NotImplementedException();
 			}
 
-			public void CopyTo(TChild[] array, int arrayIndex)
+			public void CopyTo(T[] array, int arrayIndex)
 			{
 				throw new NotImplementedException();
 			}
@@ -297,12 +309,12 @@ namespace Minq.Linq
 				}
 			}
 
-			public bool Remove(TChild item)
+			public bool Remove(T item)
 			{
 				throw new NotImplementedException();
 			}
 
-			public IEnumerator<TChild> GetEnumerator()
+			public IEnumerator<T> GetEnumerator()
 			{
 				return Children.GetEnumerator();
 			}

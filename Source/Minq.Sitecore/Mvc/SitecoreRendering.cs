@@ -41,7 +41,7 @@ namespace Minq.Sitecore.Mvc
 
 					if (scapiItem != null)
 					{
-						return new SitecoreItemKey(scapiItem.ID.Guid, new SitecoreContext());
+						return new SitecoreItemKey(scapiItem.ID.Guid, ScapiContext.Language.Name, ScapiContext.Database.Name);
 					}
 				}
 

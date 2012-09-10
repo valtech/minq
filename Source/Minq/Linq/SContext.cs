@@ -10,49 +10,44 @@ namespace Minq.Linq
 	/// </summary>
 	public class SContext
 	{
-		private ISitecoreContainer _container;
+		private ISitecoreContext _sitecoreContext;
+		private SItemComposer _itemComposer;
+		private SDb _db;
 
 		/// <summary>
 		///  Initializes the class for use based on a <see cref="ISitecoreContainer"/>.
 		/// </summary>
 		/// <param name="container"></param>
-		public SContext(ISitecoreContainer container)
+		public SContext(ISitecoreContext context, SItemComposer itemComposer)
 		{
-			_container = container;
+			_sitecoreContext = context;
+			_itemComposer = itemComposer;
 		}
 
 		/// <summary>
-		/// Gets the Sitecore LINQ item for the current HTTP request.
-		/// </summary>
-		public SItem Item
-		{
-			get
-			{
-				ISitecoreContext context = _container.Resolve<ISitecoreContext>();
-
-				ISitecoreItemGateway itemGateway = _container.Resolve<ISitecoreItemGateway>();
-
-				return new SItem(itemGateway.GetItem(context.ItemKey), _container);
-			}
-			set
-			{
-				ISitecoreContext context = _container.Resolve<ISitecoreContext>();
-
-				context.ItemKey = new SitecoreItemKey(value.Guid, value.LanguageName, value.Db.Name);
-			}
-		}
-
-		/// <summary>
-		/// Gets the Sitecore LINQ database for the current HTTP request.
+		/// Gets the Sitecore LINQ database in the current context.
 		/// </summary>
 		public SDb Db
 		{
 			get
 			{
-				ISitecoreContext context = _container.Resolve<ISitecoreContext>();
+				if (_db == null)
+				{
+					_db = new SDb(_sitecoreContext.DatabaseName, _itemComposer);
+				}
 
-				return new SDb(context.DatabaseName, _container);
+				return _db;
 			}
+		}
+
+		public SItem Item(Guid guid)
+		{
+			return _itemComposer.CreateItem(guid.ToString(), _sitecoreContext.LanguageName, Db.Name);
+		}
+
+		public SItem Item(string keyOrPath)
+		{
+			return _itemComposer.CreateItem(keyOrPath, _sitecoreContext.LanguageName, Db.Name);
 		}
 	}
 }

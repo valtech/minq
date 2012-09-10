@@ -24,26 +24,26 @@ namespace Minq.Tests
 			// Arrange
 			Guid guid = Guid.NewGuid();
 
-			SitecoreItemKey key1 = new SitecoreItemKey(guid, _container.Context);
-			SitecoreItemKey key2 = new SitecoreItemKey(guid, _container.Context);
+			SitecoreItemKey key1 = new SitecoreItemKey(guid, "en-GB", "web");
+			SitecoreItemKey key2 = new SitecoreItemKey(guid, "en-GB", "web");
 
 			// Act/Assert
 			Assert.IsTrue(key1 == key2);
 
-			Assert.IsFalse(key1 == new SitecoreItemKey(Guid.NewGuid(), _container.Context));
+			Assert.IsFalse(key1 == new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web"));
 		}
 
 		[Test]
 		public void TestNotEqualsOperator()
 		{
 			// Arrange
-			SitecoreItemKey key1 = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
-			SitecoreItemKey key2 = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey key1 = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
+			SitecoreItemKey key2 = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
 			// Act/Assert
 			Assert.IsTrue(key1 != key2);
 
-			Assert.IsFalse(key1 != new SitecoreItemKey(key1.Guid, _container.Context));
+			Assert.IsFalse(key1 != new SitecoreItemKey(key1.Guid, "en-GB", "web"));
 		}
 
 		[Test]
@@ -52,8 +52,8 @@ namespace Minq.Tests
 			// Arrange
 			Guid guid = Guid.NewGuid();
 
-			SitecoreItemKey key1 = new SitecoreItemKey(guid, _container.Context);
-			SitecoreItemKey key2 = new SitecoreItemKey(guid, _container.Context);
+			SitecoreItemKey key1 = new SitecoreItemKey(guid, "en-GB", "web");
+			SitecoreItemKey key2 = new SitecoreItemKey(guid, "en-GB", "web");
 
 			// Act/Assert
 			Assert.IsTrue(key1.Equals(key2));
@@ -62,7 +62,7 @@ namespace Minq.Tests
 
 			Assert.IsFalse(key1.Equals(new object()));
 
-			Assert.IsFalse(key1.Equals(new SitecoreItemKey(Guid.NewGuid(), _container.Context)));
+			Assert.IsFalse(key1.Equals(new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web")));
 		}
 
 		[Test]
@@ -71,7 +71,7 @@ namespace Minq.Tests
 			// Arrange
 			Guid guid = Guid.NewGuid();
 
-			SitecoreItemKey key = new SitecoreItemKey(guid, _container.Context);
+			SitecoreItemKey key = new SitecoreItemKey(guid, "en-GB", "web");
 
 			// Act/Assert
 			Assert.AreEqual(guid, key.Guid);

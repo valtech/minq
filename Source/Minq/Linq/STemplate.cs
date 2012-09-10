@@ -10,15 +10,15 @@ namespace Minq.Linq
 	/// </summary>
 	public class STemplate
 	{
-		private ISitecoreTemplate _template;
+		private ISitecoreTemplate _sitecoreTemplate;
 
 		/// <summary>
 		/// Initializes the class for use based on the <see cref="ISitecoreTemplate" />.
 		/// </summary>
-		/// <param name="template">The low level Sitecore template that represents this LINQ template.</param>
-		public STemplate(ISitecoreTemplate template)
+		/// <param name="sitecoreTemplate">The low level Sitecore template that represents this LINQ template.</param>
+		public STemplate(ISitecoreTemplate sitecoreTemplate)
 		{
-			_template = template;
+			_sitecoreTemplate = sitecoreTemplate;
 		}
 
 		/// <summary>
@@ -28,7 +28,7 @@ namespace Minq.Linq
 		{
 			get
 			{
-				return _template.Key.Guid;
+				return _sitecoreTemplate.Key.Guid;
 			}
 		}
 
@@ -38,7 +38,7 @@ namespace Minq.Linq
 		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="STemplate"/> containing the base templates of this template.</returns>
 		public IEnumerable<STemplate> BaseTemplates()
 		{
-			foreach (ISitecoreTemplate baseTemplate in _template.BaseTemplates)
+			foreach (ISitecoreTemplate baseTemplate in _sitecoreTemplate.BaseTemplates)
 			{
 				yield return new STemplate(baseTemplate);
 			}

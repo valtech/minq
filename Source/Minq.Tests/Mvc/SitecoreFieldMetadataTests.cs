@@ -15,7 +15,7 @@ namespace Minq.Tests.Mvc
 		[Test]
 		public void TestFromLambdaExpression()
 		{
-			SitecoreItemKey key = new SitecoreItemKey(Guid.NewGuid(), new MockSitecoreContext());
+			SitecoreItemKey key = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
 			DeepModel deepModel = new DeepModel
 			{

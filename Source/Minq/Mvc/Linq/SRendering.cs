@@ -10,25 +10,23 @@ namespace Minq.Mvc.Linq
 {
 	public class SRendering
 	{
-		private ISitecoreContainer _container;
+		private SItemComposer _composer;
 		private NameValueCollection _parameters;
+		private ISitecoreRendering _rendering;
 
-		public SRendering(ISitecoreContainer container)
+		public SRendering(ISitecoreRendering rendering, SItemComposer composer)
 		{
-			_container = container;
+			_rendering = rendering;
+			_composer = composer;
 		}
 
 		public SItem DataItem
 		{
 			get
 			{
-				ISitecoreContext context = _container.Resolve<ISitecoreContext>();
+				SitecoreItemKey key = _rendering.DataSourceKey;
 
-				ISitecoreItemGateway itemGateway = _container.Resolve<ISitecoreItemGateway>();
-
-				ISitecoreRendering rendering = _container.Resolve<ISitecoreRendering>();
-
-				return new SItem(itemGateway.GetItem(rendering.DataSourceKey), _container);
+				return _composer.CreateItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName);
 			}
 		}
 
@@ -40,9 +38,7 @@ namespace Minq.Mvc.Linq
 				{
 					_parameters = new NameValueCollection(StringComparer.OrdinalIgnoreCase);
 
-					ISitecoreRendering rendering = _container.Resolve<ISitecoreRendering>();
-
-					foreach (KeyValuePair<string, string> pair in rendering.Parameters)
+					foreach (KeyValuePair<string, string> pair in _rendering.Parameters)
 					{
 						_parameters[pair.Key] = pair.Value;
 					}

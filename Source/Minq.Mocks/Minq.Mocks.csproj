@@ -42,12 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MockSitecoreContainer.cs" />
+    <Compile Include="MockSitecoreContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MockSitecoreContext.cs" />
     <Compile Include="MockSitecoreField.cs" />
     <Compile Include="MockSitecoreItem.cs" />
     <Compile Include="MockSitecoreItemGateway.cs" />
     <Compile Include="MockSitecoreItemGatewayException.cs" />
+    <Compile Include="MockSitecoreRequest.cs" />
     <Compile Include="MockSitecoreTemplate.cs" />
     <Compile Include="MockSitecoreTemplateGateway.cs" />
     <Compile Include="Mvc\MockSitecoreRendering.cs" />

@@ -21,7 +21,7 @@ namespace Minq.Tests
 		[Test]
 		public void GetItemTest()
 		{
-			SitecoreItemKey key = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey key = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
 			MockSitecoreItem mockItem = new MockSitecoreItem(key);
 

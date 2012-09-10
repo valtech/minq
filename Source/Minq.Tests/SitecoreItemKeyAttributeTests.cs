@@ -24,7 +24,7 @@ namespace Minq.Tests
 			// Arrange
 			Guid guid = Guid.NewGuid();
 
-			SitecoreItemKey key = new SitecoreItemKey(guid, _container.Context);
+			SitecoreItemKey key = new SitecoreItemKey(guid, "en-GB", "web");
 
 			KeyedItem item = new KeyedItem { Key = key };
 

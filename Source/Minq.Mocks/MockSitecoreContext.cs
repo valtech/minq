@@ -52,11 +52,5 @@ namespace Minq.Mocks
 				_databaseName = value;
 			}
 		}
-
-		public SitecoreItemKey ItemKey
-		{
-			get;
-			set;
-		}
 	}
 }

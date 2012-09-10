@@ -22,7 +22,7 @@ namespace Minq.Tests
 		public void TestGetTemplate()
 		{
 			// Arrange
-			SitecoreTemplateKey key = new SitecoreTemplateKey(Guid.NewGuid(), _container.Context);
+			SitecoreTemplateKey key = new SitecoreTemplateKey(Guid.NewGuid(), "web");
 
 			MockSitecoreTemplate mockItem = new MockSitecoreTemplate(key);
 

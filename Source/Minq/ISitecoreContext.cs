@@ -6,7 +6,7 @@ using System.Text;
 namespace Minq
 {
 	/// <summary>
-	/// Defines an interface that represents the low level processing context for request-level operations in Sitecore.
+	/// Defines an interface that represents the low level processing context for operations against the Sitecore repository.
 	/// </summary>
 	public interface ISitecoreContext
 	{
@@ -16,7 +16,6 @@ namespace Minq
 		string LanguageName
 		{
 			get;
-			//set;
 		}
 
 		/// <summary>
@@ -25,16 +24,6 @@ namespace Minq
 		string DatabaseName
 		{
 			get;
-			//set;
-		}
-
-		/// <summary>
-		/// When overridden in a derived class, gets or sets the Sitecore item key associated with the current HTTP request.
-		/// </summary>
-		SitecoreItemKey ItemKey
-		{
-			get;
-			set;
 		}
 	}
 }

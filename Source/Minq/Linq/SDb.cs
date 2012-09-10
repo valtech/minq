@@ -11,35 +11,27 @@ namespace Minq.Linq
 	public class SDb
 	{
 		private string _name;
-		private ISitecoreContainer _container;
+		private SItemComposer _itemComposer;
 
 		/// <summary>
 		/// Initializes the class for use based on the database name and a <see cref="ISitecoreContainer"/>.
 		/// </summary>
 		/// <param name="name">The name of the database.</param>
 		/// <param name="container">The Sitecore container.</param>
-		public SDb(string name, ISitecoreContainer container)
+		public SDb(string name, SItemComposer itemComposer)
 		{
 			_name = name;
-			_container = container;
+			_itemComposer = itemComposer;
 		}
 
-		public SItem Item(Guid guid)
+		public SItem Item(Guid guid, string languageName)
 		{
-			ISitecoreContext context = _container.Resolve<ISitecoreContext>();
-
-			ISitecoreItemGateway itemGateway = _container.Resolve<ISitecoreItemGateway>();
-
-			return new SItem(itemGateway.GetItem(new SitecoreItemKey(guid, context.LanguageName, _name)), _container);
+			return _itemComposer.CreateItem(guid.ToString(), languageName, _name);
 		}
 
-		public SItem Item(string keyOrPath)
+		public SItem Item(string keyOrPath, string languageName)
 		{
-			ISitecoreContext context = _container.Resolve<ISitecoreContext>();
-
-			ISitecoreItemGateway itemGateway = _container.Resolve<ISitecoreItemGateway>();
-
-			return new SItem(itemGateway.GetItem(keyOrPath, context.LanguageName, _name), _container);
+			return _itemComposer.CreateItem(keyOrPath, languageName, _name);
 		}
 
 		public string Name

@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\Libraries\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\Libraries\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\Libraries\Moq.dll</HintPath>
     </Reference>

@@ -5,34 +5,51 @@ using System.Text;
 using NUnit.Framework;
 using Minq.Mocks;
 using Minq.Linq;
+using Castle.Windsor;
+using Castle.MicroKernel.Registration;
 
 namespace Minq.Tests.Linq
 {
 	[TestFixture]
 	public class SItemTests
 	{
-		private MockSitecoreContainer _container;
+		private IWindsorContainer _container;
+		private MockSitecoreItemGateway _mockItemGateway;
+		private MockSitecoreTemplateGateway _mockTemplateGateway;
+		private ISitecoreContext _mockContext;
+		private SItemComposer _composer;
 
 		[SetUp]
 		public void SetUp()
 		{
-			_container = new MockSitecoreContainer();
+			_container = new WindsorContainer();
+
+			_container.Register(Component.For<ISitecoreItemGateway>().ImplementedBy<MockSitecoreItemGateway>().Forward<MockSitecoreItemGateway>());
+			_container.Register(Component.For<ISitecoreTemplateGateway>().ImplementedBy<MockSitecoreTemplateGateway>().Forward<MockSitecoreTemplateGateway>());
+			_container.Register(Component.For<ISitecoreContext>().ImplementedBy<MockSitecoreContext>().Forward<MockSitecoreContext>());
+			_container.Register(Component.For<ISitecoreRequest>().ImplementedBy<MockSitecoreRequest>().Forward<MockSitecoreRequest>());
+			_container.Register(Component.For<SItemComposer>());
+
+			_mockItemGateway = _container.Resolve<MockSitecoreItemGateway>();
+			_mockContext = _container.Resolve<MockSitecoreContext>();
+			_mockTemplateGateway = _container.Resolve<MockSitecoreTemplateGateway>();
+			_composer = _container.Resolve<SItemComposer>();
 		}
 
 		[Test]
 		public void TestPoco()
 		{
 			// Arrange
-			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
 			MockSitecoreItem mockItem = new MockSitecoreItem(itemKey);
 
 			mockItem.AddField(new MockSitecoreField("Title", "Hello World!"));
 
-			SItem item = new SItem(mockItem, _container);
+			SItem item = new SItem(mockItem, _composer);
 
 			// Act
-			TitleItem titleItem = item.Poco<TitleItem>();
+			TitleItem titleItem = item.ToType<TitleItem>();
 
 			// Assert
 			Assert.AreEqual("Hello World!", titleItem.Title);
@@ -42,16 +59,16 @@ namespace Minq.Tests.Linq
 		public void TestPocoKeyTest()
 		{
 			// Arrange
-			SitecoreItemKey key = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey key = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
 			MockSitecoreItem mockItem = new MockSitecoreItem(key);
 
-			_container.ItemGateway.AddItem(mockItem);
+			_mockItemGateway.AddItem(mockItem);
 
-			SItem item = new SItem(mockItem, _container);
+			SItem item = new SItem(mockItem, _composer);
 
 			// Act
-			TitleItem titleItem = item.Poco<TitleItem>();
+			TitleItem titleItem = item.ToType<TitleItem>();
 
 			// Assert
 			Assert.AreEqual(key, titleItem.Key);
@@ -61,9 +78,9 @@ namespace Minq.Tests.Linq
 		public void TestPocoTypedChild()
 		{
 			// Arrange
-			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
-			SitecoreItemKey childKey = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey childKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
 			MockSitecoreItem mockItem = new MockSitecoreItem(itemKey);
 
@@ -73,12 +90,12 @@ namespace Minq.Tests.Linq
 
 			mockChild.AddField(new MockSitecoreField("Title", "Hello World!"));
 
-			_container.ItemGateway.AddItem(mockItem);
+			_mockItemGateway.AddItem(mockItem);
 
-			SItem item = new SItem(mockItem, _container);
+			SItem item = new SItem(mockItem, _composer);
 
 			// Act
-			ParentItem parentItem = item.Poco<ParentItem>();
+			ParentItem parentItem = item.ToType<ParentItem>();
 
 			// Assert
 			Assert.IsNotNull(parentItem.TitleItems);
@@ -120,8 +137,8 @@ namespace Minq.Tests.Linq
 		public void TestTemplate()
 		{
 			// Arrange
-			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
-			SitecoreTemplateKey templateKey = new SitecoreTemplateKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
+			SitecoreTemplateKey templateKey = new SitecoreTemplateKey(Guid.NewGuid(), "web");
 
 			MockSitecoreItem mockItem = new MockSitecoreItem(itemKey)
 			{
@@ -130,10 +147,10 @@ namespace Minq.Tests.Linq
 
 			MockSitecoreTemplate mockTemplate = new MockSitecoreTemplate(templateKey);
 
-			_container.TemplateGateway.AddTemplate(mockTemplate);
+			_mockTemplateGateway.AddTemplate(mockTemplate);
 
 			// Act
-			SItem item = new SItem(mockItem, _container);
+			SItem item = new SItem(mockItem, _composer);
 
 			// Assert
 			Assert.IsNotNull(item.Template);
@@ -143,9 +160,9 @@ namespace Minq.Tests.Linq
 		public void TestItems()
 		{
 			// Arrange
-			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
-			SitecoreItemKey childKey = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey childKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
 			MockSitecoreItem mockItem = new MockSitecoreItem(itemKey);
 
@@ -153,7 +170,7 @@ namespace Minq.Tests.Linq
 
 			mockItem.AddChild(mockChild);
 
-			SItem item = new SItem(mockItem, _container);
+			SItem item = new SItem(mockItem, _composer);
 
 			// Act
 			IEnumerable<SItem> list = item.Items();
@@ -167,9 +184,9 @@ namespace Minq.Tests.Linq
 		public void TestAncestors()
 		{
 			// Arrange
-			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
-			SitecoreItemKey childKey = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey childKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
 			MockSitecoreItem mockItem = new MockSitecoreItem(itemKey);
 
@@ -177,7 +194,7 @@ namespace Minq.Tests.Linq
 
 			mockItem.AddChild(mockChild);
 
-			SItem item = new SItem(mockChild, _container);
+			SItem item = new SItem(mockChild, _composer);
 
 			// Act
 			IEnumerable<SItem> list = item.Ancestors();
@@ -191,9 +208,9 @@ namespace Minq.Tests.Linq
 		public void TestAncestorsAndSelf()
 		{
 			// Arrange
-			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
-			SitecoreItemKey childKey = new SitecoreItemKey(Guid.NewGuid(), _container.Context);
+			SitecoreItemKey childKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
 
 			MockSitecoreItem mockItem = new MockSitecoreItem(itemKey);
 
@@ -201,8 +218,8 @@ namespace Minq.Tests.Linq
 
 			mockItem.AddChild(mockChild);
 
-			SItem item = new SItem(mockChild, _container);
-
+			SItem item = new SItem(mockChild, _composer);
+			
 			// Act
 			IEnumerable<SItem> list = item.AncestorsAndSelf();
 

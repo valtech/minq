@@ -11,6 +11,8 @@ C:\My Open Source Code\Minq\Minq\Minq.Tests\obj\Debug\Minq.Tests.dll
 C:\My Open Source Code\Minq\Minq\Minq.Tests\obj\Debug\Minq.Tests.pdb
 C:\My Open Source Code\Minq\Source\Minq.Tests\bin\Debug\Minq.Tests.dll
 C:\My Open Source Code\Minq\Source\Minq.Tests\bin\Debug\Minq.Tests.pdb
+C:\My Open Source Code\Minq\Source\Minq.Tests\bin\Debug\Castle.Core.dll
+C:\My Open Source Code\Minq\Source\Minq.Tests\bin\Debug\Castle.Windsor.dll
 C:\My Open Source Code\Minq\Source\Minq.Tests\bin\Debug\Minq.dll
 C:\My Open Source Code\Minq\Source\Minq.Tests\bin\Debug\Minq.Mocks.dll
 C:\My Open Source Code\Minq\Source\Minq.Tests\bin\Debug\Moq.dll

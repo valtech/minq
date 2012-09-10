@@ -10,6 +10,7 @@ namespace Minq
 		private Guid _guid;
 		private string _databaseName;
 
+		/*
 		/// <summary>
 		/// Initializes the class for use based on a Sitecore item guid and the language/database in the given <see cref="ISitecoreContext"/>.
 		/// </summary>
@@ -25,6 +26,7 @@ namespace Minq
 			_guid = guid;
 			_databaseName = context.DatabaseName;
 		}
+		*/
 
 		/// <summary>
 		/// Initializes the class for use based on a Sitecore item guid, language and database.
