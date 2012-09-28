@@ -97,6 +97,13 @@ namespace Minq.Linq
 				return true;
 			}
 
+			//RFC1123
+			if (DateTime.TryParseExact(value, "yyyyMMddTHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+			{
+				return true;
+			}
+
+			//.NET
 			if (DateTime.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
 			{
 				return true;
@@ -202,6 +209,15 @@ namespace Minq.Linq
 				if (TryGuid(input, out value))
 				{
 					output = value;
+
+					return true;
+				}
+			}
+			else if (type == typeof(SMedia))
+			{
+				if (SMedia.IsMedia(input))
+				{
+					output = new SMedia(input);
 
 					return true;
 				}

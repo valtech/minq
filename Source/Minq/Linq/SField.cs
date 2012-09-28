@@ -76,5 +76,15 @@ namespace Minq.Linq
 
 			return @default;
 		}
+
+		public bool IsEmpty
+		{
+			get
+			{
+				string value = Value<string>(null);
+
+				return String.IsNullOrEmpty(value);
+			}
+		}
 	}
 }

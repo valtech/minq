@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Linq\SConvertTests.cs" />
     <Compile Include="Linq\SItemTests.cs" />
     <Compile Include="Mvc\SitecoreFieldMarkupParserTests.cs" />
     <Compile Include="Mvc\SitecoreFieldMetadataTests.cs" />

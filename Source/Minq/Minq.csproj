@@ -51,6 +51,8 @@
     <Compile Include="ISitecoreItemGateway.cs" />
     <Compile Include="ISitecoreRequest.cs" />
     <Compile Include="Linq\SItemComposer.cs" />
+    <Compile Include="Linq\SItemExtensions.cs" />
+    <Compile Include="Linq\SMedia.cs" />
     <Compile Include="Linq\SRequest.cs" />
     <Compile Include="Mvc\ISitecoreEditorMarkup.cs" />
     <Compile Include="Mvc\Linq\SRendering.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Linq\STemplate.cs" />
     <Compile Include="Mvc\ISitecoreFieldMarkup.cs" />
     <Compile Include="Mvc\ISitecoreMarkupStrategy.cs" />
+    <Compile Include="Mvc\SitecoreEditorMetadata.cs" />
     <Compile Include="Mvc\SitecoreFieldAttributeDictionary.cs" />
     <Compile Include="Mvc\SitecoreFieldAttributeParser.cs" />
     <Compile Include="Mvc\SitecoreFieldString.cs" />
@@ -80,6 +83,7 @@
     <Compile Include="SitecoreItemKey.cs" />
     <Compile Include="SitecoreItemKeyAttribute.cs" />
     <Compile Include="SitecoreItemKeyComparer.cs" />
+    <Compile Include="SitecoreMediaFieldAttribute.cs" />
     <Compile Include="SitecoreTemplateAttribute.cs" />
     <Compile Include="SitecoreTemplateKey.cs" />
     <Compile Include="SitecoreTemplateKeyComparer.cs" />

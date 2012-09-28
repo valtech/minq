@@ -23,6 +23,6 @@ namespace Minq.Mvc
 		/// <returns>A <see cref="ISitecoreFieldMarkup"/> representing the markup generator for the field.</returns>
 		ISitecoreFieldMarkup GetFieldMarkup(SitecoreFieldMetadata fieldMetadata, SitecoreFieldAttributeDictionary fieldAttributes);
 
-		ISitecoreEditorMarkup GetEditorMarkup(SitecoreFieldAttributeDictionary editorAttributes);
+		ISitecoreEditorMarkup GetEditorMarkup(SitecoreEditorMetadata editorMetadata, SitecoreFieldAttributeDictionary editorAttributes);
 	}
 }

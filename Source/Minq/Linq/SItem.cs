@@ -194,7 +194,7 @@ namespace Minq.Linq
 		{
 			T instance = new T();
 
-			Type type = instance.GetType();
+			Type type = typeof(T);
 
 			foreach (PropertyInfo property in type.GetProperties())
 			{
@@ -211,6 +211,15 @@ namespace Minq.Linq
 						if (value != null)
 						{
 							property.SetValue(instance, value, null);
+						}
+						else
+						{
+							string s = field.Value<string>(null);
+
+							if (SMedia.IsMedia(s))
+							{
+								property.SetValue(instance, new SMedia(field).ToType(property.PropertyType), null);
+							}
 						}
 					}
 				}

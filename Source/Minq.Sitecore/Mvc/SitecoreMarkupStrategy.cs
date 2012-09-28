@@ -25,9 +25,9 @@ namespace Minq.Sitecore.Mvc
 			return new SitecoreFieldMarkup(args.Result);
 		}
 
-		public ISitecoreEditorMarkup GetEditorMarkup(SitecoreFieldAttributeDictionary editorAttributes)
+		public ISitecoreEditorMarkup GetEditorMarkup(SitecoreEditorMetadata editorMetadata, SitecoreFieldAttributeDictionary editorAttributes)
 		{
-			return new SitecoreEditorMarkup(editorAttributes);
+			return new SitecoreEditorMarkup(editorMetadata, editorAttributes);
 		}
 	}
 }

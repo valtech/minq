@@ -14,16 +14,20 @@ namespace Minq.Sitecore.Mvc
 {
 	public class SitecoreEditorMarkup : ISitecoreEditorMarkup
 	{
+		private SitecoreEditorMetadata _editorMetadata;
 		private SitecoreFieldAttributeDictionary _attributes;
 
-		public SitecoreEditorMarkup(SitecoreFieldAttributeDictionary attributes)
+		public SitecoreEditorMarkup(SitecoreEditorMetadata editorMetadata, SitecoreFieldAttributeDictionary attributes)
 		{
+			_editorMetadata = editorMetadata;
 			_attributes = attributes;
 		}
 
 		public string GetHtml(string childContent)
 		{
-			Editor editor = new Editor();
+			ScapiItem item = SitecoreItemGateway.GetScapiItem(_editorMetadata.Key, true);
+
+			Editor editor = new Editor(item);
 
 			if (editor.Visible)
 			{
@@ -61,9 +65,16 @@ namespace Minq.Sitecore.Mvc
 
 		class Editor : ScapiEditFrame
 		{
+			private ScapiItem _item;
+
+			public Editor(ScapiItem item)
+			{
+				_item = item;
+			}
+
 			protected override ScapiItem GetItem()
 			{
-				return null;
+				return _item;
 			}
 
 			public override bool Visible

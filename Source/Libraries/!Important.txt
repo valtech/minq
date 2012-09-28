@@ -1,5 +1,13 @@
 You must add the following libraries to this folder in order to build the solution:
 
+Runtime:
+
+Sitecore.Kernal.dll
+Sitecore.Mvc.dll
+
+Testing:
+
 Moq.dll
-Sitecore.Kernal
-Sitecore.Mvc
+Castle.Core.dll
+Castle.Windsor.dll
+

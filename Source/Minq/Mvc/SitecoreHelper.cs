@@ -27,6 +27,11 @@ namespace Minq.Mvc
 			_markupStrategy = markupStrategy;
 		}
 
+		public SitecoreHelper<TAlternative> Helper<TAlternative>(TAlternative alternative)
+		{
+			return new SitecoreHelper<TAlternative>(new ViewDataDictionary<TAlternative>(alternative), _markupStrategy);
+		}
+
 		/// <summary>
 		/// Returns the correct markup for a Sitecore field for each property in the object that is represented by the specified expression.
 		/// </summary>
@@ -99,7 +104,9 @@ namespace Minq.Mvc
 		{
 			SitecoreFieldAttributeDictionary editorAttributes = SitecoreFieldAttributeDictionary.FromAttributes(htmlAttributes);
 
-			ISitecoreEditorMarkup markup = _markupStrategy.GetEditorMarkup(editorAttributes);
+			SitecoreEditorMetadata metadata = SitecoreEditorMetadata.FromModel<TModel>(_viewData.Model);
+
+			ISitecoreEditorMarkup markup = _markupStrategy.GetEditorMarkup(metadata, editorAttributes);
 
 			HelperResult helperResult = htmlPredicate(_viewData.Model) as HelperResult;
 

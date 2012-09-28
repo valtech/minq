@@ -70,6 +70,7 @@
     <Compile Include="SitecoreItem.cs" />
     <Compile Include="SitecoreItemGateway.cs" />
     <Compile Include="SitecoreItemGatewayException.cs" />
+    <Compile Include="SitecoreRequest.cs" />
     <Compile Include="SitecoreTemplate.cs" />
     <Compile Include="SitecoreTemplateGateway.cs" />
     <Compile Include="SitecoreTemplateGatewayException.cs" />
