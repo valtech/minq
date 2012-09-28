@@ -42,12 +42,22 @@ namespace Minq.Linq
 
 		public SItem Item(Guid guid)
 		{
-			return _itemComposer.CreateItem(guid.ToString(), _sitecoreContext.LanguageName, Db.Name);
+			return Item(guid.ToString());
 		}
 
 		public SItem Item(string keyOrPath)
 		{
 			return _itemComposer.CreateItem(keyOrPath, _sitecoreContext.LanguageName, Db.Name);
+		}
+
+		public SMedia Media(Guid guid)
+		{
+			return Media(guid.ToString());
+		}
+
+		public SMedia Media(string keyOrPath)
+		{
+			return _itemComposer.CreateMedia(keyOrPath, _sitecoreContext.LanguageName, Db.Name);
 		}
 	}
 }

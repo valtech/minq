@@ -13,11 +13,13 @@ namespace Minq.Mvc.Linq
 		private SItemComposer _composer;
 		private NameValueCollection _parameters;
 		private ISitecoreRendering _rendering;
+		private SDb _db;
 
-		public SRendering(ISitecoreRendering rendering, SItemComposer composer)
+		public SRendering(ISitecoreRendering rendering, SItemComposer composer, SDb db)
 		{
 			_rendering = rendering;
 			_composer = composer;
+			_db = db;
 		}
 
 		public SItem DataItem

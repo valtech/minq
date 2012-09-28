@@ -11,14 +11,16 @@ namespace Minq.Linq
 	public class SField
 	{
 		private ISitecoreField _field;
+		private SItem _item;
 
 		/// <summary>
 		/// Initializes the class for use based on the <see cref="ISitecoreField" />.
 		/// </summary>
 		/// <param name="field">The low level Sitecore field that represents this LINQ field.</param>
-		public SField(ISitecoreField field)
+		public SField(ISitecoreField field, SItem item)
 		{
 			_field = field;
+			_item = item;
 		}
 
 		/// <summary>
@@ -67,6 +69,32 @@ namespace Minq.Linq
 		/// <returns>The value of the field.</returns>
 		public object Value(Type type, object @default)
 		{
+			if (type == typeof(IEnumerable<SItem>) || type == typeof(SItem[]))
+			{
+				IEnumerable<Guid> guids;
+
+				if (_field.TryConvertValue<IEnumerable<Guid>>(out guids))
+				{
+					return guids.Select(guid => _item.Db.Item(guid, _item.LanguageName)).ToArray();
+				}
+			}
+			else if (type == typeof(SMedia))
+			{
+				if (SMedia.IsMediaField(this))
+				{
+					return _item.Composer.CreateMedia(this, _item.LanguageName, _item.Db.Name);
+				}
+			}
+			else if (type == typeof(IEnumerable<SMedia>) || type == typeof(SMedia[]))
+			{
+				IEnumerable<Guid> guids;
+
+				if (_field.TryConvertValue<IEnumerable<Guid>>(out guids))
+				{
+					return guids.Select(guid => _item.Composer.CreateMedia(guid.ToString(), _item.LanguageName, _item.Db.Name)).ToArray();
+				}
+			}
+
 			object value;
 
 			if (_field.TryConvertValue(type, out value))

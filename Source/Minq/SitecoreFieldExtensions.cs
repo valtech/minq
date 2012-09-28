@@ -21,7 +21,7 @@ namespace Minq
 		/// <returns>True if the field could be converted to the given type, false otherwise.</returns>
 		public static bool TryConvertValue(this ISitecoreField source, Type type, out object value)
 		{
-			return SConvert.TryChangeType(type, source.Value, out value);
+			return SConvert.TryChangeType(type, source.Value(true, true), out value);
 		}
 
 		/// <summary>

@@ -9,30 +9,14 @@ namespace Minq.Linq
 {
 	public class SMedia
 	{
-		private Guid _guid;
-		private string _imageUrl;
+		private ISitecoreMedia _sitecoreMedia;
 
-		public SMedia(string value)
+		public SMedia(ISitecoreMedia sitecoreMedia)
 		{
-			if (!String.IsNullOrEmpty(value) && !IsMedia(value))
-			{
-				throw new Exception("Not a media field");
-			}
-
-			XElement element = XDocument.Parse(value).Descendants("image").First();
-
-			Guid.TryParse((string)element.Attribute("mediaid"), out _guid);
-
-			_imageUrl = (string)element.Attribute("src");
+			_sitecoreMedia = sitecoreMedia;
 		}
 
-		public SMedia(SField field)
-			: this(field.Value<string>(null))
-		{
-			
-		}
-
-		public static bool IsMedia(string value)
+		public static bool IsMediaField(string value)
 		{
 			if (!String.IsNullOrEmpty(value))
 			{
@@ -45,13 +29,13 @@ namespace Minq.Linq
 			return false;
 		}
 
-		public static bool IsMedia(SField field)
+		public static bool IsMediaField(SField field)
 		{
 			if (!field.IsEmpty)
 			{
 				string value = field.Value<string>();
 
-				return IsMedia(value);
+				return IsMediaField(value);
 			}
 
 			return false;
@@ -61,15 +45,15 @@ namespace Minq.Linq
 		{
 			get
 			{
-				return _guid;
+				return _sitecoreMedia.Key.Guid;
 			}
 		}
 
-		public string ImageUrl
+		public string Url
 		{
 			get
 			{
-				return _imageUrl;
+				return _sitecoreMedia.Url;
 			}
 		}
 

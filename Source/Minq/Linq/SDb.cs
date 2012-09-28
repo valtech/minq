@@ -24,9 +24,19 @@ namespace Minq.Linq
 			_itemComposer = itemComposer;
 		}
 
+		public SMedia Media(Guid guid, string languageName)
+		{
+			return Media(guid.ToString(), languageName);
+		}
+
+		public SMedia Media(string keyOrPath, string languageName)
+		{
+			return _itemComposer.CreateMedia(keyOrPath, languageName, _name);
+		}
+
 		public SItem Item(Guid guid, string languageName)
 		{
-			return _itemComposer.CreateItem(guid.ToString(), languageName, _name);
+			return Item(guid.ToString(), languageName);
 		}
 
 		public SItem Item(string keyOrPath, string languageName)

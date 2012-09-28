@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E2B8E03C-CFD9-4D10-B4EE-DC88EA845C7D}</ProjectGuid>
+    <ProjectGuid>{D34AA6F1-130A-40A9-904C-87F56B955EE7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Minq.Mocks</RootNamespace>
-    <AssemblyName>Minq.Mocks</AssemblyName>
+    <RootNamespace>Minq.Bridge</RootNamespace>
+    <AssemblyName>Minq.Bridge</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,8 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,7 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,17 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MockSitecoreContext.cs" />
-    <Compile Include="MockSitecoreField.cs" />
-    <Compile Include="MockSitecoreFieldTemplate.cs" />
-    <Compile Include="MockSitecoreItem.cs" />
-    <Compile Include="MockSitecoreItemGateway.cs" />
-    <Compile Include="MockSitecoreItemGatewayException.cs" />
-    <Compile Include="MockSitecoreRequest.cs" />
-    <Compile Include="MockSitecoreTemplate.cs" />
-    <Compile Include="MockSitecoreTemplateGateway.cs" />
-    <Compile Include="Mvc\MockSitecoreRendering.cs" />
+    <Compile Include="Configuration\BridgeConfigurationManager.cs" />
+    <Compile Include="Configuration\BridgeConfigurationSection.cs" />
+    <Compile Include="UI\SitecoreUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebFormsControllerFactory.cs" />
+    <Compile Include="WebFormsHtmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minq\Minq.csproj">

@@ -12,6 +12,7 @@ namespace Minq.Mocks
 	{
 		private string _name;
 		private string _value;
+		private ISitecoreFieldTemplate _fieldTemplate;
 
 		/// <summary>
 		/// Initializes a new instance of the class based on the field name and value;
@@ -38,11 +39,21 @@ namespace Minq.Mocks
 		/// <summary>
 		/// Gets the value of the field (includes standard values but not default values).
 		/// </summary>
-		public string Value
+		public string Value(bool fallbackOnStandardValue, bool fallbackOnDefaultTemplateValue)
+		{
+			return _value;
+		}
+
+		public ISitecoreFieldTemplate Template
 		{
 			get
 			{
-				return _value;
+				if (_fieldTemplate == null)
+				{
+					_fieldTemplate = new MockSitecoreFieldTemplate();
+				}
+
+				return _fieldTemplate;
 			}
 		}
 	}

@@ -60,7 +60,7 @@ namespace Minq.Sitecore.Mvc
 				}
 			}
 
-			return null;
+			return childContent;
 		}
 
 		class Editor : ScapiEditFrame

@@ -213,14 +213,36 @@ namespace Minq.Linq
 					return true;
 				}
 			}
-			else if (type == typeof(SMedia))
+			else if (type == typeof(IEnumerable<Guid>))
 			{
-				if (SMedia.IsMedia(input))
+				if (!String.IsNullOrEmpty(input))
 				{
-					output = new SMedia(input);
+					string[] parts = input.Split('|');
+
+					IList<Guid> guids = new List<Guid>();
+
+					foreach (string part in parts)
+					{
+						Guid guid;
+
+						if (Guid.TryParse(part, out guid))
+						{
+							guids.Add(guid);
+						}
+						else
+						{
+							return false;
+						}
+					}
+
+					output = guids;
 
 					return true;
 				}
+
+				output = Enumerable.Empty<Guid>();
+
+				return true;
 			}
 			else
 			{

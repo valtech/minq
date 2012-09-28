@@ -28,6 +28,14 @@ namespace Minq.Linq
 			_itemComposer = itemComposer;
 		}
 
+		public SItemComposer Composer
+		{
+			get
+			{
+				return _itemComposer;
+			}
+		}
+
 		/// <summary>
 		/// Returns a Sitecore field from the LINQ item.
 		/// </summary>
@@ -39,7 +47,7 @@ namespace Minq.Linq
 
 			if (_sitecoreItem.FieldDictionary.TryGetValue(name, out field))
 			{
-				return new SField(field);
+				return new SField(field, this);
 			}
 
 			return null;
@@ -216,9 +224,9 @@ namespace Minq.Linq
 						{
 							string s = field.Value<string>(null);
 
-							if (SMedia.IsMedia(s))
+							if (SMedia.IsMediaField(s))
 							{
-								property.SetValue(instance, new SMedia(field).ToType(property.PropertyType), null);
+								property.SetValue(instance, _itemComposer.CreateMedia(field, LanguageName, Db.Name).ToType(property.PropertyType), null);
 							}
 						}
 					}

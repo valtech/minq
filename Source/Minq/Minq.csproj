@@ -47,8 +47,11 @@
   <ItemGroup>
     <Compile Include="ISitecoreContext.cs" />
     <Compile Include="ISitecoreField.cs" />
+    <Compile Include="ISitecoreFieldTemplate.cs" />
     <Compile Include="ISitecoreItem.cs" />
     <Compile Include="ISitecoreItemGateway.cs" />
+    <Compile Include="ISitecoreMedia.cs" />
+    <Compile Include="ISitecoreMediaGateway.cs" />
     <Compile Include="ISitecoreRequest.cs" />
     <Compile Include="Linq\SItemComposer.cs" />
     <Compile Include="Linq\SItemExtensions.cs" />
