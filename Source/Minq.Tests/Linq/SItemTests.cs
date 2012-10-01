@@ -15,6 +15,7 @@ namespace Minq.Tests.Linq
 	{
 		private IWindsorContainer _container;
 		private MockSitecoreItemGateway _mockItemGateway;
+		private MockSitecoreMediaGateway _mockMediaGateway;
 		private MockSitecoreTemplateGateway _mockTemplateGateway;
 		private ISitecoreContext _mockContext;
 		private SItemComposer _composer;
@@ -26,6 +27,7 @@ namespace Minq.Tests.Linq
 
 			_container.Register(Component.For<ISitecoreItemGateway>().ImplementedBy<MockSitecoreItemGateway>().Forward<MockSitecoreItemGateway>());
 			_container.Register(Component.For<ISitecoreTemplateGateway>().ImplementedBy<MockSitecoreTemplateGateway>().Forward<MockSitecoreTemplateGateway>());
+			_container.Register(Component.For<ISitecoreMediaGateway>().ImplementedBy<MockSitecoreMediaGateway>().Forward<MockSitecoreMediaGateway>());
 			_container.Register(Component.For<ISitecoreContext>().ImplementedBy<MockSitecoreContext>().Forward<MockSitecoreContext>());
 			_container.Register(Component.For<ISitecoreRequest>().ImplementedBy<MockSitecoreRequest>().Forward<MockSitecoreRequest>());
 			_container.Register(Component.For<SItemComposer>());
@@ -33,6 +35,7 @@ namespace Minq.Tests.Linq
 			_mockItemGateway = _container.Resolve<MockSitecoreItemGateway>();
 			_mockContext = _container.Resolve<MockSitecoreContext>();
 			_mockTemplateGateway = _container.Resolve<MockSitecoreTemplateGateway>();
+			_mockMediaGateway = _container.Resolve<MockSitecoreMediaGateway>();
 			_composer = _container.Resolve<SItemComposer>();
 		}
 

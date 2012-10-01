@@ -11,5 +11,10 @@ namespace Minq
 		{
 			get;
 		}
+
+		Type FieldType
+		{
+			get;
+		}
 	}
 }

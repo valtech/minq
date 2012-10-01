@@ -23,6 +23,11 @@ namespace Minq.Linq
 			_item = item;
 		}
 
+		public static bool IsNullOrEmpty(SField field)
+		{
+			return field == null || String.IsNullOrEmpty(field.Value<string>());
+		}
+
 		/// <summary>
 		/// Gets the value of the field as the specified type.
 		/// </summary>
@@ -112,6 +117,14 @@ namespace Minq.Linq
 				string value = Value<string>(null);
 
 				return String.IsNullOrEmpty(value);
+			}
+		}
+
+		public Type FieldType
+		{
+			get
+			{
+				return _field.Template.FieldType;
 			}
 		}
 	}

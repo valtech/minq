@@ -44,6 +44,21 @@ namespace Minq.Linq
 			return _itemComposer.CreateItem(keyOrPath, languageName, _name);
 		}
 
+		public SItem Item(Guid guid, IEnumerable<string> languageFallback)
+		{
+			foreach (string languageName in languageFallback)
+			{
+				SItem item = Item(guid, languageName);
+
+				//if (item.IsValid)
+				//{
+					return item;
+				//}
+			}
+
+			return Item(guid, languageFallback.First());
+		}
+
 		public string Name
 		{
 			get

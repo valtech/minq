@@ -22,5 +22,25 @@ namespace Minq.Sitecore
 				return _scapiTemplateField.DefaultValue;
 			}
 		}
+
+		public Type FieldType
+		{
+			get
+			{
+				switch (_scapiTemplateField.TypeKey)
+				{
+					case "checkbox":
+						return typeof(bool);
+					case "tristate":
+						return typeof(bool?);
+					case "datetime":
+						return typeof(DateTime);
+					case "date":
+						return typeof(DateTime);
+				}
+
+				return typeof(string);
+			}
+		}
 	}
 }

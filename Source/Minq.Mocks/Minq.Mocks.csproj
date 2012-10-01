@@ -48,6 +48,8 @@
     <Compile Include="MockSitecoreItem.cs" />
     <Compile Include="MockSitecoreItemGateway.cs" />
     <Compile Include="MockSitecoreItemGatewayException.cs" />
+    <Compile Include="MockSitecoreMedia.cs" />
+    <Compile Include="MockSitecoreMediaGateway.cs" />
     <Compile Include="MockSitecoreRequest.cs" />
     <Compile Include="MockSitecoreTemplate.cs" />
     <Compile Include="MockSitecoreTemplateGateway.cs" />

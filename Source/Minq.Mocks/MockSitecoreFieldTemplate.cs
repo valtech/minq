@@ -14,5 +14,13 @@ namespace Minq.Mocks
 				return null;
 			}
 		}
+
+		public Type FieldType
+		{
+			get
+			{
+				return typeof(string);
+			}
+		}
 	}
 }
