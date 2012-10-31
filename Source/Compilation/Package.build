@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<!-- $Id$ -->
+
+	<PropertyGroup>
+		<MSBuildCommunityTasksLib>..\Libraries\MSBuild.Community.Tasks.dll</MSBuildCommunityTasksLib>
+	</PropertyGroup>
+
+	<UsingTask AssemblyFile="$(MSBuildCommunityTasksLib)" TaskName="MSBuild.Community.Tasks.Zip" />
+	<UsingTask AssemblyFile="$(MSBuildCommunityTasksLib)" TaskName="MSBuild.Community.Tasks.Time" />
+
+	<Target Name="Snapshot">
+		<Time Format="yyyy-MMM-dd">
+			<Output TaskParameter="FormattedTime" PropertyName="ZipDate" />
+		</Time>
+
+		<Copy SourceFiles="..\Minq\bin\$(Configuration)\Minq.dll" DestinationFolder="..\Compilation\$(Configuration)-$(ZipDate)" />
+		<Copy SourceFiles="..\Minq.Sitecore\bin\$(Configuration)\Minq.Sitecore.dll" DestinationFolder="..\Compilation\$(Configuration)-$(ZipDate)" />
+		<Copy SourceFiles="..\Minq.Mocks\bin\$(Configuration)\Minq.Mocks.dll" DestinationFolder="..\Compilation\$(Configuration)-$(ZipDate)" />
+
+		<ItemGroup>
+			<ZipFiles Include="..\Compilation\$(Configuration)-$(ZipDate)\**\*" />
+		</ItemGroup>
+
+		<Zip Files="@(ZipFiles)"
+		   WorkingDirectory="..\Compilation\$(Configuration)-$(ZipDate)"
+		   ZipFileName="..\Compilation\$(Configuration)-$(ZipDate).zip"
+		   ZipLevel="9" />
+	</Target>
+</Project>
