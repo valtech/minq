@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Linq.Expressions;
+using System.Web.WebPages;
 
 namespace Minq.Mvc
 {
@@ -37,6 +38,28 @@ namespace Minq.Mvc
 			if (SitecoreFieldMarkupParser.IsEmptyMarkupElement(_markup.GetHtml(null)))
 			{
 				return new HtmlString(_markup.GetHtml(ifEmptyPredicate().ToHtmlString()));
+			}
+
+			return this;
+		}
+
+		/// <summary>
+		/// Inserts content into an HTML tag if there is no content between the tags.
+		/// </summary>
+		/// <param name="htmlPredicate">The HTML template to supply the supplementary markup.</param>
+		/// <returns>The supplemented markup.</returns>
+		public IHtmlString IfEmpty(Func<object, object> htmlPredicate)
+		{
+			if (SitecoreFieldMarkupParser.IsEmptyMarkupElement(_markup.GetHtml(null)))
+			{
+				HelperResult helperResult = htmlPredicate(null) as HelperResult;
+
+				if (helperResult != null)
+				{
+					return new HtmlString(_markup.GetHtml(helperResult.ToString()));
+				}
+
+				return this;
 			}
 
 			return this;
