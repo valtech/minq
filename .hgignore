@@ -1,0 +1,16 @@
+syntax: glob
+**/bin/Debug/*.*
+**/bin/Release/*.*
+**/obj/Debug/*.*
+**/obj/Release/*.*
+**/Libraries/*.*
+**/Minq.Bridge/*.*
+**/Minq.Bridge/**/*.*
+*.user
+*.suo
+**/Compilation/*.bat
+**/Compilation/**/*.dll
+**/Compilation/*.zip
+*.PartCover.xml
+*.VisualState.xml
+*/TestResult.xml
