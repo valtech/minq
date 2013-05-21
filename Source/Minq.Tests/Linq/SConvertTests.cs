@@ -19,5 +19,17 @@ namespace Minq.Tests.Linq
 
 			Assert.AreEqual(2012, date.Year);
 		}
+
+		[Test]
+		public void TestTryInt32()
+		{
+			object output;
+
+			SConvert.TryChangeType(typeof(int), "1", out output);
+
+			Assert.IsInstanceOf<int>(output);
+
+			Assert.AreEqual(1, output);
+		}
 	}
 }
