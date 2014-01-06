@@ -7,6 +7,8 @@ using ScapiTemplateFieldItem = Sitecore.Data.Items.TemplateFieldItem;
 using ScapiStandardValuesManager = Sitecore.Data.StandardValuesManager;
 using ScapiVersionCollection = global::Sitecore.Collections.VersionCollection;
 using ScapiItemManager = global::Sitecore.Data.Managers.ItemManager;
+using ScapiVersionComparer = global::Sitecore.Data.VersionComparer;
+using ScapiVersion = global::Sitecore.Data.Version;
 
 namespace Minq.Sitecore
 {
@@ -58,7 +60,12 @@ namespace Minq.Sitecore
 
 				if (versions != null)
 				{
-					return versions.Select(version => version.Number).ToArray();
+					ScapiVersionComparer comparer = new ScapiVersionComparer();
+
+					return versions
+						.OrderBy<ScapiVersion, ScapiVersion>(version => version, comparer)
+						.Select(version => version.Number)
+						.ToArray();
 				}
 
 				return new int[0];
