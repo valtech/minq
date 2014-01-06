@@ -85,6 +85,16 @@ namespace Minq.Linq
 			}
 		}
 
+		public static bool IsNullOrUnversioned(SItem item)
+		{
+			return item == null || !item.Versions().Any();
+		}
+
+		public IEnumerable<int> Versions()
+		{
+			return _sitecoreItem.Versions;
+		}
+
 		public string Name
 		{
 			get

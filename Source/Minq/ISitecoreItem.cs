@@ -48,7 +48,15 @@ namespace Minq
 		}
 
 		/// <summary>
-		/// Gets the name <see cref="ISitecoreItem"/> of this item.
+		/// Gets the versions of this item.
+		/// </summary>
+		int[] Versions
+		{
+			get;
+		}
+
+		/// <summary>
+		/// Gets the name of this item.
 		/// </summary>
 		string Name
 		{

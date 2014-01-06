@@ -5,6 +5,8 @@ using System.Text;
 using ScapiItem = global::Sitecore.Data.Items.Item;
 using ScapiTemplateFieldItem = Sitecore.Data.Items.TemplateFieldItem;
 using ScapiStandardValuesManager = Sitecore.Data.StandardValuesManager;
+using ScapiVersionCollection = global::Sitecore.Collections.VersionCollection;
+using ScapiItemManager = global::Sitecore.Data.Managers.ItemManager;
 
 namespace Minq.Sitecore
 {
@@ -45,6 +47,21 @@ namespace Minq.Sitecore
 			get
 			{
 				return _scapiItem.Name;
+			}
+		}
+
+		public int[] Versions
+		{
+			get
+			{
+				ScapiVersionCollection versions = ScapiItemManager.GetVersions(_scapiItem);
+
+				if (versions != null)
+				{
+					return versions.Select(version => version.Number).ToArray();
+				}
+
+				return new int[0];
 			}
 		}
 

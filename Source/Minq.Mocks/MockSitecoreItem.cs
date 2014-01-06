@@ -14,6 +14,7 @@ namespace Minq.Mocks
 		private IDictionary<string, ISitecoreField> _fields = new Dictionary<string, ISitecoreField>(StringComparer.OrdinalIgnoreCase);
 		private IList<ISitecoreItem> _children = new List<ISitecoreItem>();
 		private ISitecoreItem _parent;
+		private int[] _versions;
 
 		/// <summary>
 		/// Initializes the class based on a <see cref="SitecoreItemKey"/>.
@@ -83,6 +84,18 @@ namespace Minq.Mocks
 			get
 			{
 				return _parent;
+			}
+		}
+
+		public int[] Versions
+		{
+			get
+			{
+				return _versions ?? new int[0];
+			}
+			set
+			{
+				_versions = value;
 			}
 		}
 
