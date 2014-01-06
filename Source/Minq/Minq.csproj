@@ -91,7 +91,6 @@
     <Compile Include="SitecoreTemplateAttribute.cs" />
     <Compile Include="SitecoreTemplateKey.cs" />
     <Compile Include="SitecoreTemplateKeyComparer.cs" />
-    <Compile Include="SitecoreUrlAttribute.cs" />
     <Compile Include="SitecoreUrlOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
