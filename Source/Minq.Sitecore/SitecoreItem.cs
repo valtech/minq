@@ -9,7 +9,8 @@ using ScapiVersionCollection = global::Sitecore.Collections.VersionCollection;
 using ScapiItemManager = global::Sitecore.Data.Managers.ItemManager;
 using ScapiVersionComparer = global::Sitecore.Data.VersionComparer;
 using ScapiVersion = global::Sitecore.Data.Version;
-
+using ScapiLinkManager = global::Sitecore.Links.LinkManager;
+using ScapiUrlOptions = global::Sitecore.Links.UrlOptions;
 namespace Minq.Sitecore
 {
 	/// <summary>
@@ -39,6 +40,19 @@ namespace Minq.Sitecore
 			{
 				return new SitecoreItemKey(_scapiItem.ID.Guid, _scapiItem.Language.Name, _scapiItem.Database.Name);
 			}
+		}
+
+		public string Url(SitecoreUrlOptions urlOptions)
+		{
+
+			return ScapiLinkManager.GetItemUrl(_scapiItem, new ScapiUrlOptions
+			{
+				AddAspxExtension = true,
+				AlwaysIncludeServerUrl = true,
+				LanguageEmbedding = ScapiLinkManager.LanguageEmbedding,
+				LowercaseUrls = true,
+				EncodeNames = true
+			});
 		}
 
 		/// <summary>

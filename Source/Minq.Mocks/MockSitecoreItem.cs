@@ -25,6 +25,11 @@ namespace Minq.Mocks
 			_key = key;
 		}
 
+		public string Url(SitecoreUrlOptions urlOptions)
+		{
+			return null;
+		}
+
 		/// <summary>
 		/// Gets the <see cref="SitecoreItemKey" /> used to uniquely identify the item.
 		/// </summary>
