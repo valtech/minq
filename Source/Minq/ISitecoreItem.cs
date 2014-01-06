@@ -48,6 +48,14 @@ namespace Minq
 		}
 
 		/// <summary>
+		/// Gets the name <see cref="ISitecoreItem"/> of this item.
+		/// </summary>
+		string Name
+		{
+			get;
+		}
+
+		/// <summary>
 		/// Gets the key of the template that this item is based on.
 		/// </summary>
 		SitecoreTemplateKey TemplateKey

@@ -85,6 +85,14 @@ namespace Minq.Linq
 			}
 		}
 
+		public string Name
+		{
+			get
+			{
+				return _sitecoreItem.Name;
+			}
+		}
+
 		/// <summary>
 		/// Returns a collection of the child items of this item or document, in order.
 		/// </summary>
@@ -155,6 +163,23 @@ namespace Minq.Linq
 			foreach (SItem ancestor in Ancestors())
 			{
 				yield return ancestor;
+			}
+		}
+
+		public string Path
+		{
+			get
+			{
+				StringBuilder builder = new StringBuilder();
+
+				foreach (SItem item in AncestorsAndSelf())
+				{
+					builder.Append("/");
+
+					builder.Append(item.Name);
+				}
+
+				return builder.ToString();
 			}
 		}
 

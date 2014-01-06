@@ -38,6 +38,17 @@ namespace Minq.Sitecore
 		}
 
 		/// <summary>
+		/// Gets the name of this item.
+		/// </summary>
+		public string Name
+		{
+			get
+			{
+				return _scapiItem.Name;
+			}
+		}
+
+		/// <summary>
 		/// Gets all the Sitecore fields defined for this item
 		/// based on its template definition.
 		/// </summary>

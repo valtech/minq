@@ -86,6 +86,15 @@ namespace Minq.Mocks
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the name of this item.
+		/// </summary>
+		public string Name
+		{
+			get;
+			set;
+		}
+
 		SitecoreTemplateKey ISitecoreItem.TemplateKey
 		{
 			get
