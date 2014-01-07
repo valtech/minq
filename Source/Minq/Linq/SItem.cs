@@ -305,6 +305,13 @@ namespace Minq.Linq
 							property.SetValue(instance, collection, null);
 						}
 					}
+
+					SitecoreItemUrlAttribute itemUrlAttribute = (SitecoreItemUrlAttribute)Attribute.GetCustomAttribute(property, typeof(SitecoreItemUrlAttribute));
+
+					if (itemUrlAttribute != null)
+					{
+						property.SetValue(instance, Url(),  null);
+					}
 				}
 			}
 

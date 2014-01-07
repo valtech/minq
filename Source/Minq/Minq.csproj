@@ -87,6 +87,7 @@
     <Compile Include="SitecoreItemKey.cs" />
     <Compile Include="SitecoreItemKeyAttribute.cs" />
     <Compile Include="SitecoreItemKeyComparer.cs" />
+    <Compile Include="SitecoreItemUrlAttribute.cs" />
     <Compile Include="SitecoreMediaFieldAttribute.cs" />
     <Compile Include="SitecoreTemplateAttribute.cs" />
     <Compile Include="SitecoreTemplateKey.cs" />
