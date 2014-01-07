@@ -23,8 +23,6 @@ namespace Minq.Linq
 		{
 			_field = field;
 
-			//parse XML :-)
-
 			XDocument document = XDocument.Parse(field.Value<string>());
 
 			_text = GetDocumentAttribute(document, "text");
@@ -97,17 +95,3 @@ namespace Minq.Linq
 		}
 	}
 }
-
-/*
-<link
- * text="Description"
- * linktype="internal"
- * url="/Home.aspx"
- * anchor="Anchor"
- * querystring="QS"
- * title="Alt"
- * class="Class"
- * target=""
- * id="{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
- * />
-*/
