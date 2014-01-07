@@ -42,7 +42,7 @@ namespace Minq.Sitecore
 			}
 		}
 
-		public string Url(SitecoreUrlOptions urlOptions)
+		public string CustomUrl(SitecoreUrlOptions urlOptions)
 		{
 
 			return ScapiLinkManager.GetItemUrl(_scapiItem, new ScapiUrlOptions

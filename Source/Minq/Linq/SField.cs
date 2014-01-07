@@ -11,16 +11,16 @@ namespace Minq.Linq
 	public class SField
 	{
 		private ISitecoreField _field;
-		private SItem _item;
+		private SItem _owner;
 
 		/// <summary>
 		/// Initializes the class for use based on the <see cref="ISitecoreField" />.
 		/// </summary>
 		/// <param name="field">The low level Sitecore field that represents this LINQ field.</param>
-		public SField(ISitecoreField field, SItem item)
+		public SField(ISitecoreField field, SItem owner)
 		{
 			_field = field;
-			_item = item;
+			_owner = owner;
 		}
 
 		public static bool IsNullOrEmpty(SField field)
@@ -80,12 +80,12 @@ namespace Minq.Linq
 
 				if (_field.TryConvertValue<IEnumerable<Guid>>(out guids))
 				{
-					return guids.Select(guid => _item.Db.Item(guid, _item.LanguageName)).ToArray();
+					return guids.Select(guid => _owner.Db.Item(guid, _owner.LanguageName)).ToArray();
 				}
 
 				if (guids.Any())
 				{
-					return _item.Db.Item(guids.First(), _item.LanguageName);
+					return _owner.Db.Item(guids.First(), _owner.LanguageName);
 				}
 			}
 			else if (type == typeof(IEnumerable<SItem>) || type == typeof(SItem[]))
@@ -94,14 +94,14 @@ namespace Minq.Linq
 
 				if (_field.TryConvertValue<IEnumerable<Guid>>(out guids))
 				{
-					return guids.Select(guid => _item.Db.Item(guid, _item.LanguageName)).ToArray();
+					return guids.Select(guid => _owner.Db.Item(guid, _owner.LanguageName)).ToArray();
 				}
 			}
 			else if (type == typeof(SMedia))
 			{
 				if (SMedia.IsMediaField(this))
 				{
-					return _item.Composer.CreateMedia(this, _item.LanguageName, _item.Db.Name);
+					return _owner.Composer.CreateMedia(this, _owner.LanguageName, _owner.Db.Name);
 				}
 			}
 			else if (type == typeof(IEnumerable<SMedia>) || type == typeof(SMedia[]))
@@ -110,7 +110,7 @@ namespace Minq.Linq
 
 				if (_field.TryConvertValue<IEnumerable<Guid>>(out guids))
 				{
-					return guids.Select(guid => _item.Composer.CreateMedia(guid.ToString(), _item.LanguageName, _item.Db.Name)).ToArray();
+					return guids.Select(guid => _owner.Composer.CreateMedia(guid.ToString(), _owner.LanguageName, _owner.Db.Name)).ToArray();
 				}
 			}
 
@@ -139,6 +139,14 @@ namespace Minq.Linq
 			get
 			{
 				return _field.Template.FieldType;
+			}
+		}
+
+		public SItem Owner
+		{
+			get
+			{
+				return _owner;
 			}
 		}
 	}

@@ -56,6 +56,7 @@
     <Compile Include="Linq\SItemComposer.cs" />
     <Compile Include="Linq\SItemExtensions.cs" />
     <Compile Include="Linq\SItemLocalization.cs" />
+    <Compile Include="Linq\SLink.cs" />
     <Compile Include="Linq\SMedia.cs" />
     <Compile Include="Linq\SRequest.cs" />
     <Compile Include="Mvc\ISitecoreEditorMarkup.cs" />

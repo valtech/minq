@@ -39,7 +39,7 @@ namespace Minq
 			get;
 		}
 
-		string Url(SitecoreUrlOptions urlOptions);
+		string CustomUrl(SitecoreUrlOptions urlOptions);
 
 		/// <summary>
 		/// Gets the parent <see cref="ISitecoreItem"/> of this item.
