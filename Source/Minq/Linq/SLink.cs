@@ -38,6 +38,14 @@ namespace Minq.Linq
 			_linkType = GetDocumentAttribute(document, "linktype");
 		}
 
+		public string Url
+		{
+			get
+			{
+				return _url ?? "";
+			}
+		}
+
 		public SField Field
 		{
 			get
