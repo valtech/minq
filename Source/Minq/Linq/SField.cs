@@ -74,7 +74,21 @@ namespace Minq.Linq
 		/// <returns>The value of the field.</returns>
 		public object Value(Type type, object @default)
 		{
-			if (type == typeof(IEnumerable<SItem>) || type == typeof(SItem[]))
+			if (type == typeof(SItem))
+			{
+				IEnumerable<Guid> guids;
+
+				if (_field.TryConvertValue<IEnumerable<Guid>>(out guids))
+				{
+					return guids.Select(guid => _item.Db.Item(guid, _item.LanguageName)).ToArray();
+				}
+
+				if (guids.Any())
+				{
+					return _item.Db.Item(guids.First(), _item.LanguageName);
+				}
+			}
+			else if (type == typeof(IEnumerable<SItem>) || type == typeof(SItem[]))
 			{
 				IEnumerable<Guid> guids;
 
