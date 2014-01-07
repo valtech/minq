@@ -104,6 +104,13 @@ namespace Minq.Linq
 					return _owner.Composer.CreateMedia(this, _owner.LanguageName, _owner.Db.Name);
 				}
 			}
+			else if (type == typeof(SLink))
+			{
+				if (SLink.IsLinkField(this))
+				{
+					return new SLink(this);
+				}
+			}
 			else if (type == typeof(IEnumerable<SMedia>) || type == typeof(SMedia[]))
 			{
 				IEnumerable<Guid> guids;
