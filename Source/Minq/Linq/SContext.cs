@@ -15,7 +15,7 @@ namespace Minq.Linq
 		private SDb _db;
 
 		/// <summary>
-		///  Initializes the class for use based on a <see cref="ISitecoreContainer"/>.
+		/// Initializes the class for use based on a <see cref="ISitecoreContainer"/>.
 		/// </summary>
 		/// <param name="container"></param>
 		public SContext(ISitecoreContext context, SItemComposer itemComposer)
@@ -25,7 +25,7 @@ namespace Minq.Linq
 		}
 
 		/// <summary>
-		/// Gets the Sitecore LINQ database in the current context.
+		/// Gets the Sitecore LINQ database for the current site.
 		/// </summary>
 		public SDb Db
 		{

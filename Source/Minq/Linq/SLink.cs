@@ -40,8 +40,42 @@ namespace Minq.Linq
 		{
 			get
 			{
+				SItem target = FindTarget();
+
+				if (target != null)
+				{
+					return target.Url;
+				}
+
 				return _url ?? "";
 			}
+		}
+
+		public string CustomUrl(SitecoreUrlOptions urlOptions)
+		{
+			SItem target = FindTarget();
+
+			if (target != null)
+			{
+				return target.CustomUrl(urlOptions);
+			}
+
+			return _url ?? "";
+		}
+
+		private SItem FindTarget()
+		{
+			if (!String.IsNullOrEmpty(_id))
+			{
+				SItem item = _field.Owner.Db.Item(_id, _field.Owner.LanguageName);
+
+				if (!SItem.IsNullOrUnversioned(item))
+				{
+					return item;
+				}
+			}
+
+			return null;
 		}
 
 		public SField Field
