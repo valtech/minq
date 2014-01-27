@@ -50,7 +50,7 @@ namespace Minq.Linq
 				return new SField(field, this);
 			}
 
-			return null;
+			return new SField(null, this);
 		}
 
 		/// <summary>

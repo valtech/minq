@@ -150,6 +150,11 @@ namespace Minq.Linq
 		{
 			get
 			{
+				if (_field == null)
+				{
+					return typeof(string);
+				}
+
 				return _field.Template.FieldType;
 			}
 		}
