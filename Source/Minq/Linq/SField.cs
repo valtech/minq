@@ -74,6 +74,11 @@ namespace Minq.Linq
 		/// <returns>The value of the field.</returns>
 		public object Value(Type type, object @default)
 		{
+			if (_field == null)
+			{
+				return @default;
+			}
+
 			if (type == typeof(SItem))
 			{
 				IEnumerable<Guid> guids;

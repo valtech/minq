@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>Minq</id>
+		<title>MINQ for Sitecore and Sitecore MVC</title>
+		<version>1.0.1</version>
+		<authors>True Clarity</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MINQ for Sitecore and Sitecore MVC</description>
+		<frameworkAssemblies>
+			<frameworkAssembly assemblyName="System" targetFramework="" />
+			<frameworkAssembly assemblyName="System.Configuration" targetFramework="" />
+			<frameworkAssembly assemblyName="System.Core" targetFramework="" />
+			<frameworkAssembly assemblyName="System.Data" targetFramework="" />
+			<frameworkAssembly assemblyName="System.Web" targetFramework="" />
+			<frameworkAssembly assemblyName="System.Web.Mvc" targetFramework="" />
+			<frameworkAssembly assemblyName="System.Web.WebPages" targetFramework="" />
+			<frameworkAssembly assemblyName="System.Xml" targetFramework="" />
+			<frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="" />
+		</frameworkAssemblies>
+	</metadata>
+	<files>
+		<file src="..\Minq\bin\Debug\Minq.dll" target="lib\net40" />
+		<file src="..\Minq.Sitecore\bin\Debug\Minq.Sitecore.dll" target="lib\net40" />
+	</files>
+</package>
