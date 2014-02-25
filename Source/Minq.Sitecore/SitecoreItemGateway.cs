@@ -22,7 +22,7 @@ namespace Minq.Sitecore
 		{
 			ScapiItem scapiItem = GetScapiItem(keyOrPath, languageName, databaseName, true);
 
-			if (scapiItem != null && scapiItem.Version.Number > 0 && scapiItem.Versions.Count > 0)
+			if (IsValidItem(scapiItem))
 			{
 				return new SitecoreItem(scapiItem);
 			}
@@ -57,7 +57,7 @@ namespace Minq.Sitecore
 					scapiItem = ScapiItemManager.Provider.GetItem(keyOrPath, scapiLanguage, ScapiVersion.Latest, scapiDatabase, ScapiSecurityCheck.Enable);
 				}
 
-				if (scapiItem != null && scapiItem.Version.Number > 0 && scapiItem.Versions.Count > 0)
+				if (IsValidItem(scapiItem))
 				{
 					return scapiItem;
 				}
@@ -69,6 +69,11 @@ namespace Minq.Sitecore
 			}
 
 			return null;
+		}
+
+		private static bool IsValidItem(ScapiItem scapiItem)
+		{
+			return scapiItem != null; /*&& scapiItem.Version.Number > 0 && scapiItem.Versions.Count > 0*/
 		}
 
 		public static ScapiItem GetScapiItem(SitecoreItemKey key, bool throwErrorIfNotFound)

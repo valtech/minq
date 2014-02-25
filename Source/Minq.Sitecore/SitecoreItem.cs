@@ -131,9 +131,12 @@ namespace Minq.Sitecore
 		{
 			get
 			{
-				if (_parent == null)
+				if (_scapiItem.Parent != null)
 				{
-					_parent = new SitecoreItem(_scapiItem.Parent);
+					if (_parent == null)
+					{
+						_parent = new SitecoreItem(_scapiItem.Parent);
+					}
 				}
 
 				return _parent;
