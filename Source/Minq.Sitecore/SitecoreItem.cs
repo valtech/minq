@@ -44,7 +44,6 @@ namespace Minq.Sitecore
 
 		public string CustomUrl(SitecoreUrlOptions urlOptions)
 		{
-
 			return ScapiLinkManager.GetItemUrl(_scapiItem, new ScapiUrlOptions
 			{
 				AddAspxExtension = true,
@@ -123,7 +122,7 @@ namespace Minq.Sitecore
 					{
 						yield return new SitecoreItem(scapiItem);
 					}
-				}	
+				}
 			}
 		}
 

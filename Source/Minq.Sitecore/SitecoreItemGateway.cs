@@ -20,7 +20,7 @@ namespace Minq.Sitecore
 	{
 		public ISitecoreItem GetItem(string keyOrPath, string languageName, string databaseName)
 		{
-			ScapiItem scapiItem = GetScapiItem(keyOrPath, languageName, databaseName, true);
+			ScapiItem scapiItem = GetScapiItem(keyOrPath, languageName, databaseName, false);
 
 			if (IsValidItem(scapiItem))
 			{
