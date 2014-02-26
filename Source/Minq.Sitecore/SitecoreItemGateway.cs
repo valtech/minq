@@ -27,7 +27,9 @@ namespace Minq.Sitecore
 				return new SitecoreItem(scapiItem);
 			}
 
-			throw new SitecoreItemGatewayException(String.Format("No version of the Sitecore item {0}/{1}/{2} exists", keyOrPath, languageName, databaseName));
+			return null;
+
+			//throw new SitecoreItemGatewayException(String.Format("No version of the Sitecore item {0}/{1}/{2} exists", keyOrPath, languageName, databaseName));
 		}
 
 		/// <summary>
