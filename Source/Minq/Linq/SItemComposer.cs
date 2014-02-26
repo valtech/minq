@@ -33,7 +33,14 @@ namespace Minq.Linq
 
 		public SItem CreateItem(string keyOrPath, string languageName, string databaseName)
 		{
-			return new SItem(_itemGateway.GetItem(keyOrPath, languageName, databaseName), this);
+			ISitecoreItem sitecoreItem = _itemGateway.GetItem(keyOrPath, languageName, databaseName);
+
+			if (sitecoreItem != null)
+			{
+				return new SItem(sitecoreItem, this);
+			}
+
+			return null;
 		}
 
 		public STemplate CreateTemplate(SitecoreTemplateKey templateKey)

@@ -50,10 +50,10 @@ namespace Minq.Linq
 			{
 				SItem item = Item(guid, languageName);
 
-				//if (item.IsValid)
-				//{
+				if (item != null)
+				{
 					return item;
-				//}
+				}
 			}
 
 			return Item(guid, languageFallback.First());
