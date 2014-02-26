@@ -125,7 +125,10 @@ namespace Minq.Linq
 		{
 			foreach (ISitecoreItem child in _sitecoreItem.Children)
 			{
-				yield return new SItem(child, _itemComposer);
+				if (child != null)
+				{
+					yield return new SItem(child, _itemComposer);
+				}
 			}
 		}
 
