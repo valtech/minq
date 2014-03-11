@@ -11,6 +11,7 @@ using ScapiVersionComparer = global::Sitecore.Data.VersionComparer;
 using ScapiVersion = global::Sitecore.Data.Version;
 using ScapiLinkManager = global::Sitecore.Links.LinkManager;
 using ScapiUrlOptions = global::Sitecore.Links.UrlOptions;
+using System.Web;
 namespace Minq.Sitecore
 {
 	/// <summary>
@@ -44,7 +45,7 @@ namespace Minq.Sitecore
 
 		public string CustomUrl(SitecoreUrlOptions urlOptions)
 		{
-			return ScapiLinkManager.GetItemUrl(_scapiItem, new ScapiUrlOptions
+			String url = ScapiLinkManager.GetItemUrl(_scapiItem, new ScapiUrlOptions
 			{
 				AddAspxExtension = true,
 				AlwaysIncludeServerUrl = true,
@@ -52,6 +53,22 @@ namespace Minq.Sitecore
 				LowercaseUrls = true,
 				EncodeNames = true
 			});
+
+			HttpContext context = HttpContext.Current;
+
+			if (context != null)
+			{
+				Uri customUrl = new Uri(url);
+
+				string authority = customUrl.GetLeftPart(UriPartial.Authority);
+
+				if (String.Equals(authority, context.Request.Url.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))
+				{
+					return "/" + new Uri(authority).MakeRelativeUri(customUrl);
+				}
+			}
+
+			return url;
 		}
 
 		/// <summary>
