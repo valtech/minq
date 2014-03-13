@@ -91,12 +91,12 @@ namespace Minq
 
 				string relativeToRoot = new Uri(authority).MakeRelativeUri(_sitecoreUrl).ToString();
 
-				return String.Format(_sitecoreUrl.Scheme + "://" + _sitecoreUrl.Host + "/");
+				return _sitecoreUrl.Scheme + "://" + _sitecoreUrl.Host + "/" + relativeToRoot;
 			}
 		}
 
 		/// <summary>
-		/// Gets the URL ensuring that any port mapping is stripped from the URL i.e. http://www.example.com:8080/ becomes http://www.example.com/
+		/// Gets the raw URL without modification
 		/// </summary>
 		public string Raw
 		{
