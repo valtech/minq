@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Xml.Linq;
 
 namespace Minq.Linq
@@ -36,7 +37,7 @@ namespace Minq.Linq
 			_linkType = GetDocumentAttribute(document, "linktype");
 		}
 
-		public string Url
+		public SitecoreUrl Url
 		{
 			get
 			{
@@ -47,20 +48,8 @@ namespace Minq.Linq
 					return target.Url;
 				}
 
-				return _url ?? "";
+				return new SitecoreUrl(_url ?? "");
 			}
-		}
-
-		public string CustomUrl(SitecoreUrlOptions urlOptions)
-		{
-			SItem target = FindTarget();
-
-			if (target != null)
-			{
-				return target.CustomUrl(urlOptions);
-			}
-
-			return _url ?? "";
 		}
 
 		private SItem FindTarget()

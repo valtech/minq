@@ -25,9 +25,12 @@ namespace Minq.Mocks
 			_key = key;
 		}
 
-		public string CustomUrl(SitecoreUrlOptions urlOptions)
+		public SitecoreUrl Url
 		{
-			return null;
+			get
+			{
+				return null;
+			}
 		}
 
 		/// <summary>

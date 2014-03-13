@@ -85,18 +85,12 @@ namespace Minq.Linq
 			}
 		}
 
-		public string Url
+		public SitecoreUrl Url
 		{
 			get
 			{
-				//TODO: read defaults for SitecoreUrlOptions from config???
-				return CustomUrl(new SitecoreUrlOptions());
+				return _sitecoreItem.Url;
 			}
-		}
-
-		public string CustomUrl(SitecoreUrlOptions urlOptions)
-		{
-			return _sitecoreItem.CustomUrl(urlOptions);
 		}
 
 		public static bool IsNullOrUnversioned(SItem item)

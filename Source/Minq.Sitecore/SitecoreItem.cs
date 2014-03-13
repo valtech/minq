@@ -43,32 +43,21 @@ namespace Minq.Sitecore
 			}
 		}
 
-		public string CustomUrl(SitecoreUrlOptions urlOptions)
+		public SitecoreUrl Url
 		{
-			String url = ScapiLinkManager.GetItemUrl(_scapiItem, new ScapiUrlOptions
+			get
 			{
-				AddAspxExtension = true,
-				AlwaysIncludeServerUrl = true,
-				LanguageEmbedding = ScapiLinkManager.LanguageEmbedding,
-				LowercaseUrls = true,
-				EncodeNames = true
-			});
-
-			HttpContext context = HttpContext.Current;
-
-			if (context != null)
-			{
-				Uri customUrl = new Uri(url);
-
-				string authority = customUrl.GetLeftPart(UriPartial.Authority);
-
-				if (String.Equals(authority, context.Request.Url.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))
+				String url = ScapiLinkManager.GetItemUrl(_scapiItem, new ScapiUrlOptions
 				{
-					return "/" + new Uri(authority).MakeRelativeUri(customUrl);
-				}
-			}
+					AddAspxExtension = true,
+					AlwaysIncludeServerUrl = true,
+					LanguageEmbedding = ScapiLinkManager.LanguageEmbedding,
+					LowercaseUrls = true,
+					EncodeNames = true
+				});
 
-			return url;
+				return new SitecoreUrl(url);
+			}
 		}
 
 		/// <summary>
