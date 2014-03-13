@@ -128,5 +128,10 @@ namespace Minq
 		{
 			return url.ToString();
 		}
+
+		public static implicit operator SitecoreUrl(string url)
+		{
+			return new SitecoreUrl(url);
+		}
 	}
 }

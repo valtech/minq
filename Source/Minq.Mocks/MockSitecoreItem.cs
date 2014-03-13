@@ -10,6 +10,7 @@ namespace Minq.Mocks
 	/// </summary>
 	public class MockSitecoreItem : ISitecoreItem
 	{
+		private SitecoreUrl _url;
 		private SitecoreItemKey _key;
 		private IDictionary<string, ISitecoreField> _fields = new Dictionary<string, ISitecoreField>(StringComparer.OrdinalIgnoreCase);
 		private IList<ISitecoreItem> _children = new List<ISitecoreItem>();
@@ -29,7 +30,11 @@ namespace Minq.Mocks
 		{
 			get
 			{
-				return null;
+				return _url;
+			}
+			set
+			{
+				_url = value;
 			}
 		}
 
