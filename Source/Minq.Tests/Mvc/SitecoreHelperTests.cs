@@ -71,6 +71,29 @@ namespace Minq.Tests.Mvc
 		}
 
 		[Test]
+		public void TestContent()
+		{
+			// Arrange
+			TestModel model = new TestModel();
+
+			Mock<ISitecoreFieldMarkup> markup = new Mock<ISitecoreFieldMarkup>();
+
+			markup.Setup(m => m.GetHtml(null)).Returns("<a></a>");
+
+			Mock<ISitecoreMarkupStrategy> markupStrategy = new Mock<ISitecoreMarkupStrategy>();
+
+			markupStrategy.Setup(ms => ms.GetFieldMarkup(It.IsAny<SitecoreFieldMetadata>(), It.IsAny<SitecoreFieldAttributeDictionary>())).Returns(markup.Object);
+
+			SitecoreHelper<TestModel> sitecoreHelper = new SitecoreHelper<TestModel>(new ViewDataDictionary<TestModel>(model), markupStrategy.Object);
+
+			// Act
+			IHtmlString html = sitecoreHelper.LinkFor(m => m.Logo).Content(() => new HtmlString("blah"));
+
+			// Assert
+			Assert.AreEqual("<a>blah</a>", html.ToHtmlString());
+		}
+
+		[Test]
 		[TestCase("Link", "<a>Link</a>")]
 		[TestCase("", "<a>Hello</a>")]
 		public void TestLinkForAndFieldForIfEmpty(string linkContent, string html)

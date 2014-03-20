@@ -65,6 +65,28 @@ namespace Minq.Mvc
 			return this;
 		}
 
+		public IHtmlString Content<THtmlString>(Func<THtmlString> contentPredicate)
+			where THtmlString : IHtmlString
+		{
+			string html = _markup.GetHtml(null);
+
+			return new HtmlString(SitecoreFieldMarkupParser.ReplaceContent(html, contentPredicate().ToHtmlString()));
+		}
+
+		public IHtmlString Content(Func<object, object> htmlPredicate)
+		{
+			string html = _markup.GetHtml(null);
+			
+			HelperResult helperResult = htmlPredicate(null) as HelperResult;
+
+			if (helperResult != null)
+			{
+				return new HtmlString(SitecoreFieldMarkupParser.ReplaceContent(html, helperResult.ToString()));
+			}
+			
+			return this;
+		}
+
 		/// <summary>
 		/// Gets the HTML markup for this fluent HTML markup string.
 		/// </summary>

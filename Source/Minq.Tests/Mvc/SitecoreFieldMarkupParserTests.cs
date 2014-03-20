@@ -18,5 +18,15 @@ namespace Minq.Tests.Mvc
 			Assert.AreEqual(false, SitecoreFieldMarkupParser.IsEmptyMarkupElement("<a>ra</a>"));
 			Assert.AreEqual(false, SitecoreFieldMarkupParser.IsEmptyMarkupElement("ra"));
 		}
+
+		[Test]
+		public void TestReplaceContent()
+		{
+			// Act
+			string html = SitecoreFieldMarkupParser.ReplaceContent("<a>ra</a>", "blah");
+
+			// Assert
+			Assert.AreEqual(html, "<a>blah</a>");
+		}
 	}
 }

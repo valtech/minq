@@ -69,5 +69,22 @@ namespace Minq.Mvc
 
 			return false;
 		}
+
+		public static string ReplaceContent(string html, string content)
+		{
+			int first = html.IndexOf('>');
+			int last = html.LastIndexOf('<');
+
+			if (first != -1 && last != -1)
+			{
+				string start = html.Substring(0, first + 1);
+
+				string end = html.Substring(last, html.Length - last);
+
+				return start + content + end;
+			}
+
+			return content;
+		}
 	}
 }
