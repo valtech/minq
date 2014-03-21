@@ -70,6 +70,7 @@ namespace Minq.Mvc
 			return false;
 		}
 
+		/*
 		public static string ReplaceContent(string html, string content)
 		{
 			int first = html.IndexOf('>');
@@ -85,6 +86,6 @@ namespace Minq.Mvc
 			}
 
 			return content;
-		}
+		}*/
 	}
 }

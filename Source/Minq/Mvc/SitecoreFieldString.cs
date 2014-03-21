@@ -65,6 +65,7 @@ namespace Minq.Mvc
 			return this;
 		}
 
+		/*
 		public IHtmlString Content<THtmlString>(Func<THtmlString> contentPredicate)
 			where THtmlString : IHtmlString
 		{
@@ -85,7 +86,7 @@ namespace Minq.Mvc
 			}
 			
 			return this;
-		}
+		}*/
 
 		/// <summary>
 		/// Gets the HTML markup for this fluent HTML markup string.

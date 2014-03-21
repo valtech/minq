@@ -70,6 +70,7 @@ namespace Minq.Tests.Mvc
 			Assert.AreEqual("<a></a>", html.ToHtmlString());
 		}
 
+		/*
 		[Test]
 		public void TestContent()
 		{
@@ -91,7 +92,7 @@ namespace Minq.Tests.Mvc
 
 			// Assert
 			Assert.AreEqual("<a>blah</a>", html.ToHtmlString());
-		}
+		}*/
 
 		[Test]
 		[TestCase("Link", "<a>Link</a>")]
