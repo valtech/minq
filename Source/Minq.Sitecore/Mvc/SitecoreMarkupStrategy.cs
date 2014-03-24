@@ -13,16 +13,7 @@ namespace Minq.Sitecore.Mvc
 	{
 		public ISitecoreFieldMarkup GetFieldMarkup(SitecoreFieldMetadata fieldMetadata, SitecoreFieldAttributeDictionary fieldAttributes)
 		{
-			ScapiRenderFieldArgs args = new ScapiRenderFieldArgs
-			{
-				Item = SitecoreItemGateway.GetScapiItem(fieldMetadata.Key, true),
-				FieldName = fieldMetadata.FieldName,
-				Parameters = fieldAttributes.ToSafeDictionary()
-			};
-
-			ScapiCorePipeline.Run("renderField", args);
-
-			return new SitecoreFieldMarkup(args.Result);
+			return new SitecoreFieldMarkup(fieldMetadata, fieldAttributes);
 		}
 
 		public ISitecoreEditorMarkup GetEditorMarkup(SitecoreEditorMetadata editorMetadata, SitecoreFieldAttributeDictionary editorAttributes)
