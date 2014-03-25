@@ -73,6 +73,7 @@
     <Compile Include="SitecoreItemGatewayException.cs" />
     <Compile Include="SitecoreMedia.cs" />
     <Compile Include="SitecoreMediaGateway.cs" />
+    <Compile Include="SitecorePageMode.cs" />
     <Compile Include="SitecoreRequest.cs" />
     <Compile Include="SitecoreTemplate.cs" />
     <Compile Include="SitecoreTemplateGateway.cs" />

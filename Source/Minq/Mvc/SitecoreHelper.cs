@@ -20,16 +20,18 @@ namespace Minq.Mvc
 	{
 		private ViewDataDictionary<TModel> _viewData;
 		private ISitecoreMarkupStrategy _markupStrategy;
+		private ISitecorePageMode _pageMode;
 
-		public SitecoreHelper(ViewDataDictionary<TModel> viewData, ISitecoreMarkupStrategy markupStrategy)
+		public SitecoreHelper(ViewDataDictionary<TModel> viewData, ISitecoreMarkupStrategy markupStrategy, ISitecorePageMode pageMode)
 		{
 			_viewData = viewData;
 			_markupStrategy = markupStrategy;
+			_pageMode = pageMode;
 		}
 
 		public SitecoreHelper<TAlternative> Helper<TAlternative>(TAlternative alternative)
 		{
-			return new SitecoreHelper<TAlternative>(new ViewDataDictionary<TAlternative>(alternative), _markupStrategy);
+			return new SitecoreHelper<TAlternative>(new ViewDataDictionary<TAlternative>(alternative), _markupStrategy, _pageMode);
 		}
 
 		/// <summary>
@@ -54,6 +56,97 @@ namespace Minq.Mvc
 			ISitecoreFieldMarkup markup = _markupStrategy.GetFieldMarkup(fieldMetadata, fieldAttributes);
 
 			return new HtmlString(markup.GetHtml(null));
+		}
+
+		public IHtmlString PageEditorFieldFor<TProperty>(Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null)
+		{
+			return PageEditorFieldFor(expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+		}
+
+		private IHtmlString PageEditorFieldFor<TProperty>(Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
+		{
+			return IfPageEditor(FieldFor(expression, htmlAttributes));
+		}
+
+		public IHtmlString HiddenFor<TProperty>(Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null)
+		{
+			return HiddenFor(expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+		}
+
+		private IHtmlString HiddenFor<TProperty>(Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
+		{
+			if (_pageMode.IsPageEditor)
+			{
+				return FieldFor(expression, htmlAttributes);
+			}
+
+			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _viewData);
+
+			string text = _markupStrategy.GetFieldValue(fieldMetadata);
+
+			TagBuilder tagBuilder = new TagBuilder("input");
+
+			tagBuilder.MergeAttributes<string, object>(htmlAttributes);
+			tagBuilder.MergeAttribute("type", HtmlHelper.GetInputTypeString(InputType.Hidden));
+			tagBuilder.MergeAttribute("value", HttpUtility.HtmlAttributeEncode(text));
+
+			return new MvcHtmlString(tagBuilder.ToString(TagRenderMode.SelfClosing));
+		}
+
+		public IHtmlString SubmitFor<TProperty>(Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null)
+		{
+			return SubmitFor(expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+		}
+
+		private IHtmlString SubmitFor<TProperty>(Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
+		{
+			if (_pageMode.IsPageEditor)
+			{
+				return FieldFor(expression, htmlAttributes);
+			}
+
+			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _viewData);
+
+			string text = _markupStrategy.GetFieldValue(fieldMetadata);
+
+			TagBuilder tagBuilder = new TagBuilder("input");
+
+			tagBuilder.MergeAttributes<string, object>(htmlAttributes);
+			tagBuilder.MergeAttribute("type", "submit");
+			tagBuilder.MergeAttribute("value", HttpUtility.HtmlAttributeEncode(text));
+
+			return new MvcHtmlString(tagBuilder.ToString(TagRenderMode.SelfClosing));
+		}
+
+		public IHtmlString IfPageEditor(IHtmlString htmlString)
+		{
+			if (_pageMode.IsPageEditor)
+			{
+				return htmlString;
+			}
+
+			return null;
+		}
+
+		public IHtmlString IfPageEditor(Func<object, object> htmlPredicate)
+		{
+			if (_pageMode.IsPageEditor)
+			{
+				HelperResult helperResult = htmlPredicate(null) as HelperResult;
+
+				if (helperResult != null)
+				{
+					return new HtmlString(helperResult.ToString());
+				}
+			}
+
+			return null;
+		}
+
+		public IHtmlString IfPageEditor<THtmlString>(Func<THtmlString> ifPageEditorPredicate)
+			where THtmlString : IHtmlString
+		{
+			return IfPageEditor(ifPageEditorPredicate());
 		}
 
 		/// <summary>

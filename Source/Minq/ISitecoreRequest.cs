@@ -18,5 +18,10 @@ namespace Minq
 			get;
 			set;
 		}
+
+		ISitecorePageMode PageMode
+		{
+			get;
+		}
 	}
 }

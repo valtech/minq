@@ -10,6 +10,7 @@ using Moq;
 using System.IO;
 using Minq;
 using Minq.Mvc;
+using Minq.Mocks;
 
 namespace Minq.Tests.Mvc
 {
@@ -61,7 +62,7 @@ namespace Minq.Tests.Mvc
 
 			markupStrategy.Setup(ms => ms.GetFieldMarkup(It.IsAny<SitecoreFieldMetadata>(), It.IsAny<SitecoreFieldAttributeDictionary>())).Returns(markup.Object);
 
-			SitecoreHelper<TestModel> sitecoreHelper = new SitecoreHelper<TestModel>(new ViewDataDictionary<TestModel>(model), markupStrategy.Object);
+			SitecoreHelper<TestModel> sitecoreHelper = new SitecoreHelper<TestModel>(new ViewDataDictionary<TestModel>(model), markupStrategy.Object, new MockSitecorePageMode());
 
 			// Act
 			IHtmlString html = sitecoreHelper.FieldFor(m => m.Logo);
@@ -104,7 +105,7 @@ namespace Minq.Tests.Mvc
 
 			Mock<ISitecoreMarkupStrategy> markupStrategy = new Mock<ISitecoreMarkupStrategy>();
 
-			SitecoreHelper<TestModel> sitecoreHelper = new SitecoreHelper<TestModel>(new ViewDataDictionary<TestModel>(model), markupStrategy.Object);
+			SitecoreHelper<TestModel> sitecoreHelper = new SitecoreHelper<TestModel>(new ViewDataDictionary<TestModel>(model), markupStrategy.Object, new MockSitecorePageMode());
 
 			Mock<ISitecoreFieldMarkup> anchorMarkup = new Mock<ISitecoreFieldMarkup>();
 

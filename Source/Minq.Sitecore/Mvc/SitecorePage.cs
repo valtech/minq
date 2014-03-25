@@ -26,7 +26,7 @@ namespace Minq.Sitecore.Mvc
 		{
 			base.InitHelpers();
 
-			Sitecore = new SitecoreHelper<TModel>(ViewData, new SitecoreMarkupStrategy());
+			Sitecore = new SitecoreHelper<TModel>(ViewData, new SitecoreMarkupStrategy(), new SitecorePageMode());
 		}
 	}
 

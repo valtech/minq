@@ -55,29 +55,5 @@ namespace Minq.Sitecore.Mvc
 
 			return builder.ToString();
 		}
-
-		/*
-		private ScapiRenderFieldResult _scapiRenderFieldResult;
-
-		public SitecoreFieldMarkup(ScapiRenderFieldResult scapiRenderFieldResult)
-		{
-			_scapiRenderFieldResult = scapiRenderFieldResult;
-		}
-
-		public string GetHtml(string childContent)
-		{
-			StringBuilder builder = new StringBuilder();
-
-			builder.Append(_scapiRenderFieldResult.FirstPart);
-
-			if (!String.IsNullOrEmpty(childContent))
-			{
-				builder.Append(childContent);
-			}
-
-			builder.Append(_scapiRenderFieldResult.LastPart);
-
-			return builder.ToString();
-		}*/
 	}
 }

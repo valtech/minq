@@ -12,7 +12,7 @@ namespace Minq.Mocks
 	{
 		private string _languageName;
 		private string _databaseName;
-		
+
 		/// <summary>
 		/// Gets or sets the NLS culture name for the mocked Sitecore context.
 		/// </summary>

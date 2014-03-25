@@ -9,6 +9,8 @@ namespace Minq.Sitecore
 {
 	public class SitecoreRequest : SitecoreContext, ISitecoreRequest
 	{
+		private ISitecorePageMode _pageMode;
+
 		/// <summary>
 		/// Gets the Sitecore item key associated with the current HTTP request.
 		/// </summary>
@@ -23,6 +25,19 @@ namespace Minq.Sitecore
 			set
 			{
 				ScapiContext.Item = SitecoreItemGateway.GetScapiItem(value, true);
+			}
+		}
+
+		public ISitecorePageMode PageMode
+		{
+			get
+			{
+				if (_pageMode == null)
+				{
+					_pageMode = new SitecorePageMode();
+				}
+
+				return _pageMode;
 			}
 		}
 	}

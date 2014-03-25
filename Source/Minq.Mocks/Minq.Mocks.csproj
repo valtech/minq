@@ -50,6 +50,7 @@
     <Compile Include="MockSitecoreItemGatewayException.cs" />
     <Compile Include="MockSitecoreMedia.cs" />
     <Compile Include="MockSitecoreMediaGateway.cs" />
+    <Compile Include="MockSitecorePageMode.cs" />
     <Compile Include="MockSitecoreRequest.cs" />
     <Compile Include="MockSitecoreTemplate.cs" />
     <Compile Include="MockSitecoreTemplateGateway.cs" />

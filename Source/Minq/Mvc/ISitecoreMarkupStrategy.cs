@@ -24,5 +24,7 @@ namespace Minq.Mvc
 		ISitecoreFieldMarkup GetFieldMarkup(SitecoreFieldMetadata fieldMetadata, SitecoreFieldAttributeDictionary fieldAttributes);
 
 		ISitecoreEditorMarkup GetEditorMarkup(SitecoreEditorMetadata editorMetadata, SitecoreFieldAttributeDictionary editorAttributes);
+
+		string GetFieldValue(SitecoreFieldMetadata fieldMetadata);
 	}
 }
