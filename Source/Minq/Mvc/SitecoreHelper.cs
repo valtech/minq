@@ -143,10 +143,41 @@ namespace Minq.Mvc
 			return null;
 		}
 
-		public IHtmlString IfPageEditor<THtmlString>(Func<THtmlString> ifPageEditorPredicate)
+		public IHtmlString IfPageEditor<THtmlString>(Func<THtmlString> ifNormalPagePredicate)
 			where THtmlString : IHtmlString
 		{
-			return IfPageEditor(ifPageEditorPredicate());
+			return IfPageEditor(ifNormalPagePredicate());
+		}
+
+		public IHtmlString IfNormalPage(IHtmlString htmlString)
+		{
+			if (_pageMode.IsNormal)
+			{
+				return htmlString;
+			}
+
+			return null;
+		}
+
+		public IHtmlString IfNormalPage(Func<object, object> htmlPredicate)
+		{
+			if (_pageMode.IsNormal)
+			{
+				HelperResult helperResult = htmlPredicate(null) as HelperResult;
+
+				if (helperResult != null)
+				{
+					return new HtmlString(helperResult.ToString());
+				}
+			}
+
+			return null;
+		}
+
+		public IHtmlString IfNormalPage<THtmlString>(Func<THtmlString> ifNormalPagePredicate)
+			where THtmlString : IHtmlString
+		{
+			return IfNormalPage(ifNormalPagePredicate());
 		}
 
 		/// <summary>
