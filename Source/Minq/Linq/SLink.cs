@@ -37,6 +37,30 @@ namespace Minq.Linq
 			_linkType = GetDocumentAttribute(document, "linktype");
 		}
 
+		public string Text
+		{
+			get
+			{
+				return _text ?? "";
+			}
+		}
+
+		public string Title
+		{
+			get
+			{
+				return _title ?? "";
+			}
+		}
+
+		public string Target
+		{
+			get
+			{
+				return _target ?? "";
+			}
+		}
+
 		public SitecoreUrl Url
 		{
 			get
