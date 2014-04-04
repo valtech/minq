@@ -14,6 +14,13 @@ namespace Minq
 		public SitecoreUrl(string sitecoreUrl)
 		{
 			_sitecoreUrl = new Uri(sitecoreUrl);
+
+			HttpContext context = HttpContext.Current;
+
+			if (context != null)
+			{
+				_context = new HttpContextWrapper(context);
+			}
 		}
 
 		public SitecoreUrl(Uri sitecoreUrl)
