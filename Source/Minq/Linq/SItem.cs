@@ -272,7 +272,13 @@ namespace Minq.Linq
 
 							if (SMedia.IsMediaField(s))
 							{
-								property.SetValue(instance, _itemComposer.CreateMedia(field, LanguageName, Db.Name).ToType(property.PropertyType), null);
+								SMedia media = _itemComposer.CreateMedia(field, LanguageName, Db.Name);
+
+								if (media != null)
+								{
+									// if target type is SMedia, this is wrong...
+									property.SetValue(instance, media.ToType(property.PropertyType), null);
+								}
 							}
 						}
 					}
