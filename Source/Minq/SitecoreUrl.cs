@@ -76,7 +76,12 @@ namespace Minq
 					return request.Url.MakeRelativeUri(_sitecoreUrl).ToString();
 				}
 
-				return Virtual;
+				if (String.Equals(_sitecoreUrl.Host, request.Url.Host))
+				{
+					return Virtual;
+				}
+
+				return _sitecoreUrl.ToString();
 			}
 		}
 
