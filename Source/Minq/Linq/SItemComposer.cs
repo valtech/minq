@@ -28,7 +28,17 @@ namespace Minq.Linq
 
 			XElement element = XDocument.Parse(field.Value<string>()).Descendants("image").First();
 
-			return CreateMedia((string)element.Attribute("mediaid"), languageName, databaseName);
+			if (element != null)
+			{
+				XAttribute attribute = element.Attribute("mediaid");
+
+				if (attribute != null && attribute.Value.Length > 0)
+				{
+					return CreateMedia(attribute.Value, languageName, databaseName);
+				}
+			}
+
+			return null;
 		}
 
 		public SItem CreateItem(string keyOrPath, string languageName, string databaseName)
