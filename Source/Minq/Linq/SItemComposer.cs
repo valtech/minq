@@ -50,7 +50,14 @@ namespace Minq.Linq
 
 		public SMedia CreateMedia(string keyOrPath, string languageName, string databaseName)
 		{
-			return new SMedia(_mediaGateway.GetMedia(keyOrPath, languageName, databaseName));
+			ISitecoreMedia sitecoreMedia = _mediaGateway.GetMedia(keyOrPath, languageName, databaseName);
+
+			if (sitecoreMedia != null)
+			{
+				return new SMedia(sitecoreMedia);
+			}
+
+			return null;
 		}
 	}
 }
