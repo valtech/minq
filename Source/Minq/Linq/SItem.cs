@@ -266,7 +266,7 @@ namespace Minq.Linq
 						{
 							property.SetValue(instance, value, null);
 						}
-						/*else
+						else
 						{
 							string s = field.Value<string>(null);
 
@@ -276,17 +276,10 @@ namespace Minq.Linq
 
 								if (media != null)
 								{
-									if (property.PropertyType == typeof(SMedia))
-									{
-										property.SetValue(instance, media, null);
-									}
-									else
-									{
-										property.SetValue(instance, media.ToType(property.PropertyType), null);
-									}
+									property.SetValue(instance, media.ToType(property.PropertyType), null);
 								}
 							}
-						}*/
+						}
 					}
 				}
 				else
