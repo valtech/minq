@@ -219,6 +219,22 @@ namespace Minq.Mvc
 			return new HtmlString(markup.GetHtml(null));
 		}
 
+		public IHtmlString ResponsiveImageFor<TProperty>(Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null)
+		{
+			return ResponsiveImageFor(expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+		}
+
+		private IHtmlString ResponsiveImageFor<TProperty>(Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
+		{
+			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _viewData);
+
+			SitecoreFieldAttributeDictionary fieldAttributes = SitecoreFieldAttributeDictionary.FromAttributes(htmlAttributes);
+
+			ISitecoreFieldMarkup markup = _markupStrategy.GetFieldMarkup(fieldMetadata, fieldAttributes);
+
+			return new HtmlString(markup.GetHtml(null));
+		}
+
 		public IHtmlString Editor(Func<object, object> htmlPredicate, object htmlAttributes = null)
 		{
 			return Editor(htmlPredicate, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
