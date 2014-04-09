@@ -107,6 +107,7 @@ namespace Minq
 			}
 		}
 
+		/*
 		/// <summary>
 		/// Gets the raw URL without modification
 		/// </summary>
@@ -116,7 +117,7 @@ namespace Minq
 			{
 				return _sitecoreUrl.ToString();
 			}
-		}
+		}*/
 
 		/// <summary>
 		/// Gets the URL ensuring that the scheme, host and port are stripped from the URL i.e. http://www.example.com:8080/page.aspx becomes /page.aspx
