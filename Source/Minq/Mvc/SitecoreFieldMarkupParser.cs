@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Minq.Mvc
 {
@@ -68,6 +69,11 @@ namespace Minq.Mvc
 			}
 
 			return false;
+		}
+
+		public static string StripAttribute(string html, string name)
+		{
+			return Regex.Replace(html, "( |\\t)" + name + "=\".*\"", "", RegexOptions.Singleline | RegexOptions.IgnoreCase);
 		}
 
 		/*

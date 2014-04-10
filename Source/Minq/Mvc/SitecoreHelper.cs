@@ -232,7 +232,12 @@ namespace Minq.Mvc
 
 			ISitecoreFieldMarkup markup = _markupStrategy.GetFieldMarkup(fieldMetadata, fieldAttributes);
 
-			return new HtmlString(markup.GetHtml(null));
+			string html = markup.GetHtml(null);
+
+			html = SitecoreFieldMarkupParser.StripAttribute(html, "width");
+			html = SitecoreFieldMarkupParser.StripAttribute(html, "height");
+
+			return new HtmlString(html);
 		}
 
 		public IHtmlString Editor(Func<object, object> htmlPredicate, object htmlAttributes = null)

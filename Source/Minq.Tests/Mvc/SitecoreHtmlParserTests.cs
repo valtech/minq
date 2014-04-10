@@ -19,5 +19,15 @@ namespace Minq.Tests.Mvc
 			// Assert
 			Assert.AreEqual(10, size);
 		}
+
+		[Test]
+		public void StripWidth()
+		{
+			// Act
+			string html = SitecoreFieldMarkupParser.StripAttribute("<img width=\"100\" />", "width");
+
+			// Assert
+			Assert.AreEqual("<img />", html);
+		}
 	}
 }
