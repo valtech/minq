@@ -13,13 +13,16 @@ namespace Minq
 
 		public SitecoreUrl(string sitecoreUrl)
 		{
-			_sitecoreUrl = new Uri(sitecoreUrl);
-
-			HttpContext context = HttpContext.Current;
-
-			if (context != null)
+			if (!String.IsNullOrEmpty(sitecoreUrl))
 			{
-				_context = new HttpContextWrapper(context);
+				_sitecoreUrl = new Uri(sitecoreUrl);
+
+				HttpContext context = HttpContext.Current;
+
+				if (context != null)
+				{
+					_context = new HttpContextWrapper(context);
+				}
 			}
 		}
 
@@ -69,6 +72,11 @@ namespace Minq
 		{
 			get
 			{
+				if (_sitecoreUrl == null)
+				{
+					return "";
+				}
+
 				if (_context == null)
 				{
 					throw new Exception("Cannot determine relative URL as there is no HTTP context associated with this URL use url.For(HttpContext).Relative");
@@ -99,6 +107,11 @@ namespace Minq
 		{
 			get
 			{
+				if (_sitecoreUrl == null)
+				{
+					return "";
+				}
+
 				string authority = _sitecoreUrl.GetLeftPart(UriPartial.Authority);
 
 				string relativeToRoot = new Uri(authority).MakeRelativeUri(_sitecoreUrl).ToString();
@@ -126,6 +139,11 @@ namespace Minq
 		{
 			get
 			{
+				if (_sitecoreUrl == null)
+				{
+					return "";
+				}
+
 				string authority = _sitecoreUrl.GetLeftPart(UriPartial.Authority);
 
 				return "/" + new Uri(authority).MakeRelativeUri(_sitecoreUrl).ToString();
@@ -139,6 +157,11 @@ namespace Minq
 
 		public static implicit operator string(SitecoreUrl url)
 		{
+			if (url == null)
+			{
+				return null;
+			}
+
 			return url.ToString();
 		}
 
