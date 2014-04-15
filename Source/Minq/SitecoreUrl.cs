@@ -12,29 +12,45 @@ namespace Minq
 		private HttpContextBase _context;
 
 		public SitecoreUrl(string sitecoreUrl)
+			: this(sitecoreUrl, GetContext())
 		{
-			if (!String.IsNullOrEmpty(sitecoreUrl))
-			{
-				_sitecoreUrl = new Uri(sitecoreUrl);
+			
+		}
 
-				HttpContext context = HttpContext.Current;
-
-				if (context != null)
-				{
-					_context = new HttpContextWrapper(context);
-				}
-			}
+		public SitecoreUrl(string sitecoreUrl, HttpContext context)
+			: this(sitecoreUrl, GetContext(context))
+		{
 		}
 
 		public SitecoreUrl(Uri sitecoreUrl)
+			: this(sitecoreUrl, GetContext())
 		{
-			_sitecoreUrl = sitecoreUrl;
+			
+		}
 
-			HttpContext context = HttpContext.Current;
+		public SitecoreUrl(Uri sitecoreUrl, HttpContext context)
+			: this(sitecoreUrl, GetContext(context))
+		{
 
-			if (context != null)
+		}
+
+		public SitecoreUrl(string sitecoreUrl, HttpContextBase context)
+		{
+			if (!String.IsNullOrEmpty(sitecoreUrl))
 			{
-				_context = new HttpContextWrapper(context);
+				if (sitecoreUrl == "/" || sitecoreUrl.StartsWith("/"))
+				{
+					if (context != null)
+					{
+						string authority = context.Request.Url.GetLeftPart(UriPartial.Authority);
+
+						sitecoreUrl = authority + sitecoreUrl;
+					}
+				}
+					
+				_sitecoreUrl = new Uri(sitecoreUrl);
+
+				_context = context;
 			}
 		}
 
@@ -44,16 +60,29 @@ namespace Minq
 			_context = context;
 		}
 
-		public SitecoreUrl(Uri sitecoreUrl, HttpContext context)
+		private static HttpContextBase GetContext()
 		{
-			_sitecoreUrl = sitecoreUrl;
+			HttpContext context = HttpContext.Current;
 
 			if (context != null)
 			{
-				_context = new HttpContextWrapper(context);
+				return new HttpContextWrapper(context);
 			}
+
+			return null;
 		}
 
+		private static HttpContextBase GetContext(HttpContext context)
+		{
+			if (context != null)
+			{
+				return new HttpContextWrapper(context);
+			}
+
+			return null;
+		}
+
+		/*
 		public SitecoreUrl For(HttpContextBase context)
 		{
 			return new SitecoreUrl(_sitecoreUrl, context);
@@ -62,7 +91,7 @@ namespace Minq
 		public SitecoreUrl For(HttpContext context)
 		{
 			return new SitecoreUrl(_sitecoreUrl, new HttpContextWrapper(context));
-		}
+		}*/
 
 		/// <summary>
 		/// Get the URL relative to the current request i.e. if the current page is http://www.example.com:8080/folder1/page.aspx and the Sitecore URL is

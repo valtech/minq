@@ -66,6 +66,7 @@
     <Compile Include="SitecoreItemKeyAttributeTests.cs" />
     <Compile Include="SitecoreItemKeyTests.cs" />
     <Compile Include="SitecoreTemplateGatewayTests.cs" />
+    <Compile Include="SitecoreUrlTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minq.Mocks\Minq.Mocks.csproj">
