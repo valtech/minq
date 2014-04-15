@@ -12,24 +12,24 @@ namespace Minq
 		private HttpContextBase _context;
 
 		public SitecoreUrl(string sitecoreUrl)
-			: this(sitecoreUrl, GetContext())
+			: this(sitecoreUrl, TryGetContext())
 		{
 			
 		}
 
 		public SitecoreUrl(string sitecoreUrl, HttpContext context)
-			: this(sitecoreUrl, GetContext(context))
+			: this(sitecoreUrl, TryGetContext(context))
 		{
 		}
 
 		public SitecoreUrl(Uri sitecoreUrl)
-			: this(sitecoreUrl, GetContext())
+			: this(sitecoreUrl, TryGetContext())
 		{
 			
 		}
 
 		public SitecoreUrl(Uri sitecoreUrl, HttpContext context)
-			: this(sitecoreUrl, GetContext(context))
+			: this(sitecoreUrl, TryGetContext(context))
 		{
 
 		}
@@ -60,7 +60,7 @@ namespace Minq
 			_context = context;
 		}
 
-		private static HttpContextBase GetContext()
+		private static HttpContextBase TryGetContext()
 		{
 			HttpContext context = HttpContext.Current;
 
@@ -72,7 +72,7 @@ namespace Minq
 			return null;
 		}
 
-		private static HttpContextBase GetContext(HttpContext context)
+		private static HttpContextBase TryGetContext(HttpContext context)
 		{
 			if (context != null)
 			{
