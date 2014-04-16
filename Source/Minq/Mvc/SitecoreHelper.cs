@@ -226,18 +226,25 @@ namespace Minq.Mvc
 
 		private IHtmlString ResponsiveImageFor<TProperty>(Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
 		{
-			SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _viewData);
+			if (_pageMode.IsPageEditor)
+			{
+				return ImageFor(expression, htmlAttributes);
+			}
+			else
+			{
+				SitecoreFieldMetadata fieldMetadata = SitecoreFieldMetadata.FromLambdaExpression<TModel, TProperty>(expression, _viewData);
 
-			SitecoreFieldAttributeDictionary fieldAttributes = SitecoreFieldAttributeDictionary.FromAttributes(htmlAttributes);
+				SitecoreFieldAttributeDictionary fieldAttributes = SitecoreFieldAttributeDictionary.FromAttributes(htmlAttributes);
 
-			ISitecoreFieldMarkup markup = _markupStrategy.GetFieldMarkup(fieldMetadata, fieldAttributes);
+				ISitecoreFieldMarkup markup = _markupStrategy.GetFieldMarkup(fieldMetadata, fieldAttributes);
 
-			string html = markup.GetHtml(null);
+				string html = markup.GetHtml(null);
 
-			html = SitecoreFieldMarkupParser.StripAttribute(html, "width");
-			html = SitecoreFieldMarkupParser.StripAttribute(html, "height");
+				html = SitecoreFieldMarkupParser.StripAttribute(html, "width");
+				html = SitecoreFieldMarkupParser.StripAttribute(html, "height");
 
-			return new HtmlString(html);
+				return new HtmlString(html);
+			}
 		}
 
 		public IHtmlString Editor(Func<object, object> htmlPredicate, object htmlAttributes = null)
