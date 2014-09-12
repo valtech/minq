@@ -81,15 +81,13 @@ namespace Minq.Linq
 
 			if (type == typeof(SItem))
 			{
-				string guidsString;
+				IEnumerable<Guid> guids;
 
-				if (_field.TryConvertValue<string>(out guidsString))
+				if (_field.TryConvertValue<IEnumerable<Guid>>(out guids))
 				{
-					Guid guid;
-
-					if (Guid.TryParse(guidsString, out guid))
+					if (guids.Any())
 					{
-						return _owner.Db.Item(guid, _owner.LanguageName);
+						return _owner.Db.Item(guids.First(), _owner.LanguageName);
 					}
 				}
 			}
