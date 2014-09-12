@@ -301,9 +301,9 @@ namespace Minq.Linq
 						{
 							Type genericParameter = proprtyType.GetGenericArguments()[0];
 
-							Type genericCollectionType = typeof(TypeCollection<>);
+							Type genericCollectionType = typeof(LazyChildrenCollection<>);
 
-							Type collectionType = typeof(TypeCollection<>).MakeGenericType(new Type[] { genericParameter });
+							Type collectionType = typeof(LazyChildrenCollection<>).MakeGenericType(new Type[] { genericParameter });
 
 							object collection = Activator.CreateInstance(collectionType, new object[] { this });
 
@@ -322,83 +322,5 @@ namespace Minq.Linq
 
 			return instance;
 		}
-
-		#region TypeCollection
-		sealed class TypeCollection<T> : ICollection<T>
-			where T : class, new()
-		{
-			private SItem _item;
-			private IList<T> _children;
-
-			public TypeCollection(SItem item)
-			{
-				_item = item;
-			}
-
-			private IList<T> Children
-			{
-				get
-				{
-					if (_children == null)
-					{
-						_children = new List<T>(_item.Items().Select(item => item.ToType<T>()));
-					}
-
-					return _children;
-				}
-			}
-
-			public void Add(T item)
-			{
-				throw new NotImplementedException();
-			}
-
-			public void Clear()
-			{
-				throw new NotImplementedException();
-			}
-
-			public bool Contains(T item)
-			{
-				throw new NotImplementedException();
-			}
-
-			public void CopyTo(T[] array, int arrayIndex)
-			{
-				throw new NotImplementedException();
-			}
-
-			public int Count
-			{
-				get
-				{
-					return Children.Count;
-				}
-			}
-
-			public bool IsReadOnly
-			{
-				get
-				{
-					return true;
-				}
-			}
-
-			public bool Remove(T item)
-			{
-				throw new NotImplementedException();
-			}
-
-			public IEnumerator<T> GetEnumerator()
-			{
-				return Children.GetEnumerator();
-			}
-
-			IEnumerator IEnumerable.GetEnumerator()
-			{
-				return GetEnumerator();
-			}
-		}
-		#endregion
 	}
 }

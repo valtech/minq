@@ -26,7 +26,14 @@ namespace Minq.Mvc.Linq
 			{
 				SitecoreItemKey key = _rendering.DataSourceKey;
 
-				return _composer.CreateItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName);
+				if (key != null)
+				{
+					return _composer.CreateItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName);
+				}
+				else
+				{
+					return null;
+				}
 			}
 		}
 

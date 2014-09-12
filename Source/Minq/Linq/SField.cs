@@ -126,6 +126,22 @@ namespace Minq.Linq
 				}
 			}
 
+			if (type.IsGenericType)
+			{
+				Type genericType = type.GetGenericTypeDefinition();
+
+				if (genericType == typeof(ICollection<>))
+				{
+					Type genericParameter = type.GetGenericArguments()[0];
+
+					Type collectionType = typeof(LazyFieldCollection<>).MakeGenericType(new Type[] { genericParameter });
+
+					object collection = Activator.CreateInstance(collectionType, new object[] { this });
+
+					return collection;
+				}
+			}
+
 			object value;
 
 			if (_field.TryConvertValue(type, out value))
@@ -134,6 +150,10 @@ namespace Minq.Linq
 			}
 
 			return @default;
+		}
+
+		class Ra
+		{
 		}
 
 		public bool IsEmpty
