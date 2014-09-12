@@ -40,6 +40,29 @@ namespace Minq.Tests.Linq
 		}
 
 		[Test]
+		public void TestItemField()
+		{
+			Guid id = Guid.NewGuid();
+			Guid child1Id = Guid.NewGuid();
+			Guid child2Id = Guid.NewGuid();
+
+			MockSitecoreItem mockItem = new MockSitecoreItem(new SitecoreItemKey(id, "en", "web"));
+			MockSitecoreItem mockChild1 = new MockSitecoreItem(new SitecoreItemKey(child1Id, "en", "web"));
+			MockSitecoreItem mockChild2 = new MockSitecoreItem(new SitecoreItemKey(child2Id, "en", "web"));
+
+			mockItem.AddField(new MockSitecoreField("Values", child1Id.ToString() + "|" + child2Id.ToString()));
+			mockChild1.AddField(new MockSitecoreField("Text", "Child 1"));
+			mockChild2.AddField(new MockSitecoreField("Text", "Child 2"));
+
+			_mockItemGateway.AddItem(mockChild1);
+			_mockItemGateway.AddItem(mockChild2);
+
+			SItem item = new SItem(mockItem, _composer);
+
+			Assert.That(item.Field("Values").Value<SItem>(), Is.Not.Null);
+		}
+
+		[Test]
 		public void TestLazyFieldCollection()
 		{
 			Guid id = Guid.NewGuid();
