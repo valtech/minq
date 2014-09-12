@@ -57,7 +57,7 @@ namespace Minq.Linq
 			}
 		}
 
-		internal object ToType(Type type)
+		public object ToType(Type type)
 		{
 			object instance = Activator.CreateInstance(type);
 

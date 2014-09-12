@@ -72,6 +72,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// The database from which this item came (typically the web database, but could be master, core or a custom site).
+		/// </summary>
 		public SDb Db
 		{
 			get
@@ -85,6 +88,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// The URL that could be used in a browser to request this item if it represents a page (it would need presentaiton details configured).
+		/// </summary>
 		public SitecoreUrl Url
 		{
 			get
@@ -93,6 +99,11 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Determines if the given item has at least one version and is not null.
+		/// </summary>
+		/// <param name="item">The item to check.</param>
+		/// <returns>true if the item is null or unversioned; false otherwise</returns>
 		public static bool IsNullOrUnversioned(SItem item)
 		{
 			return item == null || !item.Versions().Any();
@@ -103,6 +114,9 @@ namespace Minq.Linq
 			return _sitecoreItem.Versions;
 		}
 
+		/// <summary>
+		/// The name of this sitecore item as it would appear in the content tree.
+		/// </summary>
 		public string Name
 		{
 			get
@@ -187,6 +201,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// The path of this item in the content tree (not suitable for use as a URL as it is not escaped).
+		/// </summary>
 		public string Path
 		{
 			get
@@ -238,6 +255,11 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Converts this LINQ item into a plain old CLR object.
+		/// </summary>
+		/// <param name="type">The object type to convert to.</param>
+		/// <returns>The converted object.</returns>
 		public object ToType(Type type)
 		{
 			object instance = Activator.CreateInstance(type);

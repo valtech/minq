@@ -12,37 +12,6 @@ namespace Minq.Linq
 	/// </summary>
 	public static class SConvert
 	{
-		/*
-		/// <summary>
-		/// Converts the value of the specified string to an equivalent <see cref="Int32"/> value.
-		/// </summary>
-		/// <param name="value">The field data to convert.</param>
-		/// <param name="default">The default value if the conversion fails.</param>
-		/// <returns>The converted <see cref="Boolean"/> value.</returns>
-		public static int ToInt32(string value, int @default)
-		{
-			int result;
-
-			if (TryInt32(value, out result))
-			{
-				return result;
-			}
-
-			return @default;
-		}
-
-		/// <summary>
-		/// Tries to converts the value of the specified string to an equivalent <see cref="Int32"/> value.
-		/// </summary>
-		/// <param name="value">The field data to convert.</param>
-		/// <param name="result">The converted value.</param>
-		/// <returns>true if the value could be converted, false otherwise.</returns>
-		public static bool TryInt32(string value, out int result)
-		{
-			return Int32.TryParse(value, out result);
-		}
-		*/
-
 		/// <summary>
 		/// Converts the value of the specified string to an equivalent <see cref="Boolean"/> value.
 		/// </summary>
@@ -223,6 +192,12 @@ namespace Minq.Linq
 				if (TryDateTime(input, out value))
 				{
 					output = value;
+
+					return true;
+				}
+				else if (String.IsNullOrEmpty(input))
+				{
+					output = null;
 
 					return true;
 				}
