@@ -125,8 +125,7 @@ namespace Minq.Linq
 					return guids.Select(guid => _owner.Composer.CreateMedia(guid.ToString(), _owner.LanguageName, _owner.Db.Name)).ToArray();
 				}
 			}
-
-			if (type.IsGenericType)
+			else if (type.IsGenericType)
 			{
 				Type genericType = type.GetGenericTypeDefinition();
 
@@ -148,12 +147,12 @@ namespace Minq.Linq
 			{
 				return value;
 			}
+			else if (type.IsDefined(typeof(SitecoreTemplateAttribute), false))
+			{
+				return Value<SItem>().ToType(type);
+			}
 
 			return @default;
-		}
-
-		class Ra
-		{
 		}
 
 		public bool IsEmpty

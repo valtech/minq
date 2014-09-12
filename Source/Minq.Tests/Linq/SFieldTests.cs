@@ -54,11 +54,16 @@ namespace Minq.Tests.Linq
 			mockChild1.AddField(new MockSitecoreField("Text", "Child 1"));
 			mockChild2.AddField(new MockSitecoreField("Text", "Child 2"));
 
+			_mockItemGateway.AddItem(mockChild1);
+			_mockItemGateway.AddItem(mockChild2);
+
 			SItem item = new SItem(mockItem, _composer);
 
 			Data data = item.ToType<Data>();
 
 			Assert.That(data.Values.Count, Is.EqualTo(2));
+			Assert.That(data.Values.ElementAt(0).Text, Is.EqualTo("Child 1"));
+			Assert.That(data.Values.ElementAt(1).Text, Is.EqualTo("Child 2"));
 		}
 
 		class Data
@@ -73,6 +78,7 @@ namespace Minq.Tests.Linq
 
 		class Child
 		{
+			[SitecoreField("Text")]
 			public string Text
 			{
 				get;

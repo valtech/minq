@@ -238,17 +238,9 @@ namespace Minq.Linq
 			}
 		}
 
-		/// <summary>
-		/// Converts this LINQ item into a plain old CLR object.
-		/// </summary>
-		/// <typeparam name="T">The object type to convert to.</typeparam>
-		/// <returns>The converted object.</returns>
-		public T ToType<T>()
-			where T : class, new()
+		public object ToType(Type type)
 		{
-			T instance = new T();
-
-			Type type = typeof(T);
+			object instance = Activator.CreateInstance(type);
 
 			foreach (PropertyInfo property in type.GetProperties())
 			{
@@ -315,12 +307,23 @@ namespace Minq.Linq
 
 					if (itemUrlAttribute != null)
 					{
-						property.SetValue(instance, Url,  null);
+						property.SetValue(instance, Url, null);
 					}
 				}
 			}
 
 			return instance;
+		}
+
+		/// <summary>
+		/// Converts this LINQ item into a plain old CLR object.
+		/// </summary>
+		/// <typeparam name="TType">The object type to convert to.</typeparam>
+		/// <returns>The converted object.</returns>
+		public TType ToType<TType>()
+			where TType : class, new()
+		{
+			return (TType)ToType(typeof(TType));
 		}
 	}
 }
