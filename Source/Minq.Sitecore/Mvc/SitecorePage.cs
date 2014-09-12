@@ -32,5 +32,6 @@ namespace Minq.Sitecore.Mvc
 
 	public abstract class SitecorePage : WebViewPage
 	{
+
 	}
 }

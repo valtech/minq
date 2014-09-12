@@ -40,7 +40,7 @@ namespace Minq.Tests.Linq
 		}
 
 		[Test]
-		public void TestLazyField()
+		public void TestLazyFieldCollection()
 		{
 			Guid id = Guid.NewGuid();
 			Guid child1Id = Guid.NewGuid();
@@ -66,6 +66,28 @@ namespace Minq.Tests.Linq
 			Assert.That(data.Values.ElementAt(1).Text, Is.EqualTo("Child 2"));
 		}
 
+		[Test]
+		public void TestLazyFieldType()
+		{
+			Guid id = Guid.NewGuid();
+			Guid childId = Guid.NewGuid();
+
+			MockSitecoreItem mockItem = new MockSitecoreItem(new SitecoreItemKey(id, "en", "web"));
+			MockSitecoreItem mockChild = new MockSitecoreItem(new SitecoreItemKey(childId, "en", "web"));
+
+			mockItem.AddField(new MockSitecoreField("Value", childId.ToString()));
+			mockChild.AddField(new MockSitecoreField("Text", "Child"));
+
+			_mockItemGateway.AddItem(mockChild);
+
+			SItem item = new SItem(mockItem, _composer);
+
+			Data data = item.ToType<Data>();
+
+			Assert.That(data.Value, Is.Not.Null);
+			Assert.That(data.Value.Text, Is.EqualTo("Child"));
+		}
+
 		class Data
 		{
 			[SitecoreField("Values")]
@@ -74,8 +96,16 @@ namespace Minq.Tests.Linq
 				get;
 				set;
 			}
+
+			[SitecoreField("Value")]
+			public Child Value
+			{
+				get;
+				set;
+			}
 		}
 
+		[SitecoreTemplate("daf3d9d1-1970-43fb-b61c-ef8ac2bcdb2a")]
 		class Child
 		{
 			[SitecoreField("Text")]
