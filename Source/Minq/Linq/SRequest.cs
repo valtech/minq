@@ -39,5 +39,13 @@ namespace Minq.Linq
 				_itemRequest.ItemKey = new SitecoreItemKey(value.Guid, value.LanguageName, value.Db.Name);
 			}
 		}
+
+		public ISitecorePageMode PageMode
+		{
+			get
+			{
+				return _itemRequest.PageMode;
+			}
+		}
 	}
 }
