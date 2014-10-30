@@ -95,7 +95,6 @@ namespace Minq.Tests.Mvc
 			Assert.AreEqual("<a>blah</a>", html.ToHtmlString());
 		}*/
 
-		[Test]
 		[TestCase("Link", "<a>Link</a>")]
 		[TestCase("", "<a>Hello</a>")]
 		public void TestLinkForAndFieldForIfEmpty(string linkContent, string html)

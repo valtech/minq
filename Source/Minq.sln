@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minq", "Minq\Minq.csproj", "{27AC3952-1D8A-420D-AE23-CC49A39B83F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minq.Tests", "Minq.Tests\Minq.Tests.csproj", "{96CF3D37-34F1-4862-9D16-E3D0E0440EF1}"
@@ -13,6 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minq.Sitecore", "Minq.Sitecore\Minq.Sitecore.csproj", "{A9E176E6-CE0E-4EFA-90B0-F08BD453DC23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspec", "Nuspec", "{1E585D9F-CC23-4F4C-B4A6-2BB9C27824B1}"
+	ProjectSection(SolutionItems) = preProject
+		Nuspec\Minq.Mocks.nuspec = Nuspec\Minq.Mocks.nuspec
+		Nuspec\Minq.nuspec = Nuspec\Minq.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

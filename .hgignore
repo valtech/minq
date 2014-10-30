@@ -14,3 +14,7 @@ syntax: glob
 *.PartCover.xml
 *.VisualState.xml
 */TestResult.xml
+Nuspec/*.bat
+Nuspec/*.exe
+Nuspec/*.nupkg
+packages/*

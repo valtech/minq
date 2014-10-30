@@ -27,40 +27,41 @@ namespace Minq.Sitecore.Mvc
 		{
 			ScapiItem item = SitecoreItemGateway.GetScapiItem(_editorMetadata.Key, true);
 
-			Editor editor = new Editor(item);
-
-			if (editor.Visible)
+			using (Editor editor = new Editor(item))
 			{
-				object buttons;
-
-				if (_attributes.TryGetValue("buttons", out buttons))
+				if (editor.Visible)
 				{
-					editor.Buttons = String.Format("{0}", buttons);
-				}
+					object buttons;
 
-				object title;
-
-				if (_attributes.TryGetValue("title", out title))
-				{
-					editor.Title = String.Format("{0}", title);
-				}
-
-				editor.Controls.Add(new LiteralControl(childContent));
-
-				using (StringWriter writer = new StringWriter())
-				{
-					using (HtmlTextWriter html = new HtmlTextWriter(writer))
+					if (_attributes.TryGetValue("buttons", out buttons))
 					{
-						editor.RenderFirstPart(html);
-
-						editor.RenderLastPart(html);
+						editor.Buttons = String.Format("{0}", buttons);
 					}
 
-					return writer.ToString();
-				}
-			}
+					object title;
 
-			return childContent;
+					if (_attributes.TryGetValue("title", out title))
+					{
+						editor.Title = String.Format("{0}", title);
+					}
+
+					editor.Controls.Add(new LiteralControl(childContent));
+
+					using (StringWriter writer = new StringWriter())
+					{
+						using (HtmlTextWriter html = new HtmlTextWriter(writer))
+						{
+							editor.RenderFirstPart(html);
+
+							editor.RenderLastPart(html);
+						}
+
+						return writer.ToString();
+					}
+				}
+
+				return childContent;
+			}
 		}
 
 		class Editor : ScapiEditFrame

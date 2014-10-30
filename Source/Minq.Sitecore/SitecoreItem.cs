@@ -12,6 +12,7 @@ using ScapiVersion = global::Sitecore.Data.Version;
 using ScapiLinkManager = global::Sitecore.Links.LinkManager;
 using ScapiUrlOptions = global::Sitecore.Links.UrlOptions;
 using System.Web;
+
 namespace Minq.Sitecore
 {
 	/// <summary>
