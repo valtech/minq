@@ -4,5 +4,3 @@ Runtime:
 
 Sitecore.Kernal.dll
 Sitecore.Mvc.dll
-
-

@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Minq</id>
 		<title>MINQ for Sitecore and Sitecore MVC</title>
-		<version>1.0.5</version>
+		<version>1.0.6</version>
 		<authors>True Clarity</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MINQ for Sitecore and Sitecore MVC</description>
@@ -21,6 +21,8 @@
 	</metadata>
 	<files>
 		<file src="..\Minq\bin\Debug\Minq.dll" target="lib\net40" />
+		<file src="..\Minq\bin\Debug\Minq.xml" target="lib\net40" />
 		<file src="..\Minq.Sitecore\bin\Debug\Minq.Sitecore.dll" target="lib\net40" />
+		<file src="..\Minq.Sitecore\bin\Debug\Minq.Sitecore.xml" target="lib\net40" />
 	</files>
 </package>

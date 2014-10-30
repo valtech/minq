@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Minq.Mocks</id>
-		<version>1.0.5</version>
+		<version>1.0.6</version>
 		<title>MINQ Mocks for Sitecore and Sitecore MVC</title>
 		<authors>True Clarity</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -24,5 +24,6 @@
 	</metadata>
 	<files>
 		<file src="..\Minq.Mocks\bin\Debug\Minq.Mocks.dll" target="lib\net40" />
+		<file src="..\Minq.Mocks\bin\Debug\Minq.Mocks.xml" target="lib\net40" />
 	</files>
 </package>
