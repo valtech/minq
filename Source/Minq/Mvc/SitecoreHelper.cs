@@ -132,9 +132,9 @@ namespace Minq.Mvc
 		{
 			if (_pageMode.IsPageEditor)
 			{
-				HelperResult helperResult = htmlPredicate(null) as HelperResult;
+				object helperResult = htmlPredicate(null);
 
-				if (helperResult != null)
+                if (helperResult != null)
 				{
 					return new HtmlString(helperResult.ToString());
 				}
@@ -163,7 +163,7 @@ namespace Minq.Mvc
 		{
 			if (_pageMode.IsNormal)
 			{
-				HelperResult helperResult = htmlPredicate(null) as HelperResult;
+				object helperResult = htmlPredicate(null);
 
 				if (helperResult != null)
 				{
@@ -260,14 +260,14 @@ namespace Minq.Mvc
 
 			ISitecoreEditorMarkup markup = _markupStrategy.GetEditorMarkup(metadata, editorAttributes);
 
-			HelperResult helperResult = htmlPredicate(_viewData.Model) as HelperResult;
+            object helperResult = htmlPredicate(_viewData.Model);
 
-			if (helperResult != null)
+            if (helperResult != null)
 			{
-				return new HtmlString(markup.GetHtml(helperResult.ToString()));
+                return new HtmlString(markup.GetHtml(helperResult.ToString()));
 			}
 
-			return new HtmlString(markup.GetHtml(null));
+            return new HtmlString(markup.GetHtml(null));
 		}
 	}
 }

@@ -19,6 +19,13 @@ namespace Minq.Tests.Mvc
 			Assert.AreEqual(false, SitecoreFieldMarkupParser.IsEmptyMarkupElement("ra"));
 		}
 
+        [Test]
+        public void TestStripping()
+        {
+            // Act/Assert
+            Assert.AreEqual("<a name2=\"2\">test</a>", SitecoreFieldMarkupParser.StripAttribute("<a name1=\"1\" name2=\"2\">test</a>", "name1"));
+        }
+
 		/*
 		[Test]
 		public void TestReplaceContent()

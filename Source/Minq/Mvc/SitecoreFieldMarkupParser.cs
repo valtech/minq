@@ -73,7 +73,7 @@ namespace Minq.Mvc
 
 		public static string StripAttribute(string html, string name)
 		{
-			return Regex.Replace(html, "( |\\t)" + name + "=\".*\"", "", RegexOptions.Singleline | RegexOptions.IgnoreCase);
+			return Regex.Replace(html, "( |\\t)" + name + "=\".*?\"", "", RegexOptions.Singleline | RegexOptions.IgnoreCase);
 		}
 
 		/*
