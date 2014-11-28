@@ -52,7 +52,7 @@ namespace Minq.Mvc
 		{
 			if (SitecoreFieldMarkupParser.IsEmptyMarkupElement(_markup.GetHtml(null)))
 			{
-				HelperResult helperResult = htmlPredicate(null) as HelperResult;
+				object helperResult = htmlPredicate(null);
 
 				if (helperResult != null)
 				{
@@ -65,28 +65,30 @@ namespace Minq.Mvc
 			return this;
 		}
 
-		/*
 		public IHtmlString Content<THtmlString>(Func<THtmlString> contentPredicate)
 			where THtmlString : IHtmlString
 		{
-			string html = _markup.GetHtml(null);
+			string content = contentPredicate().ToHtmlString();
 
-			return new HtmlString(SitecoreFieldMarkupParser.ReplaceContent(html, contentPredicate().ToHtmlString()));
+			if (content != null)
+			{
+				return new HtmlString(_markup.GetHtml(content));
+			}
+
+			return this;
 		}
 
 		public IHtmlString Content(Func<object, object> htmlPredicate)
 		{
-			string html = _markup.GetHtml(null);
-			
-			HelperResult helperResult = htmlPredicate(null) as HelperResult;
+			object helperResult = htmlPredicate(null);
 
 			if (helperResult != null)
 			{
-				return new HtmlString(SitecoreFieldMarkupParser.ReplaceContent(html, helperResult.ToString()));
+				return new HtmlString(_markup.GetHtml(helperResult.ToString()));
 			}
-			
+
 			return this;
-		}*/
+		}
 
 		/// <summary>
 		/// Gets the HTML markup for this fluent HTML markup string.
