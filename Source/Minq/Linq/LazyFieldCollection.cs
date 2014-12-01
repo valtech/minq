@@ -35,12 +35,15 @@ namespace Minq.Linq
 				return _guids.Count;
 			}
 		}
-
+		
 		public override IEnumerator<T> GetEnumerator()
 		{
 			if (_items == null)
 			{
-				_items = _field.Value<IEnumerable<SItem>>().ToType<T>().ToList();
+				_items = _field.Value<IEnumerable<SItem>>()
+					.Where(item => !SItem.IsNullOrUnversioned(item))
+					.ToType<T>()
+					.ToList();
 			}
 
 			return _items.GetEnumerator();

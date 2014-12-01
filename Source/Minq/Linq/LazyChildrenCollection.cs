@@ -22,7 +22,10 @@ namespace Minq.Linq
 			{
 				if (_children == null)
 				{
-					_children = new List<T>(_item.Items().Select(item => item.ToType<T>()));
+					IEnumerable<SItem> items = _item.Items()
+						.Where(item => !SItem.IsNullOrUnversioned(item));
+
+					_children = new List<T>(items.Select(item => item.ToType<T>()));
 				}
 
 				return _children;
