@@ -7,7 +7,7 @@ using System.Text;
 namespace Minq.Linq
 {
 	abstract class LazyCollection<T> : ICollection<T>
-			where T : class, new()
+		where T : class, new()
 	{
 		public void Add(T item)
 		{

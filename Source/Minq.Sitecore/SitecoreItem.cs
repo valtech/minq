@@ -50,7 +50,7 @@ namespace Minq.Sitecore
 			{
 				String url = ScapiLinkManager.GetItemUrl(_scapiItem, new ScapiUrlOptions
 				{
-					AddAspxExtension = true,
+					//AddAspxExtension = true,
 					AlwaysIncludeServerUrl = true,
 					LanguageEmbedding = ScapiLinkManager.LanguageEmbedding,
 					LowercaseUrls = true,

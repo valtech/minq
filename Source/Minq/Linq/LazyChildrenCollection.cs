@@ -6,7 +6,7 @@ using System.Text;
 namespace Minq.Linq
 {
 	sealed class LazyChildrenCollection<T> : LazyCollection<T>
-			where T : class, new()
+		where T : class, new()
 	{
 		private SItem _item;
 		private IList<T> _children;

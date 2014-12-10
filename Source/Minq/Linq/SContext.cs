@@ -14,10 +14,6 @@ namespace Minq.Linq
 		private SItemComposer _itemComposer;
 		private SDb _db;
 
-		/// <summary>
-		/// Initializes the class for use based on a <see cref="ISitecoreContainer"/>.
-		/// </summary>
-		/// <param name="container"></param>
 		public SContext(ISitecoreContext context, SItemComposer itemComposer)
 		{
 			_sitecoreContext = context;

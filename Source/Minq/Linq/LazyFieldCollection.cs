@@ -6,7 +6,7 @@ using System.Text;
 namespace Minq.Linq
 {
 	sealed class LazyFieldCollection<T> : LazyCollection<T>
-			where T : class, new()
+		where T : class, new()
 	{
 		private SField _field;
 		private IList<T> _items;
