@@ -48,7 +48,7 @@ namespace Minq.Sitecore
 		{
 			get
 			{
-				String url = ScapiLinkManager.GetItemUrl(_scapiItem, new ScapiUrlOptions
+				string url = ScapiLinkManager.GetItemUrl(_scapiItem, new ScapiUrlOptions
 				{
                     AddAspxExtension = ScapiLinkManager.AddAspxExtension,
 					AlwaysIncludeServerUrl = true,

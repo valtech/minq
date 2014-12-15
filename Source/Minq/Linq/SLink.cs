@@ -12,13 +12,15 @@ namespace Minq.Linq
 		private SField _field;
 		private string _text;
 		private string _url;
-		private string _anchor;
+		//private string _anchor;
 		private string _queryString;
 		private string _title;
 		private string _cssClass;
 		private string _target;
-		private string _id;
+		private string _linkedItemId;
 		private string _linkType;
+		private SItem _linkedItem;
+		private bool _linkedItemResolved;
 
 		public SLink(SField field)
 		{
@@ -28,12 +30,12 @@ namespace Minq.Linq
 
 			_text = GetDocumentAttribute(document, "text");
 			_url = GetDocumentAttribute(document, "url");
-			_anchor = GetDocumentAttribute(document, "url");
+			//_anchor = GetDocumentAttribute(document, "url");
 			_queryString = GetDocumentAttribute(document, "querystring");
 			_title = GetDocumentAttribute(document, "title");
 			_cssClass = GetDocumentAttribute(document, "class");
 			_target = GetDocumentAttribute(document, "target");
-			_id = GetDocumentAttribute(document, "id");
+			_linkedItemId = GetDocumentAttribute(document, "id");
 			_linkType = GetDocumentAttribute(document, "linktype");
 		}
 
@@ -65,30 +67,38 @@ namespace Minq.Linq
 		{
 			get
 			{
-				SItem target = FindTarget();
+				SItem item = LinkedItem;
 
-				if (target != null)
+				if (item != null)
 				{
-					return target.Url;
+					return item.Url;
 				}
 
 				return new SitecoreUrl(_url ?? "");
 			}
 		}
 
-		private SItem FindTarget()
+		private SItem LinkedItem
 		{
-			if (!String.IsNullOrEmpty(_id))
+			get
 			{
-				SItem item = _field.Owner.Db.Item(_id, _field.Owner.LanguageName);
-
-				if (!SItem.IsNullOrUnversioned(item))
+				if (!_linkedItemResolved)
 				{
-					return item;
-				}
-			}
+					if (!String.IsNullOrEmpty(_linkedItemId))
+					{
+						SItem item = _field.Owner.Db.Item(_linkedItemId, _field.Owner.LanguageName);
 
-			return null;
+						if (!SItem.IsNullOrUnversioned(item))
+						{
+							_linkedItem = item;
+						}
+					}
+
+					_linkedItemResolved = true;
+				}
+
+				return _linkedItem;
+			}
 		}
 
 		public SField Field
