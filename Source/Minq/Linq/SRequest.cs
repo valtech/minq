@@ -11,7 +11,7 @@ namespace Minq.Linq
 	public class SRequest
 	{
 		private SItemComposer _itemComposer;
-		private ISitecoreRequest _itemRequest;
+		private ISitecoreRequest _sitecoreRequest;
 
 		/// <summary>
 		///  Initializes the class for use based on a <see cref="ISitecoreContainer"/>.
@@ -20,7 +20,7 @@ namespace Minq.Linq
 		public SRequest(SItemComposer itemComposer, ISitecoreRequest sitecoreRequest)
 		{
 			_itemComposer = itemComposer;
-			_itemRequest = sitecoreRequest;
+			_sitecoreRequest = sitecoreRequest;
 		}
 
 		/// <summary>
@@ -30,13 +30,13 @@ namespace Minq.Linq
 		{
 			get
 			{
-				SitecoreItemKey key = _itemRequest.ItemKey;
+				SitecoreItemKey key = _sitecoreRequest.ItemKey;
 
 				return _itemComposer.CreateItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName);
 			}
 			set
 			{
-				_itemRequest.ItemKey = new SitecoreItemKey(value.Guid, value.LanguageName, value.Db.Name);
+				_sitecoreRequest.ItemKey = new SitecoreItemKey(value.Guid, value.LanguageName, value.Db.Name);
 			}
 		}
 
@@ -44,7 +44,7 @@ namespace Minq.Linq
 		{
 			get
 			{
-				return _itemRequest.PageMode;
+				return _sitecoreRequest.PageMode;
 			}
 		}
 	}

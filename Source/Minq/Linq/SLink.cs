@@ -78,7 +78,7 @@ namespace Minq.Linq
 			}
 		}
 
-		private SItem LinkedItem
+		public SItem LinkedItem
 		{
 			get
 			{
