@@ -38,6 +38,8 @@ namespace Minq.Linq
 		
 		public override IEnumerator<T> GetEnumerator()
 		{
+			Console.WriteLine("here...");
+
 			if (_items == null)
 			{
 				_items = _field.Value<IEnumerable<SItem>>()

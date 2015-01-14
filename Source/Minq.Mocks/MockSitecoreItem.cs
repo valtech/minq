@@ -24,7 +24,9 @@ namespace Minq.Mocks
 		public MockSitecoreItem(SitecoreItemKey key)
 		{
 			_key = key;
-		}
+
+			_versions = new int[] { 1 };
+        }
 
 		public SitecoreUrl Url
 		{
