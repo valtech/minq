@@ -97,8 +97,7 @@ namespace Minq.Linq
 				return true;
 			}
 
-			//RFC1123
-			if (DateTime.TryParseExact(value, "yyyyMMddTHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+			if (TryParseRFC1123DateTime(value, out result))
 			{
 				return true;
 			}
@@ -109,8 +108,23 @@ namespace Minq.Linq
 				return true;
 			}
 
+			int colon = value.IndexOf(':');
+
+			if (colon != -1)
+			{
+				if (TryParseRFC1123DateTime(value.Substring(0, colon), out result))
+				{
+					return true;
+				}
+			}
+
 			return !String.IsNullOrEmpty(value);
 		}
+
+		private static bool TryParseRFC1123DateTime(string value, out DateTime result)
+		{
+			return DateTime.TryParseExact(value, "yyyyMMddTHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
+        }
 
 		/// <summary>
 		/// Converts the value of the specified string to an equivalent <see cref="Guid"/> value.

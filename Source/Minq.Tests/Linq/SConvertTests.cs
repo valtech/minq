@@ -13,6 +13,16 @@ namespace Minq.Tests.Linq
 		[Test]
 		public void TestTryDateTime()
 		{
+			string s = "20140922T151303:635469955834251969";
+
+			DateTime date = SConvert.ToDateTime(s, DateTime.MinValue);
+
+			Assert.AreEqual(2014, date.Year);
+		}
+
+		[Test]
+		public void TestTryDate()
+		{
 			string s = "20120927T144800";
 
 			DateTime date = SConvert.ToDateTime(s, DateTime.MinValue);
