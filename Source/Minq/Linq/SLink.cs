@@ -122,7 +122,10 @@ namespace Minq.Linq
 				{
 					SMedia media = LinkedMedia;
 
-					return media.Url;
+					if (media != null)
+					{
+						return media.Url;
+					}
 				}
 				else
 				{
