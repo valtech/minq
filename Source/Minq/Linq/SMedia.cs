@@ -49,11 +49,11 @@ namespace Minq.Linq
 			}
 		}
 
-		public string Url
+		public SitecoreUrl Url
 		{
 			get
 			{
-				return _sitecoreMedia.Url;
+				return new SitecoreUrl(_sitecoreMedia.Url);
 			}
 		}
 

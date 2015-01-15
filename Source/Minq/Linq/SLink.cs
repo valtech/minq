@@ -21,6 +21,8 @@ namespace Minq.Linq
 		private string _linkType;
 		private SItem _linkedItem;
 		private bool _linkedItemResolved;
+		private SMedia _linkedMedia;
+		private bool _linkedMediaResolved;
 
 		public SLink(SField field)
 		{
@@ -37,6 +39,55 @@ namespace Minq.Linq
 			_target = GetDocumentAttribute(document, "target");
 			_linkedItemId = GetDocumentAttribute(document, "id");
 			_linkType = GetDocumentAttribute(document, "linktype");
+		}
+
+		public bool IsMediaLink
+		{
+			get
+			{
+				return String.Equals(_linkType, "media", StringComparison.InvariantCultureIgnoreCase);
+			}
+		}
+
+		public bool IsInternalLink
+		{
+			get
+			{
+				return String.Equals(_linkType, "internal", StringComparison.InvariantCultureIgnoreCase);
+			}
+		}
+
+		public bool IsExternalLink
+		{
+			get
+			{
+				return String.Equals(_linkType, "external", StringComparison.InvariantCultureIgnoreCase);
+			}
+		}
+
+		public bool IsAnchorLink
+		{
+			get
+			{
+				return String.Equals(_linkType, "anchor", StringComparison.InvariantCultureIgnoreCase);
+			}
+		}
+
+		public bool IsMailToLink
+		{
+			get
+			{
+				return String.Equals(_linkType, "mailto", StringComparison.InvariantCultureIgnoreCase);
+			}
+		}
+
+
+		public bool IsJavaScriptLink
+		{
+			get
+			{
+				return String.Equals(_linkType, "javascript", StringComparison.InvariantCultureIgnoreCase);
+			}
 		}
 
 		public string Text
@@ -67,11 +118,20 @@ namespace Minq.Linq
 		{
 			get
 			{
-				SItem item = LinkedItem;
-
-				if (item != null)
+				if (IsMediaLink)
 				{
-					return item.Url;
+					SMedia media = LinkedMedia;
+
+					return media.Url;
+				}
+				else
+				{
+					SItem item = LinkedItem;
+
+					if (item != null)
+					{
+						return item.Url;
+					}
 				}
 
 				return new SitecoreUrl(_url ?? "");
@@ -98,6 +158,29 @@ namespace Minq.Linq
 				}
 
 				return _linkedItem;
+			}
+		}
+
+		public SMedia LinkedMedia
+		{
+			get
+			{
+				if (!_linkedMediaResolved)
+				{
+					if (IsMediaLink)
+					{
+						SItem linkedItem = LinkedItem;
+
+						if (linkedItem != null)
+						{
+							_linkedMedia = _field.Owner.Db.Media(_linkedItemId, _field.Owner.LanguageName);
+						}
+					}
+
+					_linkedMediaResolved = true;
+                }
+
+				return _linkedMedia;
 			}
 		}
 
