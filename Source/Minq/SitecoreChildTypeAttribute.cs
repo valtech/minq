@@ -22,12 +22,13 @@ namespace Minq
 		/// <param name="childType">The type of the child type in the collection.</param>
 		public SitecoreChildTypeAttribute(Type childType)
 		{
-			if (childType == null)
-			{
-				throw new ArgumentNullException("childType");
-			}
-
 			_childType = childType;
+		}
+
+		public SitecoreChildTypeAttribute()
+			: this(null)
+		{
+			
 		}
 
 		/// <summary>

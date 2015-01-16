@@ -106,6 +106,48 @@ namespace Minq.Tests.Linq
 			Assert.AreEqual(1, parentItem.TitleItems.Count);
 		}
 
+		//TODO
+		[Test]
+		public void TestPocoFiltredTypedChild()
+		{
+			// Arrange
+			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
+
+			SitecoreItemKey child1Key = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
+			SitecoreItemKey child2Key = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
+
+			MockSitecoreItem mockItem = new MockSitecoreItem(itemKey);
+
+			MockSitecoreItem mockChild1 = new MockSitecoreItem(child1Key);
+			MockSitecoreItem mockChild2 = new MockSitecoreItem(child2Key);
+
+			mockItem.AddChild(mockChild1);
+			mockItem.AddChild(mockChild2);
+
+			SitecoreTemplateKey template1Key = new SitecoreTemplateKey(Guid.NewGuid(), "web");
+			SitecoreTemplateKey template2Key = new SitecoreTemplateKey(new Guid(TitleItem.TemplateId), "web");
+
+			mockChild1.AddField(new MockSitecoreField("Title", "Text 1"));
+			mockChild2.AddField(new MockSitecoreField("Title", "Text 2"));
+
+			mockChild1.TemplateKey = template1Key;
+			mockChild2.TemplateKey = template2Key;
+
+			_mockItemGateway.AddItem(mockItem);
+			_mockTemplateGateway.AddTemplate(new MockSitecoreTemplate(template1Key));
+			_mockTemplateGateway.AddTemplate(new MockSitecoreTemplate(template2Key));
+
+			SItem item = new SItem(mockItem, _composer);
+
+			// Act
+			FilterParentItem parentItem = item.ToType<FilterParentItem>();
+
+			// Assert
+			Assert.IsNotNull(parentItem.TitleItems);
+
+			Assert.AreEqual(1, parentItem.TitleItems.Count);
+		}
+
 		[SitecoreTemplate(TemplateId)]
 		class TitleItem
 		{
@@ -120,6 +162,17 @@ namespace Minq.Tests.Linq
 
 			[SitecoreField("Title")]
 			public string Title
+			{
+				get;
+				set;
+			}
+		}
+
+		class FilterParentItem
+		{
+			[SitecoreChildren]
+			[SitecoreChildType]
+			public ICollection<TitleItem> TitleItems
 			{
 				get;
 				set;

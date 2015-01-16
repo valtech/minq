@@ -85,5 +85,10 @@ namespace Minq.Linq
 		{
 			return IsBasedOn(SitecoreTemplateAttribute.FindTemplateGuid(typeof(TItem)));
 		}
+
+		public bool IsBasedOn(Type type)
+		{
+			return IsBasedOn(SitecoreTemplateAttribute.FindTemplateGuid(type));
+		}
 	}
 }

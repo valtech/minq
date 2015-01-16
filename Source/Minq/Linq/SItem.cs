@@ -140,6 +140,11 @@ namespace Minq.Linq
 			}
 		}
 
+		public IEnumerable<SItem> Items(Func<SItem, bool> filter)
+		{
+			return Items().Where(filter);
+		}
+
 		/// <summary>
 		/// Returns a collection of the descendant items for this item, in order.
 		/// </summary>
@@ -319,7 +324,25 @@ namespace Minq.Linq
 
 							Type collectionType = typeof(LazyChildrenCollection<>).MakeGenericType(new Type[] { genericParameter });
 
-							object collection = Activator.CreateInstance(collectionType, new object[] { this });
+							object collection;
+
+							SitecoreChildTypeAttribute childTypeAttribute = (SitecoreChildTypeAttribute)Attribute.GetCustomAttribute(property, typeof(SitecoreChildTypeAttribute));
+
+							if (childTypeAttribute != null)
+							{
+								if (childTypeAttribute.ChildType != null)
+								{
+									collection = Activator.CreateInstance(collectionType, new object[] { this, childTypeAttribute.ChildType });
+								}
+								else
+								{
+									collection = Activator.CreateInstance(collectionType, new object[] { this, genericParameter });
+								}
+							}
+							else
+							{
+								collection = Activator.CreateInstance(collectionType, new object[] { this });
+							}
 
 							property.SetValue(instance, collection, null);
 						}

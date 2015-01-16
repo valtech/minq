@@ -40,8 +40,12 @@ namespace Minq.Mocks
 				}
 				else
 				{
-					throw new MockSitecoreItemGatewayException(String.Format("Sitecore item {0} does not exist", keyOrPath));
+					return null;
 				}
+				//else
+				//{
+				//	throw new MockSitecoreItemGatewayException(String.Format("Sitecore item {0} does not exist", keyOrPath));
+				//}
 			}
 			else
 			{
