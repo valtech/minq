@@ -23,7 +23,7 @@ namespace Minq.Tests
 			templateGateway.AddTemplate(mockItem);
 
 			// Act
-			ISitecoreTemplate template = templateGateway.GetTemplate(key);
+			ISitecoreTemplate template = templateGateway.GetTemplate(key.Guid.ToString(), key.DatabaseName);
 
 			// Assert
 			Assert.AreEqual(key, template.Key);

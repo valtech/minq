@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Xml.Linq;
 
 namespace Minq.Linq
 {
@@ -104,7 +104,7 @@ namespace Minq.Linq
 			{
 				if (SMedia.IsMediaField(this))
 				{
-					return _owner.Composer.CreateMedia(this, _owner.LanguageName, _owner.Db.Name);
+					return ToMedia();
 				}
 			}
 			else if (type == typeof(SLink))
@@ -151,6 +151,28 @@ namespace Minq.Linq
 			}
 
 			return @default;
+		}
+
+		public SMedia ToMedia()
+		{
+			if (!SMedia.IsMediaField(this))
+			{
+				throw new Exception("Not a media field");
+			}
+
+			XElement element = XDocument.Parse(Value<string>()).Descendants("image").First();
+
+			if (element != null)
+			{
+				XAttribute attribute = element.Attribute("mediaid");
+
+				if (attribute != null && attribute.Value.Length > 0)
+				{
+					return _owner.Composer.CreateMedia(attribute.Value, _owner.LanguageName, _owner.Db.Name);
+				}
+			}
+
+			return null;
 		}
 
 		public bool IsEmpty

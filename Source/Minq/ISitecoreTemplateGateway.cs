@@ -13,8 +13,7 @@ namespace Minq
 		/// <summary>
 		/// When overridden in a derived class, returns the Sitecore template for the given <see cref="SitecoreTemplateKey" />.
 		/// </summary>
-		/// <param name="key">The <see cref="SitecoreTemplateKey" /> unqiuely identifying the template to return.</param>
 		/// <returns>A <see cref="ISitecoreTemplate" />.</returns>
-		ISitecoreTemplate GetTemplate(SitecoreTemplateKey key);
+		ISitecoreTemplate GetTemplate(string keyOrPath, string databaseName);
 	}
 }

@@ -146,6 +146,7 @@ namespace Minq.Tests.Linq
 			Assert.IsNotNull(parentItem.TitleItems);
 
 			Assert.AreEqual(1, parentItem.TitleItems.Count);
+			Assert.That(parentItem.TitleItems.ElementAt(0).Title, Is.EqualTo("Text 2"));
 		}
 
 		[SitecoreTemplate(TemplateId)]

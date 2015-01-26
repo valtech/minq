@@ -19,29 +19,19 @@ namespace Minq.Linq
 			_mediaGateway = mediaGateway;
 		}
 
-		public SMedia CreateMedia(SField field, string languageName, string databaseName)
+		public virtual SMedia CreateMedia(string keyOrPath, string languageName, string databaseName)
 		{
-			if (!SMedia.IsMediaField(field))
+			ISitecoreMedia sitecoreMedia = _mediaGateway.GetMedia(keyOrPath, languageName, databaseName);
+
+			if (sitecoreMedia != null)
 			{
-				throw new Exception("Not a media field");
-			}
-
-			XElement element = XDocument.Parse(field.Value<string>()).Descendants("image").First();
-
-			if (element != null)
-			{
-				XAttribute attribute = element.Attribute("mediaid");
-
-				if (attribute != null && attribute.Value.Length > 0)
-				{
-					return CreateMedia(attribute.Value, languageName, databaseName);
-				}
+				return new SMedia(sitecoreMedia);
 			}
 
 			return null;
 		}
 
-		public SItem CreateItem(string keyOrPath, string languageName, string databaseName)
+		public virtual SItem CreateItem(string keyOrPath, string languageName, string databaseName)
 		{
 			ISitecoreItem sitecoreItem = _itemGateway.GetItem(keyOrPath, languageName, databaseName);
 
@@ -53,21 +43,9 @@ namespace Minq.Linq
 			return null;
 		}
 
-		public STemplate CreateTemplate(SitecoreTemplateKey templateKey)
+		public virtual STemplate CreateTemplate(string keyOrPath, string languageName)
 		{
-			return new STemplate(_templateGateway.GetTemplate(templateKey));
-		}
-
-		public SMedia CreateMedia(string keyOrPath, string languageName, string databaseName)
-		{
-			ISitecoreMedia sitecoreMedia = _mediaGateway.GetMedia(keyOrPath, languageName, databaseName);
-
-			if (sitecoreMedia != null)
-			{
-				return new SMedia(sitecoreMedia);
-			}
-
-			return null;
-		}
+			return new STemplate(_templateGateway.GetTemplate(keyOrPath, languageName));
+		}		
 	}
 }

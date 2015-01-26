@@ -12,20 +12,20 @@ namespace Minq.Sitecore
 {
 	public class SitecoreTemplateGateway : ISitecoreTemplateGateway
 	{
-		public ISitecoreTemplate GetTemplate(SitecoreTemplateKey key)
+		public ISitecoreTemplate GetTemplate(string keyOrPath, string databaseName)
 		{
-			ScapiDatabase scapiDatabase = ScapiFactory.GetDatabase(key.DatabaseName);
+			ScapiDatabase scapiDatabase = ScapiFactory.GetDatabase(databaseName);
 
-			ScapiTemplate template = ScapiTemplateManager.GetTemplate(new ScapiId(key.Guid), scapiDatabase);
+			ScapiTemplate template = ScapiTemplateManager.GetTemplate(new ScapiId(keyOrPath), scapiDatabase);
 
-			return new SitecoreTemplate(template, key.DatabaseName);
+			return new SitecoreTemplate(template, databaseName);
 		}
 
-		public static ScapiTemplate GetScapiTemplate(SitecoreTemplateKey key, bool throwErrorIfNotFound)
+		public static ScapiTemplate GetScapiTemplate(string keyOrPath, string databaseName, bool throwErrorIfNotFound)
 		{
-			ScapiDatabase scapiDatabase = ScapiFactory.GetDatabase(key.DatabaseName);
+			ScapiDatabase scapiDatabase = ScapiFactory.GetDatabase(databaseName);
 
-			ScapiTemplate template = ScapiTemplateManager.GetTemplate(new ScapiId(key.Guid), scapiDatabase);
+			ScapiTemplate template = ScapiTemplateManager.GetTemplate(new ScapiId(keyOrPath), scapiDatabase);
 
 			if (template != null)
 			{
@@ -34,7 +34,7 @@ namespace Minq.Sitecore
 
 			if (throwErrorIfNotFound)
 			{
-				throw new SitecoreTemplateGatewayException(String.Format("Sitecore template {0} was not found", key));
+				throw new SitecoreTemplateGatewayException(String.Format("Sitecore template {0} was not found", keyOrPath));
 			}
 
 			return null;

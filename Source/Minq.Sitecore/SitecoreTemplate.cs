@@ -36,7 +36,7 @@ namespace Minq.Sitecore
 		private IEnumerable<ScapiTemplate> EnumerateBaseTemplates(ScapiTemplate owner)
 		{
 			ScapiTemplate[] templates = owner.BaseIDs
-				.Select(id => SitecoreTemplateGateway.GetScapiTemplate(new SitecoreTemplateKey(id.Guid, _databaseName), true))
+				.Select(id => SitecoreTemplateGateway.GetScapiTemplate(id.Guid.ToString(), _databaseName, true))
 				.ToArray();
 
 			return templates.Union(templates.Where(t => t.ID != owner.ID).SelectMany(t => EnumerateBaseTemplates(t)));

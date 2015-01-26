@@ -253,7 +253,7 @@ namespace Minq.Linq
 			{
 				if (_template == null)
 				{
-					_template = _itemComposer.CreateTemplate(_sitecoreItem.TemplateKey);
+					_template = _itemComposer.CreateTemplate(_sitecoreItem.TemplateKey.Guid.ToString(), _sitecoreItem.TemplateKey.DatabaseName);
 				}
 
 				return _template;
@@ -291,7 +291,7 @@ namespace Minq.Linq
 
 							if (SMedia.IsMediaField(s))
 							{
-								SMedia media = _itemComposer.CreateMedia(field, LanguageName, Db.Name);
+								SMedia media = field.ToMedia();
 
 								if (media != null)
 								{

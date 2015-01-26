@@ -18,17 +18,17 @@ namespace Minq.Mocks
 			_templates[template.Key] = template;
 		}
 
-		public ISitecoreTemplate GetTemplate(SitecoreTemplateKey key)
+		public ISitecoreTemplate GetTemplate(string keyOrPath, string databaseName)
 		{
 			ISitecoreTemplate template;
 
-			if (_templates.TryGetValue(key, out template))
+			if (_templates.TryGetValue(new SitecoreTemplateKey(new Guid(keyOrPath), databaseName), out template))
 			{
 				return template;
 			}
 			else
 			{
-				throw new MockSitecoreItemGatewayException(String.Format("Sitecore template {0} does not exist", key));
+				throw new MockSitecoreItemGatewayException(String.Format("Sitecore template {0} does not exist", keyOrPath));
 			}
 		}
 	}
