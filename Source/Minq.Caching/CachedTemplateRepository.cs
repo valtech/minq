@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Minq.Caching
 {
-	public class CachedTemplateRepository
+	class CachedTemplateRepository
 	{
 		private ConcurrentDictionary<SitecoreTemplateKey, STemplate> _templateDictionary = new ConcurrentDictionary<SitecoreTemplateKey, STemplate>();
 		private ISitecoreTemplateGateway _templateGateway;

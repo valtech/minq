@@ -11,7 +11,6 @@ namespace Minq.Caching
 	public class CachedItemComposer : SItemComposer
 	{
 		private CachedTemplateRepository _templateRepository;
-		
 
 		public CachedItemComposer(ISitecoreItemGateway itemGateway, ISitecoreTemplateGateway templateGateway, ISitecoreMediaGateway mediaGateway)
 			: base(itemGateway, templateGateway, mediaGateway)

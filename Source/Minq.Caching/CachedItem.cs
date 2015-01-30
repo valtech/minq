@@ -9,7 +9,7 @@ namespace Minq.Caching
 {
 	class CachedItem : SItem
 	{
-		public CachedItem(ISitecoreItem sitecoreItem, SItemComposer itemComposer)
+		public CachedItem(ISitecoreItem sitecoreItem, SItemComposer itemComposer, CachedItemRepository repository)
 			: base(sitecoreItem, itemComposer)
 		{
 
