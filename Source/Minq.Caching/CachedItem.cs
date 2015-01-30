@@ -14,5 +14,20 @@ namespace Minq.Caching
 		{
 
 		}
+
+		public override IEnumerable<SItem> Items()
+		{
+			//TODO: push to cache
+			return base.Items();
+		}
+
+		public override SItem Parent
+		{
+			get
+			{
+				//TODO: push to cache
+				return base.Parent;
+			}
+		}
 	}
 }

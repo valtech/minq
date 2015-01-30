@@ -129,7 +129,7 @@ namespace Minq.Linq
 		/// Returns a collection of the child items of this item or document, in order.
 		/// </summary>
 		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="SItem"/> containing the child items of this item, in order.</returns>
-		public IEnumerable<SItem> Items()
+		public virtual IEnumerable<SItem> Items()
 		{
 			foreach (ISitecoreItem child in _sitecoreItem.Children)
 			{
@@ -229,7 +229,7 @@ namespace Minq.Linq
 		/// <summary>
 		/// Gets the parent <see cref="SItem"/> of this LINQ item.
 		/// </summary>
-		public SItem Parent
+		public virtual SItem Parent
 		{
 			get
 			{

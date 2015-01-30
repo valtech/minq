@@ -42,7 +42,9 @@
     <Compile Include="CachedItem.cs" />
     <Compile Include="CachedItemComposer.cs" />
     <Compile Include="CachedLock.cs" />
+    <Compile Include="CachedRepository.cs" />
     <Compile Include="CachedTemplate.cs" />
+    <Compile Include="CachedTemplateRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

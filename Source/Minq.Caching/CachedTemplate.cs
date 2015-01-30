@@ -11,18 +11,23 @@ namespace Minq.Caching
 	{
 		private IReadOnlyList<STemplate> _baseTemplates;
 		private IReadOnlyDictionary<Guid, bool> _baseTemplateDictionary;
+		private CachedTemplateRepository _repository;
+		private ISitecoreTemplate _sitecoreTemplate;
 
-		public CachedTemplate(ISitecoreTemplate sitecoreTemplate)
+		public CachedTemplate(ISitecoreTemplate sitecoreTemplate, CachedTemplateRepository repository)
 			: base(sitecoreTemplate)
 		{
-
+			_sitecoreTemplate = sitecoreTemplate;
+			_repository = repository;
 		}
 
 		public override IEnumerable<STemplate> BaseTemplates()
 		{
 			if (_baseTemplates == null)
 			{
-				_baseTemplates = base.BaseTemplates().ToList();
+				_baseTemplates = _sitecoreTemplate.BaseTemplates
+					.Select(template => _repository.GetOrAdd(template))
+					.ToList();
             }
 
 			return _baseTemplates;
