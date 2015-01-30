@@ -43,9 +43,9 @@ namespace Minq.Linq
 			return null;
 		}
 
-		public virtual STemplate CreateTemplate(string keyOrPath, string languageName)
+		public virtual STemplate CreateTemplate(string keyOrPath, string databaseName)
 		{
-			return new STemplate(_templateGateway.GetTemplate(keyOrPath, languageName));
+			return new STemplate(_templateGateway.GetTemplate(keyOrPath, databaseName));
 		}		
 	}
 }

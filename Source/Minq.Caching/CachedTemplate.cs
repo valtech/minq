@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Minq.Caching
 {
-	public class CachedTemplate : STemplate
+	class CachedTemplate : STemplate
 	{
 		private IReadOnlyList<STemplate> _baseTemplates;
 		private IReadOnlyDictionary<Guid, bool> _baseTemplateDictionary;

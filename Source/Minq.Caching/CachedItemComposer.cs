@@ -11,7 +11,7 @@ namespace Minq.Caching
 	public class CachedItemComposer : SItemComposer
 	{
 		private ISitecoreTemplateGateway _templateGateway;
-		private ConcurrentDictionary<Guid, STemplate> _templateDictionary = new ConcurrentDictionary<Guid, STemplate>();
+		private ConcurrentDictionary<string, STemplate> _templateDictionary = new ConcurrentDictionary<string, STemplate>();
 
 		public CachedItemComposer(ISitecoreItemGateway itemGateway, ISitecoreTemplateGateway templateGateway, ISitecoreMediaGateway mediaGateway)
 			: base(itemGateway, templateGateway, mediaGateway)
@@ -19,27 +19,29 @@ namespace Minq.Caching
 			_templateGateway = templateGateway;
         }
 
-		public override STemplate CreateTemplate(string keyOrPath, string languageName)
+		public override STemplate CreateTemplate(string keyOrPath, string databaseName)
 		{
 			Guid guid;
 
 			if (Guid.TryParse(keyOrPath, out guid))
 			{
+				string key = String.Format("{0}/{1}", guid, databaseName.ToLowerInvariant());
+
 				STemplate template;
 
-				if (_templateDictionary.TryGetValue(guid, out template))
+				if (_templateDictionary.TryGetValue(key, out template))
 				{
 					return template;
                 }
 
-				template = new CachedTemplate(_templateGateway.GetTemplate(keyOrPath, languageName));
+				template = new CachedTemplate(_templateGateway.GetTemplate(keyOrPath, databaseName));
 
-				_templateDictionary[guid] = template;
+				_templateDictionary[key] = template;
 
 				return template;
             }
 
-			return base.CreateTemplate(keyOrPath, languageName);
+			return base.CreateTemplate(keyOrPath, databaseName);
 		}
 	}
 }
