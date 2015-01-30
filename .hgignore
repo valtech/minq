@@ -18,3 +18,4 @@ Nuspec/*.bat
 Nuspec/*.exe
 Nuspec/*.nupkg
 packages/*
+Source/Minq/Todo.txt

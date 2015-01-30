@@ -36,7 +36,7 @@ namespace Minq.Linq
 		/// Returns a collection of the base templates making up this template.
 		/// </summary>
 		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="STemplate"/> containing the base templates of this template.</returns>
-		public IEnumerable<STemplate> BaseTemplates()
+		public virtual IEnumerable<STemplate> BaseTemplates()
 		{
 			foreach (ISitecoreTemplate baseTemplate in _sitecoreTemplate.BaseTemplates)
 			{
@@ -63,7 +63,7 @@ namespace Minq.Linq
 		/// </summary>
 		/// <param name="templateGuid">The template GUID to interogate.</param>
 		/// <returns>true if the specified GUID represents this template or one of its base templates, false otherwise.</returns>
-		public bool IsBasedOn(Guid templateGuid)
+		public virtual bool IsBasedOn(Guid templateGuid)
 		{
 			if (Guid == templateGuid)
 			{
@@ -83,7 +83,7 @@ namespace Minq.Linq
 		/// </remarks>
 		public bool IsBasedOn<TItem>()
 		{
-			return IsBasedOn(SitecoreTemplateAttribute.FindTemplateGuid(typeof(TItem)));
+			return IsBasedOn(typeof(TItem));
 		}
 
 		public bool IsBasedOn(Type type)
