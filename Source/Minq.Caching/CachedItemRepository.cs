@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Minq.Caching
 {
-	public class CachedTemplateRepository
+	public class CachedItemRepository
 	{
-		
+
 	}
 }

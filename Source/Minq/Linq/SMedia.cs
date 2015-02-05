@@ -20,7 +20,7 @@ namespace Minq.Linq
 		{
 			if (!String.IsNullOrEmpty(value))
 			{
-				if (value.StartsWith("<image ") && value.EndsWith("/>"))
+				if (value.StartsWith("<image ") && value.EndsWith(">"))
 				{
 					return true;
 				}

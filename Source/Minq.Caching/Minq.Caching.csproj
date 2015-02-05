@@ -42,10 +42,12 @@
     <Compile Include="CachedItem.cs" />
     <Compile Include="CachedItemComposer.cs" />
     <Compile Include="CachedItemRepository.cs" />
-    <Compile Include="CachedLock.cs" />
-    <Compile Include="CachedRepository.cs" />
-    <Compile Include="CachedTemplate.cs" />
     <Compile Include="CachedTemplateRepository.cs" />
+    <Compile Include="FetchLock.cs" />
+    <Compile Include="FetchLockedRepository.cs" />
+    <Compile Include="CachedTemplate.cs" />
+    <Compile Include="ConcurrentRespository.cs" />
+    <Compile Include="ICachedRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
