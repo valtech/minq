@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-
-namespace Minq.Linq
+﻿namespace Minq.Linq
 {
 	public class SItemComposer
 	{

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>Minq.Caching</id>
+		<title>MINQ Caching for Sitecore and Sitecore MVC</title>
+		<version>1.2.1</version>
+		<projectUrl>https://code.google.com/p/minq/</projectUrl>
+		<authors>True Clarity</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MINQ Caching for Sitecore and Sitecore MVC</description>
+		<frameworkAssemblies>
+			<frameworkAssembly assemblyName="System" targetFramework="" />
+			<frameworkAssembly assemblyName="System.Core" targetFramework="" />
+		</frameworkAssemblies>
+		<dependencies>
+			<dependency id="Minq" version="1.2.1" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\Minq.Caching\bin\Debug\Minq.Caching.dll" target="lib\net40" />
+		<file src="..\Minq.Caching\bin\Debug\Minq.Caching.xml" target="lib\net40" />
+	</files>
+</package>

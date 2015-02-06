@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace Minq.Caching
 {
-	class FetchLockedRepository<TKey, TValue> : ICachedRepository<TKey, TValue>
+	public class FetchLockedRepository<TKey, TValue> : ICachedRepository<TKey, TValue>
 		where TValue : class
 	{
 		private ConcurrentDictionary<TKey, FetchLock<TValue>> _dictionary;
@@ -20,7 +19,7 @@ namespace Minq.Caching
 			_dictionary = new ConcurrentDictionary<TKey, FetchLock<TValue>>(comparer);
 		}
 
-		public void Clear()
+		public void ClearCache()
 		{
 			_dictionary.Clear();
 		}

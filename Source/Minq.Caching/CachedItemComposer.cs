@@ -1,25 +1,20 @@
 ﻿using Minq.Linq;
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Minq.Caching
 {
 	public class CachedItemComposer : SItemComposer
 	{
-		private ISitecoreItemGateway _itemGateway;
-		private ISitecoreTemplateGateway _templateGateway;
-		private ICachedRepository<SitecoreTemplateKey, STemplate> _templateDictionary = new ConcurrentRespository<SitecoreTemplateKey, STemplate>();
-		private ICachedRepository<SitecoreItemKey, SItem> _itemDictionary = new ConcurrentRespository<SitecoreItemKey, SItem>();
+		private CachedTemplateRepository _templateRepository;
+		private CachedItemRepository _itemRepository;
+		private CachedMediaRepository _mediaRepository;
 
-		public CachedItemComposer(ISitecoreItemGateway itemGateway, ISitecoreTemplateGateway templateGateway, ISitecoreMediaGateway mediaGateway)
-			: base(itemGateway, templateGateway, mediaGateway)
+		public CachedItemComposer(CachedItemRepository itemRepository, CachedTemplateRepository templateRepository, CachedMediaRepository mediaRepository)
+			: base(itemRepository, templateRepository, mediaRepository)
 		{
-			_itemGateway = itemGateway;
-			_templateGateway = templateGateway;
+			_itemRepository = itemRepository;
+			_templateRepository = templateRepository;
+			_mediaRepository = mediaRepository;
         }
 
 		public override STemplate CreateTemplate(string keyOrPath, string databaseName)
@@ -30,7 +25,7 @@ namespace Minq.Caching
 			{
 				SitecoreTemplateKey key = new SitecoreTemplateKey(guid, databaseName);
 
-				return _templateDictionary.GetOrAdd(key, TemplateFactory);
+				return _templateRepository.GetOrAdd(key, TemplateFactory);
 			}
 			else
 			{
@@ -46,7 +41,7 @@ namespace Minq.Caching
 			{
 				SitecoreItemKey key = new SitecoreItemKey(guid, languageName, databaseName);
 
-				return _itemDictionary.GetOrAdd(key, ItemFactory);
+				return _itemRepository.GetOrAdd(key, ItemFactory);
 			}
 			else
 			{
@@ -54,33 +49,56 @@ namespace Minq.Caching
 			}
 		}
 
-		public SItem GetOrAdd(ISitecoreItem sitecoreItem)
+		public override SMedia CreateMedia(string keyOrPath, string languageName, string databaseName)
 		{
-			CachedItem speculativeItem = new CachedItem(sitecoreItem, this);
+			Guid guid;
 
-			return _itemDictionary.GetOrAdd(sitecoreItem.Key, speculativeItem);
-		}
+			if (Guid.TryParse(keyOrPath, out guid))
+			{
+				SitecoreItemKey key = new SitecoreItemKey(guid, languageName, databaseName);
 
-		private SItem ItemFactory(SitecoreItemKey key)
-		{
-			return new CachedItem(_itemGateway.GetItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName), this);
-		}
-
-		private STemplate TemplateFactory(SitecoreTemplateKey key)
-		{
-			return new CachedTemplate(_templateGateway.GetTemplate(key.Guid.ToString(), key.DatabaseName), this);
-		}
-
-		public STemplate GetOrAdd(ISitecoreTemplate sitecoreTemplate)
-		{
-			STemplate speculativeTemplate = new CachedTemplate(sitecoreTemplate, this);
-
-			return _templateDictionary.GetOrAdd(sitecoreTemplate.Key, speculativeTemplate);
+				return _mediaRepository.GetOrAdd(key, MediaFactory);
+			}
+			else
+			{
+				return base.CreateMedia(keyOrPath, languageName, databaseName);
+			}
 		}
 
 		public void ClearCaches()
 		{
-			_templateDictionary.Clear();
-        }
+			_itemRepository.ClearCache();
+			_templateRepository.ClearCache();
+			_mediaRepository.ClearCache();
+		}
+
+		internal SItem GetOrAdd(ISitecoreItem sitecoreItem)
+		{
+			CachedItem speculativeItem = new CachedItem(sitecoreItem, this);
+
+			return _itemRepository.GetOrAdd(sitecoreItem.Key, speculativeItem);
+		}
+
+		internal STemplate GetOrAdd(ISitecoreTemplate sitecoreTemplate)
+		{
+			STemplate speculativeTemplate = new CachedTemplate(sitecoreTemplate, this);
+
+			return _templateRepository.GetOrAdd(sitecoreTemplate.Key, speculativeTemplate);
+		}
+
+		private SItem ItemFactory(SitecoreItemKey key)
+		{
+			return new CachedItem(_itemRepository.GetItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName), this);
+		}
+
+		private STemplate TemplateFactory(SitecoreTemplateKey key)
+		{
+			return new CachedTemplate(_templateRepository.GetTemplate(key.Guid.ToString(), key.DatabaseName), this);
+		}
+
+		private SMedia MediaFactory(SitecoreItemKey key)
+		{
+			return new SMedia(_mediaRepository.GetMedia(key.Guid.ToString(), key.LanguageName, key.DatabaseName));
+		}
 	}
 }

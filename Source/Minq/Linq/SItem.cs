@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using System.Collections;
 
 namespace Minq.Linq
 {
@@ -18,10 +17,10 @@ namespace Minq.Linq
 		private STemplate _template;
 
 		/// <summary>
-		///  Initializes the class for use based on a <see cref="ISitecoreItem"/> and <see cref="ISitecoreContainer"/>.
+		///  Initializes the class for use based on a <see cref="ISitecoreItem"/> and <see cref="SItemComposer"/>.
 		/// </summary>
 		/// <param name="sitecoreItem">The low level Sitecore item that represents this LINQ item.</param>
-		/// <param name="container">The Sitecore container.</param>
+		/// <param name="itemComposer">The Sitecore item composer.</param>
 		public SItem(ISitecoreItem sitecoreItem, SItemComposer itemComposer)
 		{
 			_sitecoreItem = sitecoreItem;

@@ -2,9 +2,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Minq.Mocks</id>
-		<version>1.1.9</version>
-		<projectUrl>https://code.google.com/p/minq/</projectUrl>
 		<title>MINQ Mocks for Sitecore and Sitecore MVC</title>
+		<version>1.2.1</version>
+		<projectUrl>https://code.google.com/p/minq/</projectUrl>
 		<authors>True Clarity</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MINQ Mocks for Sitecore and Sitecore MVC</description>
@@ -20,7 +20,7 @@
 			<frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="" />
 		</frameworkAssemblies>
 		<dependencies>
-			<dependency id="Minq" version="1.0.4" />
+			<dependency id="Minq" version="1.2.1" />
 		</dependencies>
 	</metadata>
 	<files>

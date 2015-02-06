@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Minq.Caching
 {
@@ -10,11 +6,6 @@ namespace Minq.Caching
 	{
 		private volatile bool _got;
 		private TValue _value;
-
-		public FetchLock()
-		{
-
-		}
 
 		public TValue Fetch(TValue value)
 		{

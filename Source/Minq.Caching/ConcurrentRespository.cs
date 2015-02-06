@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Minq.Caching
 {
-	class ConcurrentRespository<TKey, TValue> : ICachedRepository<TKey, TValue>
+	public class ConcurrentRespository<TKey, TValue> : ICachedRepository<TKey, TValue>
 	{
 		private ConcurrentDictionary<TKey, TValue> _dictionary;
 
@@ -26,7 +23,7 @@ namespace Minq.Caching
 			return _dictionary.GetOrAdd(key, factory);
 		}
 
-		public void Clear()
+		public void ClearCache()
 		{
 			_dictionary.Clear();
         }
