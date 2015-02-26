@@ -12,8 +12,6 @@ namespace Minq.Sitecore.Mvc
 {
 	public class SitecoreRendering : ISitecoreRendering
 	{
-		private IDictionary<string, string> _parameters;
-
 		private ScapiRendering ScapiRendering
 		{
 			get
@@ -53,17 +51,14 @@ namespace Minq.Sitecore.Mvc
 		{
 			get
 			{
-				if (_parameters == null)
+				IDictionary<string, string> parameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+				foreach (KeyValuePair<string, string> pair in ScapiRendering.Parameters)
 				{
-					_parameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-					foreach (KeyValuePair<string, string> pair in ScapiRendering.Parameters)
-					{
-						_parameters.Add(pair);
-					}
+					parameters.Add(pair);
 				}
-
-				return _parameters;
+				
+				return parameters;
 			}
 		}
 	}

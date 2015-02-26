@@ -129,7 +129,6 @@ namespace Minq.Linq
 		/// Converts the value of the specified string to an equivalent <see cref="Guid"/> value.
 		/// </summary>
 		/// <param name="value">The field data to convert.</param>
-		/// <param name="default">The default value if the conversion fails.</param>
 		/// <returns>The converted <see cref="Guid"/> value.</returns>
 		public static Guid ToGuid(string value)
 		{

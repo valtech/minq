@@ -13,7 +13,9 @@ namespace Minq
 		/// <summary>
 		/// When overridden in a derived class, returns the Sitecore item for the given key or path.
 		/// </summary>
-		/// <param name="key">The key or path identifying the item to return.</param>
+		/// <param name="keyOrPath">The key or path identifying the item to return.</param>
+		/// <param name="languageName">The language of the item to return.</param>
+		/// <param name="databaseName">Thedatabse of the item to return.</param>
 		/// <returns>A <see cref="ISitecoreItem" />.</returns>
 		ISitecoreItem GetItem(string keyOrPath, string languageName, string databaseName);
 	}

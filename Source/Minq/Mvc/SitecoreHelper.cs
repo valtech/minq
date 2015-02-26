@@ -38,7 +38,6 @@ namespace Minq.Mvc
 		/// Returns the correct markup for a Sitecore field for each property in the object that is represented by the specified expression.
 		/// </summary>
 		/// <typeparam name="TProperty">The type of the value.</typeparam>
-		/// <param name="htmlHelper">The HTML helper instance that this method extends.</param>
 		/// <param name="expression">An expression that identifies the object that contains the properties to render.</param>
 		/// <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
 		/// <returns>Markup for the Sitecore field.</returns>
@@ -247,12 +246,18 @@ namespace Minq.Mvc
 			}
 		}
 
-		public IHtmlString Editor(Func<object, object> htmlPredicate, object htmlAttributes = null)
+		public IHtmlString PageEditor(Func<object, object> htmlPredicate, object htmlAttributes = null)
 		{
-			return Editor(htmlPredicate, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+			return PageEditor(htmlPredicate, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
 		}
 
-		private IHtmlString Editor(Func<object, object> htmlPredicate, IDictionary<string, object> htmlAttributes)
+		[Obsolete("Use PageEditor method instead. This method will be phased out.")]
+		public IHtmlString Editor(Func<object, object> htmlPredicate, object htmlAttributes = null)
+		{
+			return PageEditor(htmlPredicate, htmlAttributes);
+        }
+
+		private IHtmlString PageEditor(Func<object, object> htmlPredicate, IDictionary<string, object> htmlAttributes)
 		{
 			SitecoreFieldAttributeDictionary editorAttributes = SitecoreFieldAttributeDictionary.FromAttributes(htmlAttributes);
 

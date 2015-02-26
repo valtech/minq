@@ -13,10 +13,10 @@ namespace Minq.Linq
 		private SItemComposer _itemComposer;
 
 		/// <summary>
-		/// Initializes the class for use based on the database name and a <see cref="ISitecoreContainer"/>.
+		/// Initializes the class for use based on the database name and a <see cref="SItemComposer"/>.
 		/// </summary>
 		/// <param name="name">The name of the database.</param>
-		/// <param name="container">The Sitecore container.</param>
+		/// <param name="itemComposer">The item composer.</param>
 		public SDb(string name, SItemComposer itemComposer)
 		{
 			_name = name;

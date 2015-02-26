@@ -16,7 +16,7 @@ namespace Minq.Caching
 		{
 			_sitecoreItem = sitecoreItem;
 			_itemComposer = itemComposer;
-        }
+		}
 
 		public override IEnumerable<SItem> Items()
 		{
@@ -26,7 +26,7 @@ namespace Minq.Caching
 					.Select(item => _itemComposer.GetOrAdd(item))
 					.ToList();
 			}
-			
+
 			return _items;
 		}
 
@@ -37,8 +37,8 @@ namespace Minq.Caching
 				if (_parent == null)
 				{
 					_parent = _itemComposer.GetOrAdd(_sitecoreItem.Parent);
-                }
-				
+				}
+
 				return _parent;
 			}
 		}

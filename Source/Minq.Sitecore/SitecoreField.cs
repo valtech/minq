@@ -17,8 +17,7 @@ namespace Minq.Sitecore
 		/// <summary>
 		/// Initializes a new instance of the class based on the field name and value;
 		/// </summary>
-		/// <param name="name">The name of the field.</param>
-		/// <param name="value">The value of the field.</param>
+		/// <param name="scapiField">The sitecore field.</param>
 		public SitecoreField(ScapiField scapiField)
 		{
 			_scapiField = scapiField;

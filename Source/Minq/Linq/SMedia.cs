@@ -46,6 +46,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public SitecoreUrl Url
 		{
 			get

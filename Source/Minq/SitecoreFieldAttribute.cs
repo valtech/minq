@@ -36,7 +36,7 @@ namespace Minq
 		/// <summary>
 		/// Retrieves the <see cref="SitecoreFieldAttribute" /> for a given property.
 		/// </summary>
-		/// <param name="Type">The type of the object to get the property for.</param>
+		/// <param name="type">The type of the object to get the property for.</param>
 		/// <param name="propertyName">The property to get the <see cref="SitecoreFieldAttribute" /> for.</param>
 		/// <returns>The <see cref="SitecoreFieldAttribute" />, or null if not found.</returns>
 		public static SitecoreFieldAttribute GetItemFieldAttribute(Type type, string propertyName)

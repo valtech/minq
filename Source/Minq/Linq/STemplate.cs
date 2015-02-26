@@ -34,7 +34,7 @@ namespace Minq.Linq
 		/// <summary>
 		/// Returns a collection of the base templates making up this template.
 		/// </summary>
-		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="STemplate"/> containing the base templates of this template.</returns>
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="STemplate"/> containing the base templates of this template.</returns>
 		public virtual IEnumerable<STemplate> BaseTemplates()
 		{
 			foreach (ISitecoreTemplate baseTemplate in _sitecoreTemplate.BaseTemplates)
@@ -46,7 +46,7 @@ namespace Minq.Linq
 		/// <summary>
 		/// Returns a collection of templates that contain this template, and all base templates of this template.
 		/// </summary>
-		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="SItem"/> containing this template, and base templates of this template.</returns>
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="SItem"/> containing this template, and base templates of this template.</returns>
 		public IEnumerable<STemplate> BaseTemplatesAndSelf()
 		{
 			yield return this;
@@ -85,6 +85,11 @@ namespace Minq.Linq
 			return IsBasedOn(typeof(TItem));
 		}
 
+		/// <summary>
+		/// Determines if the specified type is based on this template or one of its base templates.
+		/// </summary>
+		/// <param name="type">The type to check.</param>
+		/// <returns>true if the specified type represents this template or one of its base templates, false otherwise.</returns>
 		public bool IsBasedOn(Type type)
 		{
 			return IsBasedOn(SitecoreTemplateAttribute.FindTemplateGuid(type));

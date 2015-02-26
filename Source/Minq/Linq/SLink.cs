@@ -110,6 +110,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the URL that could be used in a browser to access the resource.
+		/// </summary>
 		public SitecoreUrl Url
 		{
 			get
@@ -137,6 +140,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the <see cref="SItem"/> linked to, or null if not an item.
+		/// </summary>
 		public SItem LinkedItem
 		{
 			get
@@ -160,6 +166,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the <see cref="SMedia"/> linked to, or null if not an item.
+		/// </summary>
 		public SMedia LinkedMedia
 		{
 			get
@@ -183,6 +192,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the underlying field associated with this link. 
+		/// </summary>
 		public SField Field
 		{
 			get
@@ -191,6 +203,11 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Determines if a given Sitecore raw value is a link.
+		/// </summary>
+		/// <param name="value">The Sitecore raw value to check.</param>
+		/// <returns>true if the raw value is a link field, false otherwise.</returns>
 		public static bool IsLinkField(string value)
 		{
 			if (!String.IsNullOrEmpty(value))
@@ -204,6 +221,11 @@ namespace Minq.Linq
 			return false;
 		}
 
+		/// <summary>
+		/// Determines if a given Sitecore field's raw value is a link.
+		/// </summary>
+		/// <param name="value">The Sitecore field to check.</param>
+		/// <returns>true if the field is a link field, false otherwise.</returns>
 		public static bool IsLinkField(SField field)
 		{
 			if (!field.IsEmpty)

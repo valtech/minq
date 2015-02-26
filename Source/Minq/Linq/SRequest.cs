@@ -14,9 +14,10 @@ namespace Minq.Linq
 		private ISitecoreRequest _sitecoreRequest;
 
 		/// <summary>
-		///  Initializes the class for use based on a <see cref="ISitecoreContainer"/>.
+		///  Initializes the class for use based on a <see cref="SItemComposer"/>.
 		/// </summary>
-		/// <param name="container"></param>
+		/// <param name="itemComposer">The item composer.</param>
+		/// /// <param name="sitecoreRequest">The Sitecore request.</param>
 		public SRequest(SItemComposer itemComposer, ISitecoreRequest sitecoreRequest)
 		{
 			_itemComposer = itemComposer;

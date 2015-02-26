@@ -18,9 +18,8 @@ namespace Minq.Mvc
 		private ISitecoreFieldMarkup _markup;
 
 		/// <summary>
-		/// Initializes the class for use based on a <see cref="SitecoreHelper<TModel>"/> and <see cref="ISitecoreFieldMarkup"/>.
+		/// Initializes the class for use based on a <see cref="SitecoreHelper{TModel}"/> and <see cref="ISitecoreFieldMarkup"/>.
 		/// </summary>
-		/// <param name="sitecorelHelper">The Sitecore helper to use as part of this fluent HTML markup string.</param>
 		/// <param name="markup">The field markup for this HTML markup string.</param>
 		public SitecoreFieldString(ISitecoreFieldMarkup markup)
 		{

@@ -17,6 +17,7 @@ namespace Minq.Linq
 		/// Initializes the class for use based on the <see cref="ISitecoreField" />.
 		/// </summary>
 		/// <param name="field">The low level Sitecore field that represents this LINQ field.</param>
+		/// /// <param name="owner">The owner item of this field.</param>
 		public SField(ISitecoreField field, SItem owner)
 		{
 			_field = field;

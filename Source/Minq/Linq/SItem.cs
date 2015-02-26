@@ -27,6 +27,9 @@ namespace Minq.Linq
 			_itemComposer = itemComposer;
 		}
 
+		/// <summary>
+		/// Gets the item composer associated with the Sitecore item. 
+		/// </summary>
 		public SItemComposer Composer
 		{
 			get
@@ -63,6 +66,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the language name associated with the Sitecore item.
+		/// </summary>
 		public string LanguageName
 		{
 			get
@@ -108,6 +114,10 @@ namespace Minq.Linq
 			return item == null || !item.Versions().Any();
 		}
 
+		/// <summary>
+		/// Gets the version number of the Sitecore item.
+		/// </summary>
+		/// <returns></returns>
 		public IEnumerable<int> Versions()
 		{
 			return _sitecoreItem.Versions;
@@ -127,7 +137,7 @@ namespace Minq.Linq
 		/// <summary>
 		/// Returns a collection of the child items of this item or document, in order.
 		/// </summary>
-		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="SItem"/> containing the child items of this item, in order.</returns>
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="SItem"/> containing the child items of this item, in order.</returns>
 		public virtual IEnumerable<SItem> Items()
 		{
 			foreach (ISitecoreItem child in _sitecoreItem.Children)
@@ -147,7 +157,7 @@ namespace Minq.Linq
 		/// <summary>
 		/// Returns a collection of the descendant items for this item, in order.
 		/// </summary>
-		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="SItem"/> containing the descendants of this item, in order.</returns>
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="SItem"/> containing the descendants of this item, in order.</returns>
 		public IEnumerable<SItem> Descendants()
 		{
 			foreach (SItem item in Items())
@@ -164,7 +174,7 @@ namespace Minq.Linq
 		/// <summary>
 		/// Returns a collection of items that contain this item, and all descendant items of this item, in order.
 		/// </summary>
-		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="SItem"/> containing the item, and all descendant items of this item, in order.</returns>
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="SItem"/> containing the item, and all descendant items of this item, in order.</returns>
 		public IEnumerable<SItem> DescendantsAndSelf()
 		{
 			yield return this;
@@ -178,7 +188,7 @@ namespace Minq.Linq
 		/// <summary>
 		/// Returns a collection of the ancestor items of this node.
 		/// </summary>
-		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="SItem"/> of the ancestor items of this node.</returns>
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="SItem"/> of the ancestor items of this node.</returns>
 		public IEnumerable<SItem> Ancestors()
 		{
 			SItem ancestor = Parent;
@@ -194,7 +204,7 @@ namespace Minq.Linq
 		/// <summary>
 		/// Returns a collection of elements that contain this item, and the ancestors of this item.
 		/// </summary>
-		/// <returns>An <see cref="IEnumerable<T>"/> of <see cref="SItem"/> of items that contain this item, and the ancestors of this item.</returns>
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="SItem"/> of items that contain this item, and the ancestors of this item.</returns>
 		public IEnumerable<SItem> AncestorsAndSelf()
 		{
 			yield return this;

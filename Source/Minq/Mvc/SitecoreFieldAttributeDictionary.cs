@@ -21,7 +21,7 @@ namespace Minq.Mvc
 		/// Creates an instance of <see cref="SitecoreFieldAttributeDictionary"/> based on an existing dictionary of general field attributes.
 		/// </summary>
 		/// <param name="htmlAttributes">The dictionary of general field attributes to base this dictionary on.</param>
-		/// <returns>A new <see cref="<see cref="SitecoreFieldAttributeDictionary"/>.</returns>
+		/// <returns>A new <see cref="SitecoreFieldAttributeDictionary"/>.</returns>
 		public static SitecoreFieldAttributeDictionary FromAttributes(IDictionary<string, object> htmlAttributes)
 		{
 			SitecoreFieldAttributeDictionary parameters = new SitecoreFieldAttributeDictionary();
@@ -41,7 +41,7 @@ namespace Minq.Mvc
 		/// Creates an instance of <see cref="SitecoreFieldAttributeDictionary"/> based on an existing dictionary of image attributes.
 		/// </summary>
 		/// <param name="htmlAttributes">The dictionary of image attributes to base this dictionary on.</param>
-		/// <returns>A new <see cref="<see cref="SitecoreFieldAttributeDictionary"/>.</returns>
+		/// <returns>A new <see cref="SitecoreFieldAttributeDictionary"/>.</returns>
 		/// <remarks>
 		/// This method converts standard attributes like width and height to Sitecore field equivalents
 		/// like mw and mh to ensure scaling is applied properly.

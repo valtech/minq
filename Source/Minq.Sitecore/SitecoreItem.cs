@@ -27,7 +27,7 @@ namespace Minq.Sitecore
 		/// <summary>
 		/// Initializes the class based on a <see cref="SitecoreItemKey"/>.
 		/// </summary>
-		/// <param name="key">The <see cref="SitecoreItemKey" /> used to uniquely identify the item</param>
+		/// <param name="sitecoreItem">The Sitecore item</param>
 		public SitecoreItem(ScapiItem sitecoreItem)
 		{
 			_scapiItem = sitecoreItem;

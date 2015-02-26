@@ -14,14 +14,14 @@ namespace Minq.Linq
 		public LazyChildrenCollection(SItem item)
 			: this(item, null)
 		{
-			
+
 		}
 
 		public LazyChildrenCollection(SItem item, Type childType)
 		{
 			_item = item;
 			_childType = childType;
-        }
+		}
 
 		private IList<T> Children
 		{
@@ -31,10 +31,10 @@ namespace Minq.Linq
 				{
 					IEnumerable<SItem> items;
 
-                    if (_childType != null)
+					if (_childType != null)
 					{
 						items = _item.Items(item => item.Template.IsBasedOn(_childType));
-                    }
+					}
 					else
 					{
 						items = _item.Items();

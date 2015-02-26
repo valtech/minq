@@ -12,6 +12,9 @@ namespace Minq
 			get;
 		}
 
+		/// <summary>
+		/// The URL that could be used in a browser to request this media item.
+		/// </summary>
 		string Url
 		{
 			get;
