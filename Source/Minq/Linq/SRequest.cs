@@ -41,6 +41,10 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the page mode of the current request, i.e. if the request is a user accessing the content
+		/// deleivery site, or a CMS author using page editor.
+		/// </summary>
 		public ISitecorePageMode PageMode
 		{
 			get

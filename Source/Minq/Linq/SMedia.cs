@@ -38,6 +38,9 @@ namespace Minq.Linq
 			return false;
 		}
 
+		/// <summary>
+		/// Gets the Sitecore ID associated with this media.
+		/// </summary>
 		public Guid Guid
 		{
 			get
@@ -47,7 +50,7 @@ namespace Minq.Linq
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the URL of the media as it should be displayed in the browser.
 		/// </summary>
 		public SitecoreUrl Url
 		{

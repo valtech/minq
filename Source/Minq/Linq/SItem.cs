@@ -144,11 +144,21 @@ namespace Minq.Linq
 			{
 				if (child != null)
 				{
-					yield return new SItem(child, _itemComposer);
+					int[] versions = child.Versions;
+
+					if (versions != null && versions.Length > 0)
+					{
+						yield return new SItem(child, _itemComposer);
+					}
 				}
 			}
 		}
 
+		/// <summary>
+		/// Returns a collection of the child items of this item or document, in order.
+		/// </summary>
+		/// <param name="filter"></param>
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="SItem"/> containing the child items of this item, in order.</returns>
 		public IEnumerable<SItem> Items(Func<SItem, bool> filter)
 		{
 			return Items().Where(filter);

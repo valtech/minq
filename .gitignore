@@ -1,0 +1,10 @@
+/Source/Libraries
+
+**/bin/**
+**/obj/**
+**/packages/**
+/Source/Minq.sln.ide
+/Source/Nuspec/*.exe
+/Source/Nuspec/*.bat
+/Source/Minq.Tests.VisualState.xml
+/Source/TestResult.xml
