@@ -32,5 +32,13 @@ namespace Minq.Sitecore
 				return new SitecoreItemKey(_scapiMediaItem.ID.Guid, _scapiMediaItem.InnerItem.Language.Name, _scapiMediaItem.Database.Name);
 			}
 		}
+
+		public string AlternateText
+		{
+			get
+			{
+				return _scapiMediaItem.Alt;
+            }
+		}
 	}
 }

@@ -52,5 +52,13 @@ namespace Minq.Linq
 				return _sitecoreRequest.PageMode;
 			}
 		}
+
+		public string SiteName
+		{
+			get
+			{
+				return _sitecoreRequest.SiteName;
+			}
+		}
 	}
 }

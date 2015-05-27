@@ -19,5 +19,10 @@ namespace Minq
 		{
 			get;
 		}
+
+		string AlternateText
+		{
+			get;
+		}
 	}
 }

@@ -28,6 +28,12 @@ namespace Minq.Mocks
 			}
 		}
 
+		public string SiteName
+		{
+			get;
+			set;
+		}
+
 		ISitecorePageMode ISitecoreRequest.PageMode
 		{
 			get

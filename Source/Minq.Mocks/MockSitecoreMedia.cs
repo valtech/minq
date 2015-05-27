@@ -1,13 +1,20 @@
-﻿namespace Minq.Mocks
+﻿using System;
+
+namespace Minq.Mocks
 {
 	public class MockSitecoreMedia : ISitecoreMedia
 	{
 		private SitecoreItemKey _key;
-		private string _url;
 
 		public MockSitecoreMedia(SitecoreItemKey key)
 		{
 			_key = key;
+		}
+
+		public string AlternateText
+		{
+			get;
+			set;
 		}
 
 		public SitecoreItemKey Key
@@ -20,22 +27,8 @@
 
 		public string Url
 		{
-			get
-			{
-				return _url;
-			}
-			set
-			{
-				_url = value;
-			}
-		}
-
-		string ISitecoreMedia.Url
-		{
-			get
-			{
-				return _url;
-			}
+			get;
+			set;
 		}
 	}
 }

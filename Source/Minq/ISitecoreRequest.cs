@@ -23,5 +23,10 @@ namespace Minq
 		{
 			get;
 		}
+
+		string SiteName
+		{
+			get;
+		}
 	}
 }

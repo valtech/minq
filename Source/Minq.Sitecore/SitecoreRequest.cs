@@ -40,5 +40,13 @@ namespace Minq.Sitecore
 				return _pageMode;
 			}
 		}
+
+		public string SiteName
+		{
+			get
+			{
+				return ScapiContext.Site.Name;
+            }
+		}
 	}
 }
