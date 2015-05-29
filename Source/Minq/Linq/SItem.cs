@@ -234,7 +234,7 @@ namespace Minq.Linq
 			{
 				StringBuilder builder = new StringBuilder();
 
-				foreach (SItem item in AncestorsAndSelf())
+				foreach (SItem item in AncestorsAndSelf().Reverse())
 				{
 					builder.Append("/");
 
