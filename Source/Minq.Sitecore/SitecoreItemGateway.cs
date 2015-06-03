@@ -61,11 +61,11 @@ namespace Minq.Sitecore
 
 				if (Guid.TryParse(keyOrPath, out guid))
 				{
-					scapiItem = ScapiItemManager.Provider.GetItem(new ScapiId(guid), scapiLanguage, ScapiVersion.Latest, scapiDatabase, ScapiSecurityCheck.Enable);
+					scapiItem = ScapiItemManager.GetItem(new ScapiId(guid), scapiLanguage, ScapiVersion.Latest, scapiDatabase, ScapiSecurityCheck.Enable);
 				}
 				else
 				{
-					scapiItem = ScapiItemManager.Provider.GetItem(keyOrPath, scapiLanguage, ScapiVersion.Latest, scapiDatabase, ScapiSecurityCheck.Enable);
+					scapiItem = ScapiItemManager.GetItem(keyOrPath, scapiLanguage, ScapiVersion.Latest, scapiDatabase, ScapiSecurityCheck.Enable);
 				}
 
 				if (IsValidItem(scapiItem))

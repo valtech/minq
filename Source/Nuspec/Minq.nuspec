@@ -3,8 +3,8 @@
 	<metadata>
 		<id>Minq</id>
 		<title>MINQ for Sitecore and Sitecore MVC</title>
-		<version>1.2.8</version>
-		<projectUrl>https://code.google.com/p/minq/</projectUrl>
+		<version>1.2.9</version>
+		<projectUrl>https://github.com/tcuk/minq</projectUrl>
 		<authors>True Clarity</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MINQ for Sitecore and Sitecore MVC</description>

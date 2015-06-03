@@ -3,8 +3,8 @@
 	<metadata>
 		<id>Minq.Caching</id>
 		<title>MINQ Caching for Sitecore and Sitecore MVC</title>
-		<version>1.2.8</version>
-		<projectUrl>https://code.google.com/p/minq/</projectUrl>
+		<version>1.2.9</version>
+		<projectUrl>https://github.com/tcuk/minq</projectUrl>
 		<authors>True Clarity</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MINQ Caching for Sitecore and Sitecore MVC</description>
@@ -13,7 +13,7 @@
 			<frameworkAssembly assemblyName="System.Core" targetFramework="" />
 		</frameworkAssemblies>
 		<dependencies>
-			<dependency id="Minq" version="1.2.8" />
+			<dependency id="Minq" version="1.2.9" />
 		</dependencies>
 	</metadata>
 	<files>
