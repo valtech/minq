@@ -15,6 +15,8 @@ namespace Minq.Linq
 		private SItemComposer _itemComposer;
 		private SDb _db;
 		private STemplate _template;
+		private int[] _versions;
+		private string[] _languages;
 
 		/// <summary>
 		///  Initializes the class for use based on a <see cref="ISitecoreItem"/> and <see cref="SItemComposer"/>.
@@ -120,7 +122,26 @@ namespace Minq.Linq
 		/// <returns></returns>
 		public IEnumerable<int> Versions()
 		{
-			return _sitecoreItem.Versions;
+			if (_versions == null)
+			{
+				_versions = _sitecoreItem.Versions;
+            }
+
+			return _versions;
+		}
+
+		/// <summary>
+		/// Gets the version number of the Sitecore item.
+		/// </summary>
+		/// <returns></returns>
+		public IEnumerable<string> Languages()
+		{
+			if (_languages == null)
+			{
+				_languages = _sitecoreItem.Languages;
+			}
+
+			return _languages;
 		}
 
 		/// <summary>

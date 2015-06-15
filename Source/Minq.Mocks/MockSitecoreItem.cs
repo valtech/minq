@@ -16,6 +16,7 @@ namespace Minq.Mocks
 		private IList<ISitecoreItem> _children = new List<ISitecoreItem>();
 		private ISitecoreItem _parent;
 		private int[] _versions;
+		private string[] _languages;
 
 		/// <summary>
 		/// Initializes the class based on a <see cref="SitecoreItemKey"/>.
@@ -111,6 +112,18 @@ namespace Minq.Mocks
 			set
 			{
 				_versions = value;
+			}
+		}
+
+		public string[] Languages
+		{
+			get
+			{
+				return _languages ?? new string[0];
+			}
+			set
+			{
+				_languages = value;
 			}
 		}
 

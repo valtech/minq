@@ -61,6 +61,14 @@ namespace Minq
 		}
 
 		/// <summary>
+		/// Gets the languages of this item.
+		/// </summary>
+		string[] Languages
+		{
+			get;
+		}
+
+		/// <summary>
 		/// Gets the name of this item.
 		/// </summary>
 		string Name

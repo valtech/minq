@@ -101,6 +101,19 @@ namespace Minq.Sitecore
 		}
 
 		/// <summary>
+		/// Get the languages that this item exists in.
+		/// </summary>
+		public string[] Languages
+		{
+			get
+			{
+				return ScapiItemManager.GetContentLanguages(_scapiItem)
+					.Select(language => language.Name)
+					.ToArray();
+			}
+		}
+
+		/// <summary>
 		/// Gets all the Sitecore fields defined for this item
 		/// based on its template definition.
 		/// </summary>
