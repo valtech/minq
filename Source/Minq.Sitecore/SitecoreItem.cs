@@ -80,6 +80,9 @@ namespace Minq.Sitecore
 			}
 		}
 
+		/// <summary>
+		/// Gets the versions for this item.
+		/// </summary>
 		public int[] Versions
 		{
 			get

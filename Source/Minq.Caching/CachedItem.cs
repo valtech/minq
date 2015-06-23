@@ -36,7 +36,12 @@ namespace Minq.Caching
 			{
 				if (_parent == null)
 				{
-					_parent = _itemComposer.GetOrAdd(_sitecoreItem.Parent);
+					ISitecoreItem sitecoreParent = _sitecoreItem.Parent;
+
+					if (sitecoreParent != null)
+					{
+						_parent = _itemComposer.GetOrAdd(sitecoreParent);
+					}
 				}
 
 				return _parent;

@@ -33,11 +33,21 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets an item from the default database
+		/// </summary>
+		/// <param name="guid">The GUID of the item to get.</param>
+		/// <returns>The item.</returns>
 		public SItem Item(Guid guid)
 		{
 			return Item(guid.ToString());
 		}
 
+		/// <summary>
+		/// Gets an item from the default database
+		/// </summary>
+		/// <param name="keyOrPath">The key or path of the item to get.</param>
+		/// <returns>The item.</returns>
 		public SItem Item(string keyOrPath)
 		{
 			return _itemComposer.CreateItem(keyOrPath, _sitecoreContext.LanguageName, Db.Name);

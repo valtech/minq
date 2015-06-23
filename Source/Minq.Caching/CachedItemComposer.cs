@@ -88,17 +88,44 @@ namespace Minq.Caching
 
 		private SItem ItemFactory(SitecoreItemKey key)
 		{
-			return new CachedItem(_itemRepository.GetItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName), this);
+			ISitecoreItem sitecoreItem = _itemRepository.GetItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName);
+
+			if (sitecoreItem != null)
+			{
+				return new CachedItem(sitecoreItem, this);
+			}
+			else
+			{
+				return null;
+			}
 		}
 
 		private STemplate TemplateFactory(SitecoreTemplateKey key)
 		{
-			return new CachedTemplate(_templateRepository.GetTemplate(key.Guid.ToString(), key.DatabaseName), this);
+			ISitecoreTemplate sitecoreTemplate = _templateRepository.GetTemplate(key.Guid.ToString(), key.DatabaseName);
+
+			if (sitecoreTemplate != null)
+			{
+				return new CachedTemplate(sitecoreTemplate, this);
+			}
+			else
+			{
+				return null;
+			}
 		}
 
 		private SMedia MediaFactory(SitecoreItemKey key)
 		{
-			return new SMedia(_mediaRepository.GetMedia(key.Guid.ToString(), key.LanguageName, key.DatabaseName));
+			ISitecoreMedia sitecoreMedia = _mediaRepository.GetMedia(key.Guid.ToString(), key.LanguageName, key.DatabaseName);
+
+			if (sitecoreMedia != null)
+			{
+				return new SMedia(sitecoreMedia);
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 }
