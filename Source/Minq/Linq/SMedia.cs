@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace Minq.Linq
 {
+	/// <summary>
+	/// Represents Sitecore media library content.
+	/// </summary>
 	public class SMedia
 	{
 		private ISitecoreMedia _sitecoreMedia;
@@ -13,6 +16,11 @@ namespace Minq.Linq
 			_sitecoreMedia = sitecoreMedia;
 		}
 
+		/// <summary>
+		/// Determines if the string value of a field is encoded as raw value media data.
+		/// </summary>
+		/// <param name="value">The raw value media data.</param>
+		/// <returns>true if the raw value is media data; false otherwise.</returns>
 		public static bool IsMediaField(string value)
 		{
 			if (!String.IsNullOrEmpty(value))
@@ -26,6 +34,11 @@ namespace Minq.Linq
 			return false;
 		}
 
+		/// <summary>
+		/// Determines if the field is a media field.
+		/// </summary>
+		/// <param name="field">The field to check.</param>
+		/// <returns>true if the field is a media field; false otherwise.</returns>
 		public static bool IsMediaField(SField field)
 		{
 			if (!field.IsEmpty)
@@ -60,6 +73,11 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Converts the media to a plain old CLR object (POCO).
+		/// </summary>
+		/// <param name="type">The type to convert to.</param>
+		/// <returns>The new type.</returns>
 		public object ToType(Type type)
 		{
 			object instance = Activator.CreateInstance(type);
@@ -85,6 +103,11 @@ namespace Minq.Linq
 			return instance;
 		}
 
+		/// <summary>
+		/// Converts the media to a plain old CLR object (POCO).
+		/// </summary>
+		/// <typeparam name="T">The type to convert to.</typeparam>
+		/// <returns>The new type.</returns>
 		public T ToType<T>()
 			where T : class, new()
 		{

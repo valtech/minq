@@ -53,6 +53,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the name of the Sitecore site associated with this request (as labelled in the config).
+		/// </summary>
 		public string SiteName
 		{
 			get

@@ -53,11 +53,21 @@ namespace Minq.Linq
 			return _itemComposer.CreateItem(keyOrPath, _sitecoreContext.LanguageName, Db.Name);
 		}
 
+		/// <summary>
+		/// Gets a media item from the default database.
+		/// </summary>
+		/// <param name="guid">The GUID of the media item to get.</param>
+		/// <returns>The media.</returns>
 		public SMedia Media(Guid guid)
 		{
 			return Media(guid.ToString());
 		}
 
+		/// <summary>
+		/// Gets a media item from the default database.
+		/// </summary>
+		/// <param name="keyOrPath">The  key or path of the media item to get.</param>
+		/// <returns>The media.</returns>
 		public SMedia Media(string keyOrPath)
 		{
 			return _itemComposer.CreateMedia(keyOrPath, _sitecoreContext.LanguageName, Db.Name);

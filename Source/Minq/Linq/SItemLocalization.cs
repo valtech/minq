@@ -5,8 +5,18 @@ using System.Text;
 
 namespace Minq.Linq
 {
+	/// <summary>
+	/// Provides a set of extension methods for performing Sitecore content localization.
+	/// </summary>
 	public static class SItemLocalization
 	{
+		/// <summary>
+		/// Gets a localized version of a field using a priority based language fallback mechanism.
+		/// </summary>
+		/// <param name="source">The item to query.</param>
+		/// <param name="name">The name of the field.</param>
+		/// <param name="languageFallback">The languages to match in order of precedence.</param>
+		/// <returns>The localized field.</returns>
 		public static SField Field(this SItem source, string name, IEnumerable<string> languageFallback)
 		{
 			if (languageFallback != null && languageFallback.Any())
@@ -85,7 +95,6 @@ namespace Minq.Linq
 				}
 			}
 			
-
 			if (!anyLanguages)
 			{
 				yield return source.Field(name);

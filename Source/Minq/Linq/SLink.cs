@@ -3,12 +3,14 @@ using System.Xml.Linq;
 
 namespace Minq.Linq
 {
+	/// <summary>
+	/// Represents a HTML link/anchor to a resource.
+	/// </summary>
 	public class SLink
 	{
 		private SField _field;
 		private string _text;
 		private string _url;
-		//private string _anchor;
 		private string _queryString;
 		private string _title;
 		private string _cssClass;
@@ -20,6 +22,10 @@ namespace Minq.Linq
 		private SMedia _linkedMedia;
 		private bool _linkedMediaResolved;
 
+		/// <summary>
+		/// Creates a new HTML link/anchor.
+		/// </summary>
+		/// <param name="field">The Sitecore field to initialize the link from.</param>
 		public SLink(SField field)
 		{
 			_field = field;
@@ -28,7 +34,6 @@ namespace Minq.Linq
 
 			_text = GetDocumentAttribute(document, "text");
 			_url = GetDocumentAttribute(document, "url");
-			//_anchor = GetDocumentAttribute(document, "url");
 			_queryString = GetDocumentAttribute(document, "querystring");
 			_title = GetDocumentAttribute(document, "title");
 			_cssClass = GetDocumentAttribute(document, "class");
@@ -37,6 +42,9 @@ namespace Minq.Linq
 			_linkType = GetDocumentAttribute(document, "linktype");
 		}
 
+		/// <summary>
+		/// Gets whether this link is configured to point to Sitecore media content.
+		/// </summary>
 		public bool IsMediaLink
 		{
 			get
@@ -45,6 +53,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets whether this link is configured to point to other Sitecore site content.
+		/// </summary>
 		public bool IsInternalLink
 		{
 			get
@@ -53,6 +64,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets whether this link is configured with a hard coded external URL.
+		/// </summary>
 		public bool IsExternalLink
 		{
 			get
@@ -61,6 +75,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets whether this link normal URL or fragment based anchor.
+		/// </summary>
 		public bool IsAnchorLink
 		{
 			get
@@ -69,6 +86,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets whether this link is a mail-to command.
+		/// </summary>
 		public bool IsMailToLink
 		{
 			get
@@ -77,7 +97,9 @@ namespace Minq.Linq
 			}
 		}
 
-
+		/// <summary>
+		/// Gets whether this link is a JavaScript command.
+		/// </summary>
 		public bool IsJavaScriptLink
 		{
 			get
@@ -86,6 +108,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the text rendered between the HTML anchor start and end tags.
+		/// </summary>
 		public string Text
 		{
 			get
@@ -94,6 +119,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the URL title for the rendered HTML anchor.
+		/// </summary>
 		public string Title
 		{
 			get
@@ -102,6 +130,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the URL target for the rendered HTML anchor.
+		/// </summary>
 		public string Target
 		{
 			get
@@ -224,7 +255,7 @@ namespace Minq.Linq
 		/// <summary>
 		/// Determines if a given Sitecore field's raw value is a link.
 		/// </summary>
-		/// <param name="value">The Sitecore field to check.</param>
+		/// <param name="field">The Sitecore field to check.</param>
 		/// <returns>true if the field is a link field, false otherwise.</returns>
 		public static bool IsLinkField(SField field)
 		{

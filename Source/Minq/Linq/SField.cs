@@ -153,7 +153,14 @@ namespace Minq.Linq
 
 			return @default;
 		}
-
+		
+		/// <summary>
+		/// Converts the field to a medai item.
+		/// </summary>
+		/// <returns>The media item.</returns>
+		/// <remarks>
+		/// Will throw an exception if the field is not a media field.
+		/// </remarks>
 		public SMedia ToMedia()
 		{
 			if (!SMedia.IsMediaField(this))
@@ -176,6 +183,9 @@ namespace Minq.Linq
 			return null;
 		}
 
+		/// <summary>
+		/// Gets whether this field is empty or not.
+		/// </summary>
 		public bool IsEmpty
 		{
 			get
@@ -186,6 +196,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the field type as a .NET data type.
+		/// </summary>
 		public Type FieldType
 		{
 			get
@@ -199,6 +212,9 @@ namespace Minq.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the item that this field belongs to.
+		/// </summary>
 		public SItem Owner
 		{
 			get
