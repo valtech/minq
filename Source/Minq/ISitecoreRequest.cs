@@ -19,11 +19,17 @@ namespace Minq
 			set;
 		}
 
+		/// <summary>
+		/// When overridden in a derived class, gets the current page request mode.
+		/// </summary>
 		ISitecorePageMode PageMode
 		{
 			get;
 		}
 
+		/// <summary>
+		/// When overridden in a derived class, gets the name of the Sitecore site associated with this request.
+		/// </summary>
 		string SiteName
 		{
 			get;

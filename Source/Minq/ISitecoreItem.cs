@@ -39,6 +39,9 @@ namespace Minq
 			get;
 		}
 
+		/// <summary>
+		/// When overridden in a derived class, gets the Sitecore URL of this item.
+		/// </summary>
 		SitecoreUrl Url
 		{
 			get;

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Minq
 {
+	/// <summary>
+	/// Defines an object that represents access to the Sitecore media library.
+	/// </summary>
 	public interface ISitecoreMediaGateway
 	{
 		/// <summary>

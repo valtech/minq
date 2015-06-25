@@ -3,12 +3,21 @@ using System;
 
 namespace Minq.Caching
 {
+	/// <summary>
+	/// Provides facilities to compose/construct LINQ based Sitecore foundation classes via a caching policy.
+	/// </summary>
 	public class CachedItemComposer : SItemComposer
 	{
 		private CachedTemplateRepository _templateRepository;
 		private CachedItemRepository _itemRepository;
 		private CachedMediaRepository _mediaRepository;
 
+		/// <summary>
+		/// Creates a new composer.
+		/// </summary>
+		/// <param name="itemRepository">The repository supplying cached items.</param>
+		/// <param name="templateRepository">The repository supplying cached templates.</param>
+		/// <param name="mediaRepository">The repository supplying cached media.</param>
 		public CachedItemComposer(CachedItemRepository itemRepository, CachedTemplateRepository templateRepository, CachedMediaRepository mediaRepository)
 			: base(itemRepository, templateRepository, mediaRepository)
 		{
@@ -17,22 +26,13 @@ namespace Minq.Caching
 			_mediaRepository = mediaRepository;
         }
 
-		public override STemplate CreateTemplate(string keyOrPath, string databaseName)
-		{
-			Guid guid;
-
-			if (Guid.TryParse(keyOrPath, out guid))
-			{
-				SitecoreTemplateKey key = new SitecoreTemplateKey(guid, databaseName);
-
-				return _templateRepository.GetOrAdd(key, TemplateFactory);
-			}
-			else
-			{
-				return base.CreateTemplate(keyOrPath, databaseName);
-			}
-		}
-
+		/// <summary>
+		/// Creates a new item.
+		/// </summary>
+		/// <param name="keyOrPath">The key or path of the item.</param>
+		/// <param name="languageName">The language of the item.</param>
+		/// <param name="databaseName">The database from which to get the item.</param>
+		/// <returns>An item.</returns>
 		public override SItem CreateItem(string keyOrPath, string languageName, string databaseName)
 		{
 			Guid guid;
@@ -49,6 +49,13 @@ namespace Minq.Caching
 			}
 		}
 
+		/// <summary>
+		/// Creates a new media item.
+		/// </summary>
+		/// <param name="keyOrPath">The key or path of the media item.</param>
+		/// <param name="languageName">The language of the medai item.</param>
+		/// <param name="databaseName">The database from which to get the media item.</param>
+		/// <returns>A media item.</returns>
 		public override SMedia CreateMedia(string keyOrPath, string languageName, string databaseName)
 		{
 			Guid guid;
@@ -65,6 +72,31 @@ namespace Minq.Caching
 			}
 		}
 
+		/// <summary>
+		/// Creates a new template.
+		/// </summary>
+		/// <param name="keyOrPath">The key or path of the template.</param>
+		/// <param name="databaseName">The database from which to get the template.</param>
+		/// <returns>An item.</returns>
+		public override STemplate CreateTemplate(string keyOrPath, string databaseName)
+		{
+			Guid guid;
+
+			if (Guid.TryParse(keyOrPath, out guid))
+			{
+				SitecoreTemplateKey key = new SitecoreTemplateKey(guid, databaseName);
+
+				return _templateRepository.GetOrAdd(key, TemplateFactory);
+			}
+			else
+			{
+				return base.CreateTemplate(keyOrPath, databaseName);
+			}
+		}
+
+		/// <summary>
+		/// Clears all caches.
+		/// </summary>
 		public void ClearCaches()
 		{
 			_itemRepository.ClearCache();

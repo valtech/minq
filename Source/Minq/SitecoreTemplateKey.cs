@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Minq
 {
+	/// <summary>
+	/// Defines an object that uniquely identifies a Sitecore template.
+	/// </summary>
 	public class SitecoreTemplateKey
 	{
 		private Guid _guid;

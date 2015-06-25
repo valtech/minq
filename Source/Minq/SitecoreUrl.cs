@@ -6,34 +6,60 @@ using System.Web;
 
 namespace Minq
 {
+	/// <summary>
+	/// Defines an object that represents a URL (typically but not necessarily to Sitecore content).
+	/// </summary>
 	public class SitecoreUrl
 	{
 		private Uri _sitecoreUrl;
 		private HttpContextBase _context;
 
+		/// <summary>
+		/// Creates a new URL from the supplied path. 
+		/// </summary>
+		/// <param name="sitecoreUrl">The path to the URL.</param>
 		public SitecoreUrl(string sitecoreUrl)
 			: this(sitecoreUrl, TryGetContext())
 		{
 			
 		}
 
+		/// <summary>
+		/// Creates a new URL from the supplied path using HTTP context information to determine the missing left part.
+		/// </summary>
+		/// <param name="sitecoreUrl">The path to the URL.</param>
+		/// <param name="context">The HTTP context.</param>
 		public SitecoreUrl(string sitecoreUrl, HttpContext context)
 			: this(sitecoreUrl, TryGetContext(context))
 		{
 		}
 
+		/// <summary>
+		/// Creates a new URL from the supplied path. 
+		/// </summary>
+		/// <param name="sitecoreUrl">The path to the URL.</param>
 		public SitecoreUrl(Uri sitecoreUrl)
 			: this(sitecoreUrl, TryGetContext())
 		{
 			
 		}
 
+		/// <summary>
+		/// Creates a new URL from the supplied path using HTTP context information to determine the missing left part.
+		/// </summary>
+		/// <param name="sitecoreUrl">The path to the URL.</param>
+		/// <param name="context">The HTTP context.</param>
 		public SitecoreUrl(Uri sitecoreUrl, HttpContext context)
 			: this(sitecoreUrl, TryGetContext(context))
 		{
 
 		}
 
+		/// <summary>
+		/// Creates a new URL from the supplied path using HTTP context information to determine the missing left part.
+		/// </summary>
+		/// <param name="sitecoreUrl">The path to the URL.</param>
+		/// <param name="context">The HTTP context.</param>
 		public SitecoreUrl(string sitecoreUrl, HttpContextBase context)
 		{
 			if (!String.IsNullOrEmpty(sitecoreUrl))
@@ -47,13 +73,18 @@ namespace Minq
 						sitecoreUrl = authority + sitecoreUrl;
 					}
 				}
-					
+				
 				_sitecoreUrl = new Uri(sitecoreUrl);
 
 				_context = context;
 			}
 		}
 
+		/// <summary>
+		/// Creates a new URL from the supplied path using HTTP context information to determine the missing left part.
+		/// </summary>
+		/// <param name="sitecoreUrl">The path to the URL.</param>
+		/// <param name="context">The HTTP context.</param>
 		public SitecoreUrl(Uri sitecoreUrl, HttpContextBase context)
 		{
 			_sitecoreUrl = sitecoreUrl;
@@ -179,6 +210,10 @@ namespace Minq
 			}
 		}
 
+		/// <summary>
+		/// Returns the relative URL as a string.
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return Relative;

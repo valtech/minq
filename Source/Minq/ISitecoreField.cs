@@ -23,6 +23,9 @@ namespace Minq
 		/// </summary>
 		string Value(bool fallbackOnStandardValue, bool fallbackOnDefaultTemplateValue);
 
+		/// <summary>
+		///  When overridden in a derived class, gets the field template associated with this field.
+		/// </summary>
 		ISitecoreFieldTemplate Template
 		{
 			get;

@@ -92,13 +92,5 @@ namespace Minq.Tests.Caching
 			Assert.That(item1.Items().ElementAt(0), Is.SameAs(child));
 			Assert.That(item2.Items().ElementAt(0), Is.SameAs(child));
 		}
-
-		[Test]
-		public void MediaCaching()
-		{
-			SitecoreItemKey itemKey = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web");
-
-			
-		}
 	}
 }

@@ -25,6 +25,9 @@ namespace Minq
 			_childType = childType;
 		}
 
+		/// <summary>
+		/// Initializes the class for use based on a given child type.
+		/// </summary>
 		public SitecoreChildTypeAttribute()
 			: this(null)
 		{

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Minq
 {
+	/// <summary>
+	/// Defines an object that represents the current page request mode.
+	/// </summary>
 	public interface ISitecorePageMode
 	{
 		/// <summary>

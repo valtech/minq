@@ -11,6 +11,10 @@ namespace Minq.Linq
 	{
 		private ISitecoreMedia _sitecoreMedia;
 
+		/// <summary>
+		///  Initializes the class for use based on a <see cref="ISitecoreItem"/>.
+		/// </summary>
+		/// <param name="sitecoreMedia">The low level Sitecore media item that represents this LINQ media item.</param>
 		public SMedia(ISitecoreMedia sitecoreMedia)
 		{
 			_sitecoreMedia = sitecoreMedia;

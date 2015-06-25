@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace Minq.Caching
 {
+	/// <summary>
+	/// Defines an object that represents a cached Sitecore LINQ media item.
+	/// </summary>
 	class CachedTemplate : STemplate
 	{
 		private IReadOnlyList<STemplate> _baseTemplates;

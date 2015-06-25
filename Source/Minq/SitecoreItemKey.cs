@@ -16,24 +16,6 @@ namespace Minq
 		private string _databaseName;
 		private string _languageName;
 
-		/*
-		/// <summary>
-		/// Initializes the class for use based on a Sitecore item guid and the language/database in the given <see cref="ISitecoreContext"/>.
-		/// </summary>
-		/// <param name="guid">The Sitecore item's guid.</param>
-		/// <param name="context">A Sitecore context.</param>
-		public SitecoreItemKey(Guid guid, ISitecoreContext context)
-		{
-			if (context == null)
-			{
-				throw new ArgumentNullException("context");
-			}
-
-			_guid = guid;
-			_languageName = context.LanguageName;
-			_databaseName = context.DatabaseName;
-		}*/
-
 		/// <summary>
 		/// Initializes the class for use based on a Sitecore item guid, language and database.
 		/// </summary>
