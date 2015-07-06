@@ -8,6 +8,9 @@ namespace Minq.Caching
 
 		TValue GetOrAdd(TKey key, TValue value);
 
+		/// <summary>
+		/// When overridden in a derived class, clears the repository cache.
+		/// </summary>
 		void ClearCache();
     }
 }

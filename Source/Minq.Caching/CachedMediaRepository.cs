@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Minq.Caching
 {
 	/// <summary>
-	/// Defines an object that represents a repository of cached media.
+	/// Defines an object that represents a repository of cached Sitecore media.
 	/// </summary>
 	public class CachedMediaRepository : ISitecoreMediaGateway, ICachedRepository<SitecoreItemKey, SMedia>
 	{
@@ -31,7 +31,7 @@ namespace Minq.Caching
 		/// </summary>
 		/// <param name="keyOrPath">The key or path identifying the item to return.</param>
 		/// <param name="languageName">The language of the item to return.</param>
-		/// <param name="databaseName">Thedatabse of the item to return.</param>
+		/// <param name="databaseName">The databse of the item to return.</param>
 		/// <returns>A <see cref="ISitecoreItem" />.</returns>
 		public ISitecoreMedia GetMedia(string keyOrPath, string languageName, string databaseName)
 		{
@@ -64,7 +64,7 @@ namespace Minq.Caching
 		/// <param name="factory">The factory to use to create the media item is not in the cache.</param>
 		/// <returns>The cached media item.</returns>
 		/// <remakrs>
-		/// If the cost of creating the media item is comparable to the cost of creating the factory, do not use this version of the method.
+		/// If the cost of creating the media item is comparable to the cost of creating the factory do not use this version of the method.
 		/// </remakrs>
 		public SMedia GetOrAdd(SitecoreItemKey key, Func<SitecoreItemKey, SMedia> factory)
 		{

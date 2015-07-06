@@ -107,6 +107,16 @@ namespace Minq.Linq
 				return true;
 			}
 
+			if (value.EndsWith("Z"))
+			{
+				if (TryParseRFC1123DateTime(value.TrimEnd('Z'), out result))
+				{
+					result = new DateTime(result.Ticks, DateTimeKind.Utc);
+
+					return true;
+				}
+			}
+
 			int colon = value.IndexOf(':');
 
 			if (colon != -1)

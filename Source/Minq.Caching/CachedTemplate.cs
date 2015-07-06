@@ -22,6 +22,10 @@ namespace Minq.Caching
 			_itemComposer = itemComposer;
 		}
 
+		/// <summary>
+		/// Gets the base templates that this template inherits from.
+		/// </summary>
+		/// <returns>An enumerable of <see cref="STemplate" /> objects.</returns>
 		public override IEnumerable<STemplate> BaseTemplates()
 		{
 			if (_baseTemplates == null)
@@ -34,6 +38,11 @@ namespace Minq.Caching
 			return _baseTemplates;
 		}
 
+		/// <summary>
+		/// Determines if this template is based on the template with the given GUID.
+		/// </summary>
+		/// <param name="templateGuid">The GUID of the inherited template to test.</param>
+		/// <returns>true if this template is based on the supplied template GUID; false otherwise.</returns>
 		public override bool IsBasedOn(Guid templateGuid)
 		{
 			if (_baseTemplateDictionary == null)
