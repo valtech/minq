@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ScapiMediaItem = global::Sitecore.Data.Items.MediaItem;
 using ScapiMediaManager = Sitecore.Resources.Media.MediaManager;
 using ScapiMediaUrlOptions = Sitecore.Resources.Media.MediaUrlOptions;

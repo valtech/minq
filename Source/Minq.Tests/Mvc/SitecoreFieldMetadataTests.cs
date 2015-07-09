@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using Minq.Mvc;
 using System.Web.Mvc;
-using Minq.Mocks;
 
 namespace Minq.Tests.Mvc
 {

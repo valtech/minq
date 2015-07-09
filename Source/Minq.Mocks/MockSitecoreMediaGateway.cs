@@ -17,7 +17,7 @@ namespace Minq.Mocks
 		/// </summary>
 		/// <param name="keyOrPath">The key or path identifying the media to return.</param>
 		/// <param name="languageName">The language of the media to return.</param>
-		/// <param name="databaseName">Thedatabse of the media to return.</param>
+		/// <param name="databaseName">Thedatabase of the media to return.</param>
 		/// <returns>A <see cref="ISitecoreMedia" />.</returns>
 		public ISitecoreMedia GetMedia(string keyOrPath, string languageName, string databaseName)
 		{

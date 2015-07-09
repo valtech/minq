@@ -1,9 +1,5 @@
 ﻿using Minq.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Minq.Caching
 {
@@ -31,7 +27,7 @@ namespace Minq.Caching
 		/// </summary>
 		/// <param name="keyOrPath">The key or path identifying the item to return.</param>
 		/// <param name="languageName">The language of the item to return.</param>
-		/// <param name="databaseName">The databse of the item to return.</param>
+		/// <param name="databaseName">The database of the item to return.</param>
 		/// <returns>A <see cref="ISitecoreItem" />.</returns>
 		public ISitecoreMedia GetMedia(string keyOrPath, string languageName, string databaseName)
 		{

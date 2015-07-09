@@ -24,7 +24,7 @@ namespace Minq.Mocks
 		/// </summary>
 		/// <param name="keyOrPath">The key or path identifying the item to return.</param>
 		/// <param name="languageName">The language of the item to return.</param>
-		/// <param name="databaseName">Thedatabse of the item to return.</param>
+		/// <param name="databaseName">Thedatabase of the item to return.</param>
 		/// <returns>A <see cref="ISitecoreItem" />.</returns>
 		public ISitecoreItem GetItem(string keyOrPath, string languageName, string databaseName)
 		{

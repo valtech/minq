@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ScapiDatabase = global::Sitecore.Data.Database;
 using ScapiFactory = global::Sitecore.Configuration.Factory;
 using ScapiTemplateManager = Sitecore.Data.Managers.TemplateManager;

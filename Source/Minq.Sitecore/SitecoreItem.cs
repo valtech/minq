@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using ScapiItem = global::Sitecore.Data.Items.Item;
 using ScapiTemplateFieldItem = Sitecore.Data.Items.TemplateFieldItem;
 using ScapiStandardValuesManager = Sitecore.Data.StandardValuesManager;
@@ -12,7 +11,6 @@ using ScapiVersion = global::Sitecore.Data.Version;
 using ScapiLinkManager = global::Sitecore.Links.LinkManager;
 using ScapiUrlOptions = global::Sitecore.Links.UrlOptions;
 using ScapaLanguageEmbedding = global::Sitecore.Links.LanguageEmbedding;
-using System.Web;
 
 namespace Minq.Sitecore
 {

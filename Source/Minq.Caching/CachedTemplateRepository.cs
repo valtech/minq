@@ -26,7 +26,7 @@ namespace Minq.Caching
 		/// Returns the Sitecore template for the given key or path.
 		/// </summary>
 		/// <param name="keyOrPath">The key or path identifying the template to return.</param>
-		/// <param name="databaseName">The databse of the template to return.</param>
+		/// <param name="databaseName">The database of the template to return.</param>
 		/// <returns></returns>
 		public ISitecoreTemplate GetTemplate(string keyOrPath, string databaseName)
 		{
