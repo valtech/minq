@@ -36,8 +36,15 @@ namespace Minq.Linq
 		/// <returns>The value of the field.</returns>
 		public TType Value<TType>()
 		{
-			return (TType)Value(typeof(TType));
-		}
+			Type type = typeof(TType);
+
+            if (type == typeof(string))
+			{
+				return (TType)Value(type, String.Empty);
+			}
+
+			return Value<TType>(default(TType));
+        }
 
 		/// <summary>
 		/// Gets the value of the field as the specified type, substituting a default value
