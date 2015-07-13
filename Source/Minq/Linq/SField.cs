@@ -24,6 +24,11 @@ namespace Minq.Linq
 			_owner = owner;
 		}
 
+		/// <summary>
+		/// Indicates whether the specified field is null or an empty raw value.
+		/// </summary>
+		/// <param name="field">The field to test.</param>
+		/// <returns>true if the field parameter is null or an empty raw value; otherwise, false.</returns>
 		public static bool IsNullOrEmpty(SField field)
 		{
 			return field == null || String.IsNullOrEmpty(field.Value<string>());
