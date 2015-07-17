@@ -43,13 +43,13 @@ namespace Minq.Linq
 		{
 			Type type = typeof(TType);
 
-            if (type == typeof(string))
+			if (type == typeof(string))
 			{
 				return (TType)Value(type, String.Empty);
 			}
 
 			return Value<TType>(default(TType));
-        }
+		}
 
 		/// <summary>
 		/// Gets the value of the field as the specified type, substituting a default value
@@ -165,7 +165,7 @@ namespace Minq.Linq
 
 			return @default;
 		}
-		
+
 		/// <summary>
 		/// Converts the field to a medai item.
 		/// </summary>
