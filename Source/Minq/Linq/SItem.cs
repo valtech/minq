@@ -156,21 +156,34 @@ namespace Minq.Linq
 		}
 
 		/// <summary>
-		/// Returns a collection of the child items of this item or document, in order.
+		/// Returns a collection of the child items of this item or document including unversioned items, in order.
 		/// </summary>
 		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="SItem"/> containing the child items of this item, in order.</returns>
-		public virtual IEnumerable<SItem> Items()
+		public virtual IEnumerable<SItem> ItemsIncludingUnversioned()
 		{
 			foreach (ISitecoreItem child in _sitecoreItem.Children)
 			{
 				if (child != null)
 				{
-					int[] versions = child.Versions;
+					yield return new SItem(child, _itemComposer);
+                }
+			}
+		}
 
-					if (versions != null && versions.Length > 0)
-					{
-						yield return new SItem(child, _itemComposer);
-					}
+		/// <summary>
+		/// Returns a collection of the child items of this item or document, in order.
+		/// </summary>
+		/// <remarks>
+		/// Unversioned items are not returned.
+		/// </remarks>
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="SItem"/> containing the child items of this item, in order.</returns>
+		public virtual IEnumerable<SItem> Items()
+		{
+			foreach (SItem item in ItemsIncludingUnversioned())
+			{
+				if (item.Versions().Any())
+				{
+					yield return item;
 				}
 			}
 		}

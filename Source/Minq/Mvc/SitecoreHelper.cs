@@ -148,6 +148,31 @@ namespace Minq.Mvc
 			return IfPageEditor(ifNormalPagePredicate());
 		}
 
+		public IHtmlString IfPreview(IHtmlString htmlString)
+		{
+			if (_pageMode.IsPreview)
+			{
+				return htmlString;
+			}
+
+			return null;
+		}
+
+		public IHtmlString IfPreview(Func<object, object> htmlPredicate)
+		{
+			if (_pageMode.IsPreview)
+			{
+				object helperResult = htmlPredicate(null);
+
+				if (helperResult != null)
+				{
+					return new HtmlString(helperResult.ToString());
+				}
+			}
+
+			return null;
+		}
+
 		public IHtmlString IfNormalPage(IHtmlString htmlString)
 		{
 			if (_pageMode.IsNormal)

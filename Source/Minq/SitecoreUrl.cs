@@ -136,7 +136,7 @@ namespace Minq
 
 				if (_context == null)
 				{
-					throw new Exception("Cannot determine relative URL as there is no HTTP context associated with this URL use url.For(HttpContext).Relative");
+					throw new Exception("Cannot determine relative URL as there is no HTTP context associated with this URL.");
 				}
 
 				HttpRequestBase request = _context.Request;

@@ -30,10 +30,10 @@ namespace Minq.Caching
 		}
 
 		/// <summary>
-		/// Returns a collection of the cached child items of this item or document, in order.
+		/// Returns a collection of the cached child items including unversioned items of this item or document, in order.
 		/// </summary>
 		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="SItem"/> containing the child items of this item, in order.</returns>
-		public override IEnumerable<SItem> Items()
+		public override IEnumerable<SItem> ItemsIncludingUnversioned()
 		{
 			if (_items == null)
 			{
