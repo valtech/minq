@@ -117,9 +117,17 @@ namespace Minq.Mvc
 			return new MvcHtmlString(tagBuilder.ToString(TagRenderMode.SelfClosing));
 		}
 
-		public IHtmlString IfPageEditor(IHtmlString htmlString)
+		private bool IsAuthoring
 		{
-			if (_pageMode.IsPageEditor)
+			get
+			{
+				return _pageMode.IsPageEditor;
+			}
+		}
+
+		public IHtmlString IfAuthoring(IHtmlString htmlString)
+		{
+			if (IsAuthoring)
 			{
 				return htmlString;
 			}
@@ -127,40 +135,9 @@ namespace Minq.Mvc
 			return null;
 		}
 
-		public IHtmlString IfPageEditor(Func<object, object> htmlPredicate)
+		public IHtmlString IfAuthoring(Func<object, object> htmlPredicate)
 		{
-			if (_pageMode.IsPageEditor)
-			{
-				object helperResult = htmlPredicate(null);
-
-                if (helperResult != null)
-				{
-					return new HtmlString(helperResult.ToString());
-				}
-			}
-
-			return null;
-		}
-
-		public IHtmlString IfPageEditor<THtmlString>(Func<THtmlString> ifNormalPagePredicate)
-			where THtmlString : IHtmlString
-		{
-			return IfPageEditor(ifNormalPagePredicate());
-		}
-
-		public IHtmlString IfPreview(IHtmlString htmlString)
-		{
-			if (_pageMode.IsPreview)
-			{
-				return htmlString;
-			}
-
-			return null;
-		}
-
-		public IHtmlString IfPreview(Func<object, object> htmlPredicate)
-		{
-			if (_pageMode.IsPreview)
+			if (IsAuthoring)
 			{
 				object helperResult = htmlPredicate(null);
 
@@ -173,9 +150,23 @@ namespace Minq.Mvc
 			return null;
 		}
 
-		public IHtmlString IfNormalPage(IHtmlString htmlString)
+		public IHtmlString IfAuthoring<THtmlString>(Func<THtmlString> htmlPredicate)
+			where THtmlString : IHtmlString
 		{
-			if (_pageMode.IsNormal)
+			return IfAuthoring(htmlPredicate());
+		}
+
+		private bool IsDelivering
+		{
+			get
+			{
+				return _pageMode.IsNormal || _pageMode.IsPreview;
+			}
+		}
+		
+		public IHtmlString IfDelivering(IHtmlString htmlString)
+		{
+			if (IsDelivering)
 			{
 				return htmlString;
 			}
@@ -183,9 +174,9 @@ namespace Minq.Mvc
 			return null;
 		}
 
-		public IHtmlString IfNormalPage(Func<object, object> htmlPredicate)
+		public IHtmlString IfDelivering(Func<object, object> htmlPredicate)
 		{
-			if (_pageMode.IsNormal)
+			if (IsDelivering)
 			{
 				object helperResult = htmlPredicate(null);
 
@@ -198,10 +189,10 @@ namespace Minq.Mvc
 			return null;
 		}
 
-		public IHtmlString IfNormalPage<THtmlString>(Func<THtmlString> ifNormalPagePredicate)
+		public IHtmlString IfDelivering<THtmlString>(Func<THtmlString> htmlPredicate)
 			where THtmlString : IHtmlString
 		{
-			return IfNormalPage(ifNormalPagePredicate());
+			return IfDelivering(htmlPredicate());
 		}
 
 		/// <summary>
@@ -276,12 +267,6 @@ namespace Minq.Mvc
 			return PageEditor(htmlPredicate, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
 		}
 
-		[Obsolete("Use PageEditor method instead. This method will be phased out.")]
-		public IHtmlString Editor(Func<object, object> htmlPredicate, object htmlAttributes = null)
-		{
-			return PageEditor(htmlPredicate, htmlAttributes);
-        }
-
 		private IHtmlString PageEditor(Func<object, object> htmlPredicate, IDictionary<string, object> htmlAttributes)
 		{
 			SitecoreFieldAttributeDictionary editorAttributes = SitecoreFieldAttributeDictionary.FromAttributes(htmlAttributes);
@@ -290,14 +275,90 @@ namespace Minq.Mvc
 
 			ISitecoreEditorMarkup markup = _markupStrategy.GetEditorMarkup(metadata, editorAttributes);
 
-            object helperResult = htmlPredicate(_viewData.Model);
+			object helperResult = htmlPredicate(_viewData.Model);
 
-            if (helperResult != null)
+			if (helperResult != null)
 			{
-                return new HtmlString(markup.GetHtml(helperResult.ToString()));
+				return new HtmlString(markup.GetHtml(helperResult.ToString()));
 			}
 
-            return new HtmlString(markup.GetHtml(null));
+			return new HtmlString(markup.GetHtml(null));
 		}
+
+		#region Obsolete
+		[Obsolete("USe IfPageEditor instead of IfAuthoring.")]
+		public IHtmlString IfPageEditor(IHtmlString htmlString)
+		{
+			if (_pageMode.IsPageEditor)
+			{
+				return htmlString;
+			}
+
+			return null;
+		}
+
+		[Obsolete("USe IfPageEditor instead of IfAuthoring.")]
+		public IHtmlString IfPageEditor(Func<object, object> htmlPredicate)
+		{
+			if (_pageMode.IsPageEditor)
+			{
+				object helperResult = htmlPredicate(null);
+
+				if (helperResult != null)
+				{
+					return new HtmlString(helperResult.ToString());
+				}
+			}
+
+			return null;
+		}
+
+		[Obsolete("USe IfPageEditor instead of IfAuthoring.")]
+		public IHtmlString IfPageEditor<THtmlString>(Func<THtmlString> htmlPredicate)
+			where THtmlString : IHtmlString
+		{
+			return IfPageEditor(htmlPredicate());
+		}
+
+		[Obsolete("USe IfDelivering instead of IfNormalPage.")]
+		public IHtmlString IfNormalPage(IHtmlString htmlString)
+		{
+			if (_pageMode.IsNormal)
+			{
+				return htmlString;
+			}
+
+			return null;
+		}
+
+		[Obsolete("USe IfDelivering instead of IfNormalPage.")]
+		public IHtmlString IfNormalPage(Func<object, object> htmlPredicate)
+		{
+			if (_pageMode.IsNormal)
+			{
+				object helperResult = htmlPredicate(null);
+
+				if (helperResult != null)
+				{
+					return new HtmlString(helperResult.ToString());
+				}
+			}
+
+			return null;
+		}
+
+		[Obsolete("USe IfDelivering instead of IfNormalPage.")]
+		public IHtmlString IfNormalPage<THtmlString>(Func<THtmlString> htmlPredicate)
+			where THtmlString : IHtmlString
+		{
+			return IfNormalPage(htmlPredicate());
+		}
+
+		[Obsolete("Use PageEditor method instead. This method will be phased out.")]
+		public IHtmlString Editor(Func<object, object> htmlPredicate, object htmlAttributes = null)
+		{
+			return PageEditor(htmlPredicate, htmlAttributes);
+        }
+		#endregion
 	}
 }
