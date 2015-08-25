@@ -124,19 +124,27 @@ namespace Minq.Sitecore
 			{
 				if (_fields == null)
 				{
-					_fields = new Dictionary<string, ISitecoreField>(StringComparer.OrdinalIgnoreCase);
-
-					foreach (ScapiTemplateFieldItem scapiTemplateFieldItem in _scapiItem.Template.Fields)
-					{
-						string name = scapiTemplateFieldItem.Name;
-
-						_fields[name] = new SitecoreField(_scapiItem.Fields[name]);
-					}
+					_fields = GetFieldDictionary();
 				}
 
 				return _fields;
 			}
 		}
+
+		private Dictionary<string, ISitecoreField> GetFieldDictionary()
+		{
+			Dictionary<string, ISitecoreField> fields = new Dictionary<string, ISitecoreField>(StringComparer.OrdinalIgnoreCase);
+
+			foreach (ScapiTemplateFieldItem scapiTemplateFieldItem in _scapiItem.Template.Fields)
+			{
+				string name = scapiTemplateFieldItem.Name;
+
+				fields[name] = new SitecoreField(_scapiItem.Fields[name]);
+			}
+
+			return fields;
+        }
+
 
 		/// <summary>
 		/// Gets all the Sitecore children defined for this item.

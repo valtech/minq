@@ -195,6 +195,45 @@ namespace Minq.Mvc
 			return IfDelivering(htmlPredicate());
 		}
 
+		private bool IsPreviewing
+		{
+			get
+			{
+				return _pageMode.IsPreview;
+			}
+		}
+
+		public IHtmlString IfPreviewing(IHtmlString htmlString)
+		{
+			if (IsPreviewing)
+			{
+				return htmlString;
+			}
+
+			return null;
+		}
+
+		public IHtmlString IfPreviewing(Func<object, object> htmlPredicate)
+		{
+			if (IsPreviewing)
+			{
+				object helperResult = htmlPredicate(null);
+
+				if (helperResult != null)
+				{
+					return new HtmlString(helperResult.ToString());
+				}
+			}
+
+			return null;
+		}
+
+		public IHtmlString IfPreviewing<THtmlString>(Func<THtmlString> htmlPredicate)
+			where THtmlString : IHtmlString
+		{
+			return IfPreviewing(htmlPredicate());
+		}
+
 		/// <summary>
 		/// Returns the correct markup for a Sitecore hyperlink field for each property in the object that is represented by the specified expression.
 		/// </summary>

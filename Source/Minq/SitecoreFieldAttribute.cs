@@ -6,7 +6,7 @@ namespace Minq
 	/// <summary>
 	/// When applied to the member of a type, specifies that the member is a Sitecore field and is serializable by the Sitecore engine.
 	/// </summary>
-	public class SitecoreFieldAttribute : Attribute
+	public sealed class SitecoreFieldAttribute : Attribute
 	{
 		private string _name;
 
@@ -16,6 +16,11 @@ namespace Minq
 		/// <param name="name">The name of the Sitecore field.</param>
 		public SitecoreFieldAttribute(string name)
 		{
+			if (String.IsNullOrEmpty(name))
+			{
+				throw new ArgumentNullException("name");
+			}
+
 			_name = name;
 		}
 
