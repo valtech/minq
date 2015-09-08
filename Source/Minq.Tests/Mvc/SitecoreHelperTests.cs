@@ -46,7 +46,7 @@ namespace Minq.Tests.Mvc
 		public void TestFieldFor()
 		{
 			// Arrange
-			TestModel model = new TestModel();
+			TestModel model = new TestModel { Key = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web") };
 
 			Mock<ISitecoreFieldMarkup> markup = new Mock<ISitecoreFieldMarkup>();
 
@@ -94,7 +94,7 @@ namespace Minq.Tests.Mvc
 		public void TestLinkForAndFieldForIfEmpty(string linkContent, string html)
 		{
 			// Arrange
-			TestModel model = new TestModel { Other = "Hello" };
+			TestModel model = new TestModel { Other = "Hello", Key = new SitecoreItemKey(Guid.NewGuid(), "en-GB", "web") };
 
 			Mock<ISitecoreMarkupStrategy> markupStrategy = new Mock<ISitecoreMarkupStrategy>();
 

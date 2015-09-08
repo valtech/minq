@@ -69,9 +69,23 @@ namespace Minq
 
 		public static bool operator ==(SitecoreItemKey a, SitecoreItemKey b)
 		{
-			return (object)a != null && (object)b != null && a._guid == b._guid
-				&& String.Equals(a._databaseName, b._databaseName, StringComparison.OrdinalIgnoreCase)
-				&& String.Equals(a._languageName, b._languageName, StringComparison.OrdinalIgnoreCase);
+			if (Object.ReferenceEquals(a, null))
+			{
+				return Object.ReferenceEquals(b, null);
+			}
+			else
+			{
+				if (Object.ReferenceEquals(b, null))
+				{
+					return false;
+				}
+				else
+				{
+					return a._guid == b._guid
+						&& String.Equals(a._databaseName, b._databaseName, StringComparison.OrdinalIgnoreCase)
+						&& String.Equals(a._languageName, b._languageName, StringComparison.OrdinalIgnoreCase);
+				}
+            }
 		}
 
 		public static bool operator !=(SitecoreItemKey a, SitecoreItemKey b)

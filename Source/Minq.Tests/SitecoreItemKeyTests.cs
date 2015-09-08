@@ -15,6 +15,15 @@ namespace Minq.Tests
 		}
 
 		[Test]
+		public void TestNullEquality()
+		{
+			SitecoreItemKey key1 = null;
+			SitecoreItemKey key2 = null;
+
+			Assert.That(key1 == key2, Is.EqualTo(true));
+		}
+
+		[Test]
 		public void TestEqualsOperator()
 		{
 			// Arrange

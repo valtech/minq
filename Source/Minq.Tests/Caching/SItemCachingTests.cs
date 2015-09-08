@@ -75,6 +75,7 @@ namespace Minq.Tests.Caching
 			mockItem.AddChild(mockChild);
 
 			_mockItemGateway.AddItem(mockItem);
+			_mockItemGateway.AddItem(mockChild);
 
 			// Act
 			SItem item1 = _composer.CreateItem(itemKey.Guid.ToString(), itemKey.LanguageName, itemKey.DatabaseName);
@@ -82,6 +83,7 @@ namespace Minq.Tests.Caching
 			SItem child = _composer.CreateItem(childKey.Guid.ToString(), childKey.LanguageName, childKey.DatabaseName);
 
 			// Assert
+			Assert.That(child, Is.Not.Null);
 			Assert.That(item1, Is.Not.Null);
 			Assert.That(item2, Is.Not.Null);
 			Assert.That(item1, Is.SameAs(item2));
