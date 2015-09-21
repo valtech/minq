@@ -98,7 +98,7 @@ namespace Minq.Mvc
 
 			if (parts.Length > 1)
 			{
-				return DataBinder.Eval(model, String.Concat(parts.Take(parts.Length - 1)));
+				return DataBinder.Eval(model, String.Join(".", parts.Take(parts.Length - 1)));
 			}
 
 			return model;
