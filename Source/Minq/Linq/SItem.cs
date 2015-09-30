@@ -343,7 +343,7 @@ namespace Minq.Linq
 						{
 							string s = field.Value<string>(null);
 
-							if (SMedia.IsMediaField(s))
+							if (SMedia.IsImageField(s) || SMedia.IsFileField(s))
 							{
 								SMedia media = field.ToMedia();
 

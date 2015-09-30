@@ -115,7 +115,7 @@ namespace Minq.Linq
 			}
 			else if (type == typeof(SMedia))
 			{
-				if (SMedia.IsMediaField(this))
+				if (SMedia.IsImageField(this))
 				{
 					return ToMedia();
 				}
@@ -175,24 +175,36 @@ namespace Minq.Linq
 		/// </remarks>
 		public SMedia ToMedia()
 		{
-			if (!SMedia.IsMediaField(this))
+			if (SMedia.IsImageField(this))
 			{
-				throw new Exception("Not a media field");
-			}
+				XElement element = XDocument.Parse(Value<string>()).Descendants("image").First();
 
-			XElement element = XDocument.Parse(Value<string>()).Descendants("image").First();
-
-			if (element != null)
-			{
-				XAttribute attribute = element.Attribute("mediaid");
-
-				if (attribute != null && attribute.Value.Length > 0)
+				if (element != null)
 				{
-					return _owner.Composer.CreateMedia(attribute.Value, _owner.LanguageName, _owner.Db.Name);
+					XAttribute attribute = element.Attribute("mediaid");
+
+					if (attribute != null && attribute.Value.Length > 0)
+					{
+						return _owner.Composer.CreateMedia(attribute.Value, _owner.LanguageName, _owner.Db.Name);
+					}
+				}
+			}
+			else if (SMedia.IsFileField(this))
+			{
+				XElement element = XDocument.Parse(Value<string>()).Descendants("file").First();
+
+				if (element != null)
+				{
+					XAttribute attribute = element.Attribute("mediaid");
+
+					if (attribute != null && attribute.Value.Length > 0)
+					{
+						return _owner.Composer.CreateMedia(attribute.Value, _owner.LanguageName, _owner.Db.Name);
+					}
 				}
 			}
 
-			return null;
+			throw new Exception("Not a media field: " + Value<string>());
 		}
 
 		/// <summary>

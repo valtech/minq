@@ -25,11 +25,24 @@ namespace Minq.Linq
 		/// </summary>
 		/// <param name="value">The raw value media data.</param>
 		/// <returns>true if the raw value is media data; false otherwise.</returns>
-		public static bool IsMediaField(string value)
+		public static bool IsImageField(string value)
 		{
 			if (!String.IsNullOrEmpty(value))
 			{
 				if (value.StartsWith("<image ") && value.EndsWith(">"))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public static bool IsFileField(string value)
+		{
+			if (!String.IsNullOrEmpty(value))
+			{
+				if (value.StartsWith("<file ") && value.EndsWith(">"))
 				{
 					return true;
 				}
@@ -43,13 +56,25 @@ namespace Minq.Linq
 		/// </summary>
 		/// <param name="field">The field to check.</param>
 		/// <returns>true if the field is a media field; false otherwise.</returns>
-		public static bool IsMediaField(SField field)
+		public static bool IsImageField(SField field)
 		{
 			if (!field.IsEmpty)
 			{
 				string value = field.Value<string>();
 
-				return IsMediaField(value);
+				return IsImageField(value);
+			}
+
+			return false;
+		}
+
+		public static bool IsFileField(SField field)
+		{
+			if (!field.IsEmpty)
+			{
+				string value = field.Value<string>();
+
+				return IsFileField(value);
 			}
 
 			return false;
