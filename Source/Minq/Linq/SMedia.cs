@@ -51,6 +51,16 @@ namespace Minq.Linq
 			return false;
 		}
 
+		public static bool IsMediaField(string value)
+		{
+			return IsImageField(value) || IsFileField(value);
+        }
+
+		public static bool IsMediaField(SField field)
+		{
+			return IsImageField(field) || IsFileField(field);
+		}
+
 		/// <summary>
 		/// Determines if the field is a media field.
 		/// </summary>

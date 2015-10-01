@@ -115,7 +115,7 @@ namespace Minq.Linq
 			}
 			else if (type == typeof(SMedia))
 			{
-				if (SMedia.IsImageField(this))
+				if (SMedia.IsMediaField(this))
 				{
 					return ToMedia();
 				}
