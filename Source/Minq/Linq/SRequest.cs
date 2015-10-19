@@ -33,7 +33,14 @@ namespace Minq.Linq
 			{
 				SitecoreItemKey key = _sitecoreRequest.ItemKey;
 
-				return _itemComposer.CreateItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName);
+				if (key != null)
+				{
+					return _itemComposer.CreateItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName);
+				}
+				else
+				{
+					return null;
+				}
 			}
 			set
 			{

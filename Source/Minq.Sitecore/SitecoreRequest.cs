@@ -17,7 +17,14 @@ namespace Minq.Sitecore
 			{
 				ScapiItem item = ScapiContext.Item;
 
-				return new SitecoreItemKey(item.ID.Guid, item.Language.Name, item.Database.Name);
+				if (item != null)
+				{
+					return new SitecoreItemKey(item.ID.Guid, item.Language.Name, item.Database.Name);
+				}
+				else
+				{
+					return null;
+				}
 			}
 			set
 			{
