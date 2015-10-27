@@ -8,18 +8,29 @@ using System.Collections.Specialized;
 
 namespace Minq.Mvc.Linq
 {
+	/// <summary>
+	/// Defines an object that reperesenting an MVC controller rendering.
+	/// </summary>
 	public class SRendering
 	{
 		private SItemComposer _composer;
 		private NameValueCollection _parameters;
 		private ISitecoreRendering _rendering;
 
+		/// <summary>
+		/// Initializes the class for use based on the current rendering context.
+		/// </summary>
+		/// <param name="rendering">The Sitecore rendering providing data about the current rendering context.</param>
+		/// <param name="composer">The item composer to construct new Sitecore items.</param>
 		public SRendering(ISitecoreRendering rendering, SItemComposer composer)
 		{
 			_rendering = rendering;
 			_composer = composer;
 		}
 
+		/// <summary>
+		/// Gets the Sitecore item by resolving the data source for the current controller rendering.
+		/// </summary>
 		public SItem DataItem
 		{
 			get
@@ -37,6 +48,9 @@ namespace Minq.Mvc.Linq
 			}
 		}
 
+		/// <summary>
+		/// Gets the rendering parameters for MVC controller rendering.
+		/// </summary>
 		public NameValueCollection Parameters
 		{
 			get

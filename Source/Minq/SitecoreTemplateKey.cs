@@ -66,6 +66,12 @@ namespace Minq
 			}
 		}
 
+		/// <summary>
+		/// Determines if two template keys are equal.
+		/// </summary>
+		/// <param name="a">The first key to compare.</param>
+		/// <param name="b">THe second key to compare.</param>
+		/// <returns>true if the value of a is the same as the value of b; otherwise, false.</returns>
 		public static bool operator ==(SitecoreTemplateKey a, SitecoreTemplateKey b)
 		{
 			if (Object.ReferenceEquals(a, null))
@@ -86,6 +92,12 @@ namespace Minq
 			}
 		}
 
+		/// <summary>
+		/// Determines if two template keys have different values.
+		/// </summary>
+		/// <param name="a">The first key to compare.</param>
+		/// <param name="b">THe second key to compare.</param>
+		/// <returns>true if the value of a different to the value of b; otherwise, false.</returns>
 		public static bool operator !=(SitecoreTemplateKey a, SitecoreTemplateKey b)
 		{
 			return !(a == b);
@@ -94,8 +106,8 @@ namespace Minq
 		/// <summary>
 		/// Returns a value indicating whether two <see cref="SitecoreTemplateKey"/> instances have the same date and time value.
 		/// </summary>
-		/// <param name="o"></param>
-		/// <returns></returns>
+		/// <param name="o">The object to compare.</param>
+		/// <returns>true if the value of o is the same; otherwise, false.</returns>
 		public override bool Equals(object o)
 		{
 			return this == o as SitecoreTemplateKey;

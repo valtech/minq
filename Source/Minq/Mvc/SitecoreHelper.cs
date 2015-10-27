@@ -29,6 +29,12 @@ namespace Minq.Mvc
 			_pageMode = pageMode;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TAlternative"></typeparam>
+		/// <param name="alternative"></param>
+		/// <returns></returns>
 		public SitecoreHelper<TAlternative> Helper<TAlternative>(TAlternative alternative)
 		{
 			return new SitecoreHelper<TAlternative>(new ViewDataDictionary<TAlternative>(alternative), _markupStrategy, _pageMode);
@@ -92,6 +98,13 @@ namespace Minq.Mvc
 			return new MvcHtmlString(tagBuilder.ToString(TagRenderMode.SelfClosing));
 		}
 
+		/// <summary>
+		/// Returns submit button markup for a Sitecore field.
+		/// </summary>
+		/// <typeparam name="TProperty">The type of the value.</typeparam>
+		/// <param name="expression">An expression that identifies the object that contains the properties to render.</param>
+		/// <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
+		/// <returns>Submit button markup for the Sitecore field.</returns>
 		public IHtmlString SubmitFor<TProperty>(Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null)
 		{
 			return SubmitFor(expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
@@ -125,6 +138,11 @@ namespace Minq.Mvc
 			}
 		}
 
+		/// <summary>
+		/// A HTML filter than that outputs the given string if you are accessing the Sitecore authoring environment.
+		/// </summary>
+		/// <param name="htmlString">The HTML string to output.</param>
+		/// <returns>The HTML string if you are accessing the Sitecore authoring environment; null otherwise.</returns>
 		public IHtmlString IfAuthoring(IHtmlString htmlString)
 		{
 			if (IsAuthoring)
@@ -135,6 +153,11 @@ namespace Minq.Mvc
 			return null;
 		}
 
+		/// <summary>
+		/// A HTML filter than that outputs the given string if you are accessing the Sitecore authoring environment.
+		/// </summary>
+		/// <param name="htmlPredicate">The HTML rendering predicate to generate the output.</param>
+		/// <returns>The HTML string if you are accessing the Sitecore authoring environment; null otherwise.</returns>
 		public IHtmlString IfAuthoring(Func<object, object> htmlPredicate)
 		{
 			if (IsAuthoring)
@@ -150,6 +173,11 @@ namespace Minq.Mvc
 			return null;
 		}
 
+		/// <summary>
+		/// A HTML filter than that outputs the given string if you are accessing the Sitecore authoring environment.
+		/// </summary>
+		/// <param name="htmlPredicate">The HTML rendering predicate to generate the output.</param>
+		/// <returns>The HTML string if you are accessing the Sitecore authoring environment; null otherwise.</returns>
 		public IHtmlString IfAuthoring<THtmlString>(Func<THtmlString> htmlPredicate)
 			where THtmlString : IHtmlString
 		{

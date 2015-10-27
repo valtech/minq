@@ -12,7 +12,7 @@ namespace Minq.Linq
 		private ISitecoreMedia _sitecoreMedia;
 
 		/// <summary>
-		///  Initializes the class for use based on a <see cref="ISitecoreItem"/>.
+		/// Initializes the class for use based on a <see cref="ISitecoreItem"/>.
 		/// </summary>
 		/// <param name="sitecoreMedia">The low level Sitecore media item that represents this LINQ media item.</param>
 		public SMedia(ISitecoreMedia sitecoreMedia)
@@ -21,10 +21,10 @@ namespace Minq.Linq
 		}
 
 		/// <summary>
-		/// Determines if the string value of a field is encoded as raw value media data.
+		/// Determines if the raw value of a field represents a media image.
 		/// </summary>
-		/// <param name="value">The raw value media data.</param>
-		/// <returns>true if the raw value is media data; false otherwise.</returns>
+		/// <param name="value">The raw value to test.</param>
+		/// <returns>true if the raw value is a media image; false otherwise.</returns>
 		public static bool IsImageField(string value)
 		{
 			if (!String.IsNullOrEmpty(value))
@@ -38,6 +38,11 @@ namespace Minq.Linq
 			return false;
 		}
 
+		/// <summary>
+		/// Determines if the raw value of a field represents a media file.
+		/// </summary>
+		/// <param name="value">The raw value to test.</param>
+		/// <returns>true if the raw value is a media file; false otherwise.</returns>
 		public static bool IsFileField(string value)
 		{
 			if (!String.IsNullOrEmpty(value))
@@ -51,21 +56,31 @@ namespace Minq.Linq
 			return false;
 		}
 
+		/// <summary>
+		/// Determines if the given raw value contains file or image media.
+		/// </summary>
+		/// <param name="value">The raw value to test.</param>
+		/// <returns>true if the given raw value is a file or image media; false otherwise.</returns>
 		public static bool IsMediaField(string value)
 		{
 			return IsImageField(value) || IsFileField(value);
         }
 
+		/// <summary>
+		/// Determines if the given field contains file or image media.
+		/// </summary>
+		/// <param name="field">The field to test.</param>
+		/// <returns>true if the field is a file or image media; false otherwise.</returns>
 		public static bool IsMediaField(SField field)
 		{
 			return IsImageField(field) || IsFileField(field);
 		}
 
 		/// <summary>
-		/// Determines if the field is a media field.
+		/// Determines if the field is a media image.
 		/// </summary>
 		/// <param name="field">The field to check.</param>
-		/// <returns>true if the field is a media field; false otherwise.</returns>
+		/// <returns>true if the field is a media image; false otherwise.</returns>
 		public static bool IsImageField(SField field)
 		{
 			if (!field.IsEmpty)
@@ -78,6 +93,11 @@ namespace Minq.Linq
 			return false;
 		}
 
+		/// <summary>
+		/// Determines if the field is a media file.
+		/// </summary>
+		/// <param name="field">The field to check.</param>
+		/// <returns>true if the field is a media file; false otherwise.</returns>
 		public static bool IsFileField(SField field)
 		{
 			if (!field.IsEmpty)

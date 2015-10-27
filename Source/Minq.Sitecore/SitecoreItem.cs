@@ -53,7 +53,8 @@ namespace Minq.Sitecore
 					AlwaysIncludeServerUrl = true,
 					LanguageEmbedding = ScapiLinkManager.LanguageEmbedding,
 					LowercaseUrls = true,
-					EncodeNames = true
+					EncodeNames = true,
+					UseDisplayName = ScapiLinkManager.UseDisplayName
 				};
 
 				if (ScapaLanguageEmbedding.Never != ScapiLinkManager.LanguageEmbedding)

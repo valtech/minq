@@ -110,17 +110,6 @@ namespace Minq
 			return null;
 		}
 
-		/*
-		public SitecoreUrl For(HttpContextBase context)
-		{
-			return new SitecoreUrl(_sitecoreUrl, context);
-		}
-
-		public SitecoreUrl For(HttpContext context)
-		{
-			return new SitecoreUrl(_sitecoreUrl, new HttpContextWrapper(context));
-		}*/
-
 		/// <summary>
 		/// Get the URL relative to the current request i.e. if the current page is http://www.example.com:8080/folder1/page.aspx and the Sitecore URL is
 		/// http://www.example.com:8080/folder2/page.aspx you will get ../folder2/page.aspx.
@@ -177,18 +166,6 @@ namespace Minq
 			}
 		}
 
-		/*
-		/// <summary>
-		/// Gets the raw URL without modification
-		/// </summary>
-		public string Raw
-		{
-			get
-			{
-				return _sitecoreUrl.ToString();
-			}
-		}*/
-
 		/// <summary>
 		/// Gets the URL ensuring that the scheme, host and port are stripped from the URL i.e. http://www.example.com:8080/page.aspx becomes /page.aspx
 		/// </summary>
@@ -208,14 +185,18 @@ namespace Minq
 		}
 
 		/// <summary>
-		/// Returns the relative URL as a string.
+		/// Returns the virtual URL as a string.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>The URL in virtual URL representation.</returns>
 		public override string ToString()
 		{
-			return Relative;
+			return Virtual;
 		}
 
+		/// <summary>
+		/// Converts the given Sitecore URL to a string. A virtual URL is used by default.
+		/// </summary>
+		/// <returns>The URL in virtual URL representation.</returns>
 		public static implicit operator string(SitecoreUrl url)
 		{
 			if (url == null)
@@ -226,6 +207,10 @@ namespace Minq
 			return url.ToString();
 		}
 
+		/// <summary>
+		/// Converts the given string to a Sitecore URL.
+		/// </summary>
+		/// <returns>A Sitecore URL.</returns>
 		public static implicit operator SitecoreUrl(string url)
 		{
 			return new SitecoreUrl(url);
