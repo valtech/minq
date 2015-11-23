@@ -120,6 +120,17 @@ namespace Minq.Linq
 		}
 
 		/// <summary>
+		/// Gets the value of the link (if it is not url).
+		/// </summary>
+		public string Value
+		{
+			get
+			{
+				return _url ?? "";
+			}
+		}
+
+		/// <summary>
 		/// Gets the URL title for the rendered HTML anchor.
 		/// </summary>
 		public string Title

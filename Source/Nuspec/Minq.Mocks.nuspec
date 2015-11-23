@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Minq.Mocks</id>
 		<title>MINQ Mocks for Sitecore and Sitecore MVC</title>
-		<version>1.2.25</version>
+		<version>1.2.26</version>
 		<projectUrl>https://github.com/tcuk/minq</projectUrl>
 		<authors>True Clarity</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -20,7 +20,7 @@
 			<frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="" />
 		</frameworkAssemblies>
 		<dependencies>
-			<dependency id="Minq" version="1.2.25" />
+			<dependency id="Minq" version="1.2.26" />
 		</dependencies>
 	</metadata>
 	<files>
