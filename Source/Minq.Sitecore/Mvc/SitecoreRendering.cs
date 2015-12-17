@@ -47,6 +47,21 @@ namespace Minq.Sitecore.Mvc
 			}
 		}
 
+	    public SitecoreItemKey ItemKey
+	    {
+	        get
+	        {
+	            ScapiItem scapiItem = ScapiRendering.Item;
+
+	            if (scapiItem != null)
+	            {
+                    return new SitecoreItemKey(scapiItem.ID.Guid, ScapiContext.Language.Name, ScapiContext.Database.Name);
+	            }
+
+	            return null;
+	        }
+	    }
+
 		public IDictionary<string, string> Parameters
 		{
 			get

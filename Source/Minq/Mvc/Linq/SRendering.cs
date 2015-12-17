@@ -48,6 +48,26 @@ namespace Minq.Mvc.Linq
 			}
 		}
 
+        /// <summary>
+		/// Gets the Sitecore item by resolving the Item property for the rendering.
+		/// </summary>
+	    public SItem Item
+	    {
+	        get
+	        {
+	            SitecoreItemKey key = _rendering.ItemKey;
+
+	            if (key != null)
+	            {
+	                return _composer.CreateItem(key.Guid.ToString(), key.LanguageName, key.DatabaseName);
+	            }
+	            else
+	            {
+	                return null;
+	            }
+	        }
+	    }
+
 		/// <summary>
 		/// Gets the rendering parameters for MVC controller rendering.
 		/// </summary>

@@ -24,7 +24,13 @@ namespace Minq.Mocks.Mvc
 			set;
 		}
 
-		public IDictionary<string, string> Parameters
+        public SitecoreItemKey ItemKey
+        {
+            get;
+            set;
+        }
+
+        public IDictionary<string, string> Parameters
 		{
 			get
 			{

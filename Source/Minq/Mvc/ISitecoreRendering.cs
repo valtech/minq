@@ -12,7 +12,12 @@ namespace Minq.Mvc
 			get;
 		}
 
-		IDictionary<string, string> Parameters
+        SitecoreItemKey ItemKey
+        {
+            get;
+        }
+
+        IDictionary<string, string> Parameters
 		{
 			get;
 		}
