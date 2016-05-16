@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using Minq.Linq;
+using System.Globalization;
 
 namespace Minq.Tests.Linq
 {
@@ -47,6 +48,82 @@ namespace Minq.Tests.Linq
 			Assert.IsInstanceOf<int>(output);
 
 			Assert.AreEqual(1, output);
+		}
+
+		[Test]
+		public void TestTryDouble()
+		{
+			object output;
+
+			SConvert.TryChangeType(typeof(double), "1.1", out output);
+
+			Assert.IsInstanceOf<double>(output);
+
+			Assert.AreEqual(1.1, output);
+		}
+
+		[Test]
+		public void TestTryDecimal()
+		{
+			object output;
+
+			SConvert.TryChangeType(typeof(decimal), "1.1", out output);
+
+			Assert.IsInstanceOf<decimal>(output);
+
+			Assert.AreEqual(1.1, output);
+		}
+
+		[Test]
+		public void TestTryFloat()
+		{
+			object output;
+
+			float valueToTest = 1.6f;
+
+			SConvert.TryChangeType(typeof(float), String.Format(CultureInfo.InvariantCulture, "{0}", valueToTest), out output);
+
+			Assert.IsInstanceOf<float>(output);
+
+			Assert.AreEqual(valueToTest, output);
+		}
+
+		[Test]
+		public void TestTryNullableDouble()
+		{
+			object output;
+
+			SConvert.TryChangeType(typeof(double?), "1.1", out output);
+
+			Assert.IsInstanceOf<double?>(output);
+
+			Assert.AreEqual(1.1, output);
+		}
+
+		[Test]
+		public void TestTryNullableDecimal()
+		{
+			object output;
+
+			SConvert.TryChangeType(typeof(decimal?), "1.1", out output);
+
+			Assert.IsInstanceOf<decimal?>(output);
+
+			Assert.AreEqual(1.1, output);
+		}
+
+		[Test]
+		public void TestTryNullableFloat()
+		{
+			object output;
+
+			float? valueToTest = 1.6f;
+
+			SConvert.TryChangeType(typeof(float?), String.Format(CultureInfo.InvariantCulture, "{0}", valueToTest), out output);
+
+			Assert.IsInstanceOf<float?>(output);
+
+			Assert.AreEqual(valueToTest, output);
 		}
 	}
 }

@@ -174,6 +174,90 @@ namespace Minq.Linq
 			}
 		}
 
+		private static bool TryDouble(string value, out double result)
+		{
+			return Double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+		}
+
+		private static bool TryFloat(string value, out float result)
+		{
+			return Single.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+		}
+
+		private static bool TryDecimal(string value, out decimal result)
+		{
+			return Decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+		}
+
+		private static bool TryNullableDouble(string value, out double? result)
+		{
+			result = null;
+
+			if (String.IsNullOrEmpty(value))
+			{
+				return true;
+			}
+			else
+			{
+				double number = 0;
+
+				if (TryDouble(value, out number))
+				{
+					result = number;
+
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private static bool TryNullableFloat(string value, out float? result)
+		{
+			result = null;
+
+			if (String.IsNullOrEmpty(value))
+			{
+				return true;
+			}
+			else
+			{
+				float number = 0;
+
+				if (TryFloat(value, out number))
+				{
+					result = number;
+
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private static bool TryNullableDecimal(string value, out decimal? result)
+		{
+			result = null;
+
+			if (String.IsNullOrEmpty(value))
+			{
+				return true;
+			}
+			else
+			{
+				decimal number = 0;
+
+				if (TryDecimal(value, out number))
+				{
+					result = number;
+
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		/// <summary>
 		/// Returns an object of the specified type and whose value is equivalent to the field data input.
 		/// </summary>
@@ -190,6 +274,72 @@ namespace Minq.Linq
 				bool value;
 
 				if (TryBoolean(input, out value))
+				{
+					output = value;
+
+					return true;
+				}
+			}
+			else if (type == typeof(double))
+			{
+				double value;
+
+				if (TryDouble(input, out value))
+				{
+					output = value;
+
+					return true;
+				}
+			}
+			else if (type == typeof(decimal))
+			{
+				decimal value;
+
+				if (TryDecimal(input, out value))
+				{
+					output = value;
+
+					return true;
+				}
+			}
+			else if (type == typeof(float))
+			{
+				float value;
+
+				if (TryFloat(input, out value))
+				{
+					output = value;
+
+					return true;
+				}
+			}
+			else if (type == typeof(double?))
+			{
+				double? value;
+
+				if (TryNullableDouble(input, out value))
+				{
+					output = value;
+
+					return true;
+				}
+			}
+			else if (type == typeof(decimal?))
+			{
+				decimal? value;
+
+				if (TryNullableDecimal(input, out value))
+				{
+					output = value;
+
+					return true;
+				}
+			}
+			else if (type == typeof(float?))
+			{
+				float? value;
+
+				if (TryNullableFloat(input, out value))
 				{
 					output = value;
 
@@ -295,9 +445,18 @@ namespace Minq.Linq
 			}
 			catch
 			{
-				value = null;
+				try
+				{
+					value = Convert.ChangeType(input, type);
 
-				return false;
+					return true;
+				}
+				catch
+				{
+					value = null;
+
+					return false;
+				}
 			}
 		}
 	}
