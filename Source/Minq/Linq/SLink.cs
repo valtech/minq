@@ -8,6 +8,8 @@ namespace Minq.Linq
 	/// </summary>
 	public class SLink
 	{
+		private const string JavaScriptPrefix = "javascript:";
+
 		private SField _field;
 		private string _text;
 		private string _url;
@@ -40,6 +42,21 @@ namespace Minq.Linq
 			_target = GetDocumentAttribute(document, "target");
 			_linkedItemId = GetDocumentAttribute(document, "id");
 			_linkType = GetDocumentAttribute(document, "linktype");
+
+			if (IsJavaScriptLink)
+			{
+				if (!String.IsNullOrEmpty(_url) || String.Equals(_url, JavaScriptPrefix, StringComparison.OrdinalIgnoreCase))
+				{
+					if (!_url.StartsWith(JavaScriptPrefix))
+					{
+						_url = JavaScriptPrefix + _url;
+					}
+				}
+				else
+				{
+					_url = JavaScriptPrefix + "void(0);";
+				}
+			}
 		}
 
 		/// <summary>
@@ -126,7 +143,22 @@ namespace Minq.Linq
 		{
 			get
 			{
-				return _url ?? "";
+				if (String.IsNullOrEmpty(_url))
+				{
+					//Sitecore sometimes populates the url attribute, other times not, so we ensure consistency here
+					if (IsMediaLink)
+					{
+						return Url;
+					}
+					else if (IsInternalLink)
+					{
+						return Url;
+					}
+
+					return "";
+				}
+
+				return _url;
 			}
 		}
 

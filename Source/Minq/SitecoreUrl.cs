@@ -8,8 +8,11 @@ namespace Minq
 	/// </summary>
 	public class SitecoreUrl
 	{
+		private const string JavaScriptPrefix = "javascript:";
+
 		private Uri _sitecoreUrl;
 		private HttpContextBase _context;
+		private string _javaScript;
 
 		/// <summary>
 		/// Creates a new URL from the supplied path. 
@@ -61,19 +64,26 @@ namespace Minq
 		{
 			if (!String.IsNullOrEmpty(sitecoreUrl))
 			{
-				if (sitecoreUrl == "/" || sitecoreUrl.StartsWith("/"))
+				if (sitecoreUrl.StartsWith(JavaScriptPrefix, StringComparison.OrdinalIgnoreCase))
 				{
-					if (context != null)
-					{
-						string authority = context.Request.Url.GetLeftPart(UriPartial.Authority);
-
-						sitecoreUrl = authority + sitecoreUrl;
-					}
+					_javaScript = sitecoreUrl.Substring(JavaScriptPrefix.Length);
 				}
-				
-				_sitecoreUrl = new Uri(sitecoreUrl);
+				else
+				{
+					if (sitecoreUrl == "/" || sitecoreUrl.StartsWith("/"))
+					{
+						if (context != null)
+						{
+							string authority = context.Request.Url.GetLeftPart(UriPartial.Authority);
 
-				_context = context;
+							sitecoreUrl = authority + sitecoreUrl;
+						}
+					}
+
+					_sitecoreUrl = new Uri(sitecoreUrl);
+
+					_context = context;
+				}
 			}
 		}
 
@@ -120,6 +130,11 @@ namespace Minq
 			{
 				if (_sitecoreUrl == null)
 				{
+					if (IsJavaScript)
+					{
+						return JavaScriptUrl();
+					}
+
 					return "";
 				}
 
@@ -155,6 +170,11 @@ namespace Minq
 			{
 				if (_sitecoreUrl == null)
 				{
+					if (IsJavaScript)
+					{
+						return JavaScriptUrl();
+					}
+
 					return "";
 				}
 
@@ -175,12 +195,33 @@ namespace Minq
 			{
 				if (_sitecoreUrl == null)
 				{
+					if (IsJavaScript)
+					{
+						return JavaScriptUrl();
+					}
+
 					return "";
 				}
 
 				string authority = _sitecoreUrl.GetLeftPart(UriPartial.Authority);
 
-				return "/" + new Uri(authority).MakeRelativeUri(_sitecoreUrl).ToString();
+				if (_context != null)
+				{
+					HttpRequestBase request = _context.Request;
+
+					bool differentAuthority = !String.Equals(authority, request.Url.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase);
+					
+					if (differentAuthority)
+					{
+						return Absolute;
+					}
+
+					return "/" + new Uri(authority).MakeRelativeUri(_sitecoreUrl).ToString();
+				}
+				else
+				{
+					return Absolute;
+				}
 			}
 		}
 
@@ -214,6 +255,22 @@ namespace Minq
 		public static implicit operator SitecoreUrl(string url)
 		{
 			return new SitecoreUrl(url);
+		}
+
+		private string JavaScriptUrl()
+		{
+			return JavaScriptPrefix + _javaScript;
+		}
+
+		/// <summary>
+		/// true is this link is inline JavaScript; false otherwise
+		/// </summary>
+		public bool IsJavaScript
+		{
+			get
+			{
+				return _javaScript != null;
+			}
 		}
 	}
 }
