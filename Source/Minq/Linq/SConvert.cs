@@ -11,6 +11,8 @@ namespace Minq.Linq
 	/// </summary>
 	public static class SConvert
 	{
+		private delegate bool TypeParser<T>(string value, out T result);
+
 		/// <summary>
 		/// Converts the value of the specified string to an equivalent <see cref="Boolean"/> value.
 		/// </summary>
@@ -174,90 +176,6 @@ namespace Minq.Linq
 			}
 		}
 
-		private static bool TryDouble(string value, out double result)
-		{
-			return Double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
-		}
-
-		private static bool TryFloat(string value, out float result)
-		{
-			return Single.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
-		}
-
-		private static bool TryDecimal(string value, out decimal result)
-		{
-			return Decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
-		}
-
-		private static bool TryNullableDouble(string value, out double? result)
-		{
-			result = null;
-
-			if (String.IsNullOrEmpty(value))
-			{
-				return true;
-			}
-			else
-			{
-				double number = 0;
-
-				if (TryDouble(value, out number))
-				{
-					result = number;
-
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		private static bool TryNullableFloat(string value, out float? result)
-		{
-			result = null;
-
-			if (String.IsNullOrEmpty(value))
-			{
-				return true;
-			}
-			else
-			{
-				float number = 0;
-
-				if (TryFloat(value, out number))
-				{
-					result = number;
-
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		private static bool TryNullableDecimal(string value, out decimal? result)
-		{
-			result = null;
-
-			if (String.IsNullOrEmpty(value))
-			{
-				return true;
-			}
-			else
-			{
-				decimal number = 0;
-
-				if (TryDecimal(value, out number))
-				{
-					result = number;
-
-					return true;
-				}
-			}
-
-			return false;
-		}
-
 		/// <summary>
 		/// Returns an object of the specified type and whose value is equivalent to the field data input.
 		/// </summary>
@@ -269,127 +187,43 @@ namespace Minq.Linq
 		{
 			output = null;
 
-			if (type == typeof(bool))
-			{
-				bool value;
-
-				if (TryBoolean(input, out value))
-				{
-					output = value;
-
-					return true;
-				}
-			}
-			else if (type == typeof(double))
-			{
-				double value;
-
-				if (TryDouble(input, out value))
-				{
-					output = value;
-
-					return true;
-				}
-			}
-			else if (type == typeof(decimal))
-			{
-				decimal value;
-
-				if (TryDecimal(input, out value))
-				{
-					output = value;
-
-					return true;
-				}
-			}
-			else if (type == typeof(float))
-			{
-				float value;
-
-				if (TryFloat(input, out value))
-				{
-					output = value;
-
-					return true;
-				}
-			}
-			else if (type == typeof(double?))
-			{
-				double? value;
-
-				if (TryNullableDouble(input, out value))
-				{
-					output = value;
-
-					return true;
-				}
-			}
-			else if (type == typeof(decimal?))
-			{
-				decimal? value;
-
-				if (TryNullableDecimal(input, out value))
-				{
-					output = value;
-
-					return true;
-				}
-			}
-			else if (type == typeof(float?))
-			{
-				float? value;
-
-				if (TryNullableFloat(input, out value))
-				{
-					output = value;
-
-					return true;
-				}
-			}
-			else if (type == typeof(DateTime))
-			{
-				DateTime value;
-
-				if (TryDateTime(input, out value))
-				{
-					output = value;
-
-					return true;
-				}
-			}
-			else if (type == typeof(DateTime?))
-			{
-				DateTime value;
-
-				if (TryDateTime(input, out value))
-				{
-					output = value;
-
-					return true;
-				}
-				else if (String.IsNullOrEmpty(input))
-				{
-					output = null;
-
-					return true;
-				}
-			}
-			else if (type == typeof(string))
+			if (type == typeof(string))
 			{
 				output = input;
 
 				return true;
 			}
-			else if (type == typeof(Guid))
+			else if (TryStruct<double>(type, input, out output, TryDouble))
 			{
-				Guid value;
-
-				if (TryGuid(input, out value))
-				{
-					output = value;
-
-					return true;
-				}
+				return true;
+			}
+			else if (TryStruct<float>(type, input, out output, TrySingle))
+			{
+				return true;
+			}
+			else if (TryStruct<int>(type, input, out output, TryInt32))
+			{
+				return true;
+			}
+			else if (TryStruct<long>(type, input, out output, TryInt64))
+			{
+				return true;
+			}
+			else if (TryStruct<decimal>(type, input, out output, TryDecimal))
+			{
+				return true;
+			}
+			else if (TryStruct<bool>(type, input, out output, TryBoolean))
+			{
+				return true;
+			}
+			else if (TryStruct<DateTime>(type, input, out output, TryDateTime))
+			{
+				return true;
+			}
+			else if (TryStruct<Guid>(type, input, out output, TryGuid))
+			{
+				return true;
 			}
 			else if (type == typeof(IEnumerable<Guid>))
 			{
@@ -429,6 +263,84 @@ namespace Minq.Linq
 					return true;
 				}
 			}
+
+			return false;
+		}
+
+		private static bool TryInt32(string value, out int result)
+		{
+			return Int32.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+		}
+
+		private static bool TryInt64(string value, out long result)
+		{
+			return Int64.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+		}
+
+		private static bool TryDouble(string value, out double result)
+		{
+			return Double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+		}
+
+		private static bool TrySingle(string value, out float result)
+		{
+			return Single.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+		}
+
+		private static bool TryDecimal(string value, out decimal result)
+		{
+			return Decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+		}
+
+		private static bool TryNullable<T>(string value, out T? result, TypeParser<T> parser) where T : struct
+		{
+			result = null;
+
+			if (String.IsNullOrEmpty(value))
+			{
+				return true;
+			}
+			else
+			{
+				T number = default(T);
+
+				if (parser(value, out number))
+				{
+					result = number;
+
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private static bool TryStruct<T>(Type type, string input, out object output, TypeParser<T> parser) where T : struct
+		{
+			if (type == typeof(T))
+			{
+				T value;
+
+				if (parser(input, out value))
+				{
+					output = value;
+
+					return true;
+				}
+			}
+			else if (type == typeof(T?))
+			{
+				T? value;
+
+				if (TryNullable<T>(input, out value, parser))
+				{
+					output = value;
+
+					return true;
+				}
+			}
+
+			output = null;
 
 			return false;
 		}
