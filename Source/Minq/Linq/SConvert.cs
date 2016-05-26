@@ -292,11 +292,11 @@ namespace Minq.Linq
 			return Decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
 		}
 
-		private static bool TryNullable<T>(string value, out T? result, TypeParser<T> parser) where T : struct
+		private static bool TryNullable<T>(string input, out T? output, TypeParser<T> parser) where T : struct
 		{
-			result = null;
+			output = null;
 
-			if (String.IsNullOrEmpty(value))
+			if (String.IsNullOrEmpty(input))
 			{
 				return true;
 			}
@@ -304,9 +304,9 @@ namespace Minq.Linq
 			{
 				T number = default(T);
 
-				if (parser(value, out number))
+				if (parser(input, out number))
 				{
-					result = number;
+					output = number;
 
 					return true;
 				}
@@ -317,6 +317,8 @@ namespace Minq.Linq
 
 		private static bool TryStruct<T>(Type type, string input, out object output, TypeParser<T> parser) where T : struct
 		{
+			output = null;
+
 			if (type == typeof(T))
 			{
 				T value;
@@ -340,18 +342,16 @@ namespace Minq.Linq
 				}
 			}
 
-			output = null;
-
 			return false;
 		}
 
-		private static bool TryTypeConverter(Type type, string input, out object value, CultureInfo culture)
+		private static bool TryTypeConverter(Type type, string input, out object output, CultureInfo culture)
 		{
 			try
 			{
 				TypeConverter converter = TypeDescriptor.GetConverter(type);
 
-				value = converter.ConvertTo(null, culture, input, type);
+				output = converter.ConvertTo(null, culture, input, type);
 
 				return true;
 			}
@@ -359,13 +359,13 @@ namespace Minq.Linq
 			{
 				try
 				{
-					value = Convert.ChangeType(input, type);
+					output = Convert.ChangeType(input, type);
 
 					return true;
 				}
 				catch
 				{
-					value = null;
+					output = null;
 
 					return false;
 				}
