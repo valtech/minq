@@ -133,6 +133,17 @@ namespace Minq.Linq
 		}
 
 		/// <summary>
+		/// Gets the Alternate Text of the media as it should be displayed in the browser.
+		/// </summary>
+		public string AlternateText
+		{
+			get
+			{
+				return _sitecoreMedia.AlternateText;
+			}
+		}
+
+		/// <summary>
 		/// Converts the media to a plain old CLR object (POCO).
 		/// </summary>
 		/// <param name="type">The type to convert to.</param>
