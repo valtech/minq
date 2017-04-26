@@ -8,3 +8,4 @@
 /Source/Nuspec/*.bat
 /Source/Minq.Tests.VisualState.xml
 /Source/TestResult.xml
+/Source/.vs
