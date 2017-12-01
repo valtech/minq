@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Minq.Mvc;
 using ScapiRendering = Sitecore.Mvc.Presentation.Rendering;
 using ScapiRenderingContext = Sitecore.Mvc.Presentation.RenderingContext;
@@ -75,6 +73,11 @@ namespace Minq.Sitecore.Mvc
 				
 				return parameters;
 			}
+		}
+
+		public string Placeholder
+		{
+			get { return ScapiRendering.Placeholder; }
 		}
 	}
 }

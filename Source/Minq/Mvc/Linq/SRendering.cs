@@ -81,5 +81,7 @@ namespace Minq.Mvc.Linq
 				return parameters;
 			}
 		}
+
+		public string Placeholder {  get { return _rendering.Placeholder; } }
 	}
 }
