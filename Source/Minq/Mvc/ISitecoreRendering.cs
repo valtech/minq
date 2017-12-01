@@ -19,7 +19,7 @@ namespace Minq.Mvc
 			get;
 		}
 
-		string Placeholder
+		string PlaceholderKey
 		{
 			get;
 		}

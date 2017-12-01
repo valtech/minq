@@ -43,7 +43,7 @@ namespace Minq.Mocks.Mvc
 			}
 		}
 
-		public string Placeholder
+		public string PlaceholderKey
 		{
 			get;
 			set;

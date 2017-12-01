@@ -75,7 +75,7 @@ namespace Minq.Sitecore.Mvc
 			}
 		}
 
-		public string Placeholder
+		public string PlaceholderKey
 		{
 			get
 			{
