@@ -19,6 +19,9 @@ namespace Minq.Mvc
 			get;
 		}
 
-		string Placeholder { get; }
+		string Placeholder
+		{
+			get;
+		}
 	}
 }

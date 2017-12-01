@@ -77,7 +77,10 @@ namespace Minq.Sitecore.Mvc
 
 		public string Placeholder
 		{
-			get { return ScapiRendering.Placeholder; }
+			get
+			{
+				return ScapiRendering.Placeholder;
+			}
 		}
 	}
 }

@@ -43,6 +43,10 @@ namespace Minq.Mocks.Mvc
 			}
 		}
 
-		public string Placeholder { get; set; }
+		public string Placeholder
+		{
+			get;
+			set;
+		}
 	}
 }
