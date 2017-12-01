@@ -42,5 +42,11 @@ namespace Minq.Mocks.Mvc
 				return _parameters;
 			}
 		}
+
+		public string PlaceholderKey
+		{
+			get;
+			set;
+		}
 	}
 }

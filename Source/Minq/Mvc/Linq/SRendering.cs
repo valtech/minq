@@ -81,5 +81,16 @@ namespace Minq.Mvc.Linq
 				return parameters;
 			}
 		}
+
+		/// <summary>
+		/// Gets the placeholder key for associated rendering.
+		/// </summary>
+		public string PlaceholderKey
+		{
+			get
+			{
+				return _rendering.PlaceholderKey;
+			}
+		}
 	}
 }
