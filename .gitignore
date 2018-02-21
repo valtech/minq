@@ -3,6 +3,7 @@
 **/bin/**
 **/obj/**
 **/packages/**
+*.nupkg
 /Source/Minq.sln.ide
 /Source/Nuspec/*.exe
 /Source/Nuspec/*.bat
